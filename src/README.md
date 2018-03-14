@@ -17,4 +17,4 @@ admin password: maciek<br />
 //todo dockerize
 
 Tips<br />
-Don't forget about credentials when setting up keycloack config
+Don't forget about credentials when setting up keycloack config in future apps
