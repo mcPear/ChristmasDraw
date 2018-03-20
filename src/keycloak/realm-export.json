@@ -351,6 +351,7 @@
   "groups": [],
   "defaultRoles": [
     "offline_access",
+    "user",
     "uma_authorization"
   ],
   "requiredCredentials": [
@@ -365,6 +366,14 @@
   "otpSupportedApplications": [
     "FreeOTP",
     "Google Authenticator"
+  ],
+  "scopeMappings": [
+    {
+      "client": "cd-frontend",
+      "roles": [
+        "user"
+      ]
+    }
   ],
   "clientScopeMappings": {
     "account": [
@@ -813,6 +822,7 @@
       "implicitFlowEnabled": false,
       "directAccessGrantsEnabled": false,
       "serviceAccountsEnabled": false,
+      "authorizationServicesEnabled": true,
       "publicClient": false,
       "frontchannelLogout": false,
       "protocol": "openid-connect",
@@ -911,7 +921,24 @@
       ],
       "useTemplateConfig": false,
       "useTemplateScope": false,
-      "useTemplateMappers": false
+      "useTemplateMappers": false,
+      "authorizationSettings": {
+        "allowRemoteResourceManagement": false,
+        "policyEnforcementMode": "ENFORCING",
+        "resources": [],
+        "policies": [],
+        "scopes": [
+          {
+            "name": "map-role"
+          },
+          {
+            "name": "map-role-client-scope"
+          },
+          {
+            "name": "map-role-composite"
+          }
+        ]
+      }
     },
     {
       "id": "94927972-d279-4272-abc7-a6729abbadb5",
@@ -1169,6 +1196,7 @@
     {
       "id": "1829d736-cc11-487e-aaf8-99a99c3bc5a8",
       "clientId": "cd-backend",
+      "adminUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
       "clientAuthenticatorType": "client-secret",

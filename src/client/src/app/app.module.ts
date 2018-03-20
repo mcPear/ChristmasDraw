@@ -1,8 +1,10 @@
 import {BrowserModule} from "@angular/platform-browser";
-import {NgModule, APP_INITIALIZER} from "@angular/core";
-import {KeycloakService, KeycloakAngularModule} from "keycloak-angular";
+import {APP_INITIALIZER, NgModule} from "@angular/core";
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {initializer} from "./utils/app-init";
 import {AppComponent} from "./app.component";
+import {AppService} from "./app.service";
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -11,9 +13,11 @@ import {AppComponent} from "./app.component";
   ],
   imports: [
     BrowserModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    HttpClientModule
   ],
   providers: [
+    AppService,
     {
       provide: APP_INITIALIZER,
       useFactory: initializer,

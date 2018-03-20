@@ -1,5 +1,6 @@
 package com.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -9,16 +10,17 @@ import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotEmpty
     @NotNull
     @Column(unique = true)
-    private String login;
+    private String preferredUsername;
 
     @NotEmpty
     @NotNull
@@ -31,7 +33,7 @@ public class User {
     @Lob
     private String about;
 
-    private int children;
+    private Integer children;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     List<Membership> membershipsWhereUser;

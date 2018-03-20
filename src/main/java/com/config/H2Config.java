@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.sql.SQLException;
 
-@Configuration
+//@Configuration
 public class H2Config {
 
     @Value("${h2.tcp.port}")
