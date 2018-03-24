@@ -11,15 +11,11 @@ import {AppService} from "./app.service";
 export class AppComponent implements OnInit {
   title='ChristmasDraw';
   userDetails: KeycloakProfile;
-  fetchedUserNickname: String;
 
   constructor(private keycloakService: KeycloakService, private service: AppService) {}
 
   async ngOnInit() {
     this.userDetails = await this.keycloakService.loadUserProfile();
-    this.service.fetchUserNickname()
-      .then( res => this.fetchedUserNickname = res)
-      .catch(res => console.log(res));
   }
 
   async doLogout() {

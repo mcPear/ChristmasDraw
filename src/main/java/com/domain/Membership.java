@@ -21,6 +21,11 @@ public class Membership {
 
     private boolean includeInDraw;
 
+    @Lob
+    private String about;
+
+    private Integer children;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
     private Group group;
