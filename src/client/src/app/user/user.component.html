@@ -1,12 +1,11 @@
 <mat-card class="example-card" *ngIf="user != null; else waitForUser">
   <mat-card-header>
-    <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
-    <mat-card-subtitle>Children count: {{user.children}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p>About me:
-      {{user.about}}
-    </p>
+    <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
+    <p>{{childrenOutput}}</p>
+    <mat-card-subtitle>About me:</mat-card-subtitle>
+    <p>{{user.about}}</p>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button (click)="openEditDialog()">Edit</button>

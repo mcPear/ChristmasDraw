@@ -16,7 +16,7 @@ export class UserService {
   }
 
   editUser(user: UserDto): Promise<Object> {
-    return this.http.post('http://localhost:8090/api/user/', user).toPromise();
+    return this.http.post('http://localhost:8090/api/user/edit', user).toPromise();
   }
 
 }

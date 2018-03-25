@@ -12,6 +12,7 @@ import {UserEditComponent} from "../user-edit/user-edit.component";
 export class UserComponent implements OnInit {
   @Input() username: string;
   user: UserDto = null;
+  childrenOutput: string;
 
   constructor(private service: UserService, public dialog: MatDialog) {
   }
@@ -21,22 +22,31 @@ export class UserComponent implements OnInit {
       .then(res => {
         this.user = res;
         console.log('@@@@' + res);
+        this.childrenOutput = this.getChildrenOutput(res.children);
       })
       .catch(res => console.log(res));
   }
 
   openEditDialog(): void {
     let dialogRef = this.dialog.open(UserEditComponent, {
-      height: '400px',
-      width: '600px',
+      height: '600px',
+      width: '700px',
       data: this.user
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      console.log(result);
       this.service.editUser(result)
+        .then(res => this.ngOnInit())
         .catch(err => console.log(err));
     });
+  }
+
+  getChildrenOutput(count: number):string{
+    if(count==0) return 'no children';
+    else if(count==1) return '1 child';
+    else return count+'children';
   }
 
 }

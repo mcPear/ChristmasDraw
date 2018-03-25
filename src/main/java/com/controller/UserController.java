@@ -45,7 +45,7 @@ public class UserController {
         return UserMapper.toDto(userDao.findByPreferredUsername(token.getPreferredUsername()));
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(path = "/edit", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     private void editUser(@RequestBody UserDto userDto) {
         User user = userDao.findByPreferredUsername(userDto.getPreferredUsername());

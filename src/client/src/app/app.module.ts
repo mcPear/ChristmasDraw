@@ -11,7 +11,7 @@ import {UserComponent} from "./user/user.component";
 import {UserService} from "./user/user.service";
 import {UserEditComponent} from "./user-edit/user-edit.component";
 import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
-
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
     KeycloakAngularModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {UserDto} from "../user/user.dto";
 
@@ -9,11 +9,11 @@ import {UserDto} from "../user/user.dto";
 })
 export class UserEditComponent {
 
-  constructor(public dialogRef: MatDialogRef<UserEditComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: UserDto) { }
+  resultData: UserDto;
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  constructor(public dialogRef: MatDialogRef<UserEditComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: UserDto) {
+    this.resultData = data;
   }
 
 }
