@@ -37,9 +37,11 @@ export class UserComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      this.service.editUser(result)
-        .then(res => this.ngOnInit())
-        .catch(err => console.log(err));
+      if(result) {
+        this.service.editUser(result)
+          .then(res => this.ngOnInit())
+          .catch(err => console.log(err));
+      }
     });
   }
 
