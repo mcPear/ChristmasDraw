@@ -1,6 +1,9 @@
 package com.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -8,7 +11,9 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class GiftPart {
 
     @Id
@@ -22,7 +27,7 @@ public class GiftPart {
     @NotNull
     private BigDecimal value;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "membership_id")
     private Membership membership;
 }

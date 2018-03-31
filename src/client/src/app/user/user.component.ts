@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserService} from "./user.service";
-import {UserDto} from "./user.dto";
+import {UserService} from "../shared/service/user.service";
+import {UserDto} from "../shared/dto/user.dto";
 import {MatDialog} from "@angular/material";
 import {UserEditComponent} from "../user-edit/user-edit.component";
 
@@ -17,14 +17,9 @@ export class UserComponent implements OnInit {
   constructor(private service: UserService, public dialog: MatDialog) {
   }
 
-  ngOnInit() {
-    this.service.getUser(this.username)
-      .then(res => {
-        this.user = res;
-        console.log('@@@@' + res);
-        this.childrenOutput = this.getChildrenOutput(res.children);
-      })
-      .catch(res => console.log(res));
+  async ngOnInit() {
+    this.user = await this.service.getUser(this.username);
+    this.childrenOutput = this.getChildrenOutput(this.user.children);
   }
 
   openEditDialog(): void {

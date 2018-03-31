@@ -1,6 +1,6 @@
 package com.domain;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -10,8 +10,17 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity(name = "GROUPX")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Group {
+
+    public Group(String name) {
+        this(null, name, null, false, false,
+                new BigDecimal(0), new BigDecimal(0), "not provided", null);
+        this.name = name;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +43,6 @@ public class Group {
 
     private String collectorContact;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     List<Membership> memberships;
 }

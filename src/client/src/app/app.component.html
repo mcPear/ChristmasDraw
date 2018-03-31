@@ -6,15 +6,21 @@
     <span class="example-spacer"></span>
     <span>{{userDetails.username}}</span>
     <span class="example-spacer"></span>
-
-    <button mat-button>About me</button>
-    <button mat-button>Groups I belong to</button>
-    <button mat-button>Groups managed by me</button>
     <button mat-button (click)="doLogout()">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>
-<app-user [username]='userDetails.username'></app-user>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <app-groups-member></app-groups-member>
+    </div>
+    <div class="col-sm">
+      <app-user [username]='userDetails.username'></app-user>
+    </div>
+    <div class="col-sm">
+        <app-groups-owner></app-groups-owner>
+    </div>
+      </div>
 <ng-template #waitForUsername>Login problem</ng-template>
 
 

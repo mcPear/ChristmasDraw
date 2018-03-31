@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Type group name</h2>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Group name" required
+    [(ngModel)]="groupName" name="groupName">
+  </mat-form-field>
+</form>
+<mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="groupName">Save</button>
+  <button mat-raised-button [mat-dialog-close]=null>Cancel</button>
+</mat-dialog-actions>

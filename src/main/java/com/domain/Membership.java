@@ -1,19 +1,22 @@
 package com.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Membership {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean isOwner;
+    private boolean owns;
 
     private boolean accepted;
 
@@ -26,18 +29,18 @@ public class Membership {
 
     private Integer children;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "drawnUser_id")
     private User drawnUser;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "membership", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "membership", cascade = CascadeType.ALL)
     List<GiftPart> giftParts;
 }

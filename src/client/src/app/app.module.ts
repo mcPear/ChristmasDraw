@@ -3,21 +3,28 @@ import {APP_INITIALIZER, NgModule} from "@angular/core";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {initializer} from "./utils/app-init";
 import {AppComponent} from "./app.component";
-import {AppService} from "./app.service";
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "./material.module";
 import {UserComponent} from "./user/user.component";
-import {UserService} from "./user/user.service";
+import {UserService} from "./shared/service/user.service";
 import {UserEditComponent} from "./user-edit/user-edit.component";
 import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
 import { FormsModule }   from '@angular/forms';
+import {GroupsMemberComponent} from "./groups-member/groups-member.component";
+import {GroupsOwnerComponent} from "./groups-owner/groups-owner.component";
+import {GroupJoinComponent} from "./group-join/group-join.component";
+import {GroupCreateComponent} from "./group-create/group-create.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    UserEditComponent
+    UserEditComponent,
+    GroupsMemberComponent,
+    GroupsOwnerComponent,
+    GroupJoinComponent,
+    GroupCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +36,6 @@ import { FormsModule }   from '@angular/forms';
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
-    AppService,
     UserService,
     {
       provide: APP_INITIALIZER,
@@ -40,7 +46,9 @@ import { FormsModule }   from '@angular/forms';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    UserEditComponent
+    UserEditComponent,
+    GroupJoinComponent,
+    GroupCreateComponent
   ]
 })
 export class AppModule {

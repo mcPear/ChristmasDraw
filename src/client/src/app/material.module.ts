@@ -5,6 +5,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSliderModule
+    MatSliderModule,
+    MatListModule
   ],
   exports: [
     MatButtonModule,
@@ -23,7 +25,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSliderModule
+    MatSliderModule,
+    MatListModule
   ],
 })
 export class MaterialModule {

@@ -7,3 +7,7 @@
   background-size: cover;
 }
 p { word-break: break-all }
+
+.angular-with-newlines {
+  white-space: pre-wrap;
+}

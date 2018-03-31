@@ -1,8 +1,6 @@
 package com.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -10,7 +8,8 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -37,9 +36,9 @@ public class User {
 
     private Integer children;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Membership> membershipsWhereUser;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "drawnUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "drawnUser", cascade = CascadeType.ALL)
     List<Membership> membershipsWhereDrawnUser;
 }
