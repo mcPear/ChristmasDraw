@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {UserDto} from "../dto/user.dto";
 import {GroupsDto} from "../dto/groups.dto";
+import {MemberGroupDto} from "../dto/member-group.dto";
 
 @Injectable()
 
@@ -20,8 +21,8 @@ export class UserService {
     return this.http.post('http://localhost:8090/api/user/edit', user).toPromise();
   }
 
-  getMemberGroups(): Promise<string[]> {
-    return this.http.get<string[]>('http://localhost:8090/api/user/groups/member')
+  getMemberGroups(): Promise<MemberGroupDto[]> {
+    return this.http.get<MemberGroupDto[]>('http://localhost:8090/api/user/groups/member')
       .toPromise();
   }
 

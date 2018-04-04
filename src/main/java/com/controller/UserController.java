@@ -6,6 +6,7 @@ import com.dao.UserDao;
 import com.domain.Group;
 import com.domain.Membership;
 import com.domain.User;
+import com.dto.MemberGroupDto;
 import com.dto.UserDto;
 import com.mapper.UserMapper;
 import com.util.GlobalLogger;
@@ -84,20 +85,28 @@ public class UserController {
     }
 
     @GetMapping(path = "/groups/member")
-    public List<String> getUserMemberGroups(KeycloakPrincipal principal) {
-        return getUserGroups(false, principal);
+    public List<MemberGroupDto> getUserMemberGroups(KeycloakPrincipal principal) {
+        return getUserMemberGroupDtos(principal);
     }
 
     @GetMapping(path = "/groups/owner")
     public List<String> getUserOwnerGroups(KeycloakPrincipal principal) {
-        return getUserGroups(true, principal);
+        return getUserGroupsWhereOwner(principal);
     }
 
-    private List<String> getUserGroups(boolean isOwner, KeycloakPrincipal principal) {
+    private List<String> getUserGroupsWhereOwner(KeycloakPrincipal principal) {
         User user = getUserByPrincipal(principal);
-        List<Membership> memberships = membershipDao.findByUserIdAndOwns(user.getId(), isOwner);
+        List<Membership> memberships = membershipDao.findByUserIdAndOwns(user.getId(), true);
         return memberships.stream()
                 .map(m -> m.getGroup().getName())
+                .collect(Collectors.toList());
+    }
+
+    private List<MemberGroupDto> getUserMemberGroupDtos(KeycloakPrincipal principal) {
+        User user = getUserByPrincipal(principal);
+        List<Membership> memberships = membershipDao.findByUserIdAndOwns(user.getId(), false);
+        return memberships.stream()
+                .map(m -> new MemberGroupDto(m.getGroup().getName(), m.isAccepted()))
                 .collect(Collectors.toList());
     }
 

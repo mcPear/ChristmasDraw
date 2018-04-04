@@ -3,6 +3,7 @@ import {UserService} from "../shared/service/user.service";
 import {MatDialog} from "@angular/material";
 import {GroupJoinComponent} from "../group-join/group-join.component";
 import {GroupsDto} from "../shared/dto/groups.dto";
+import {MemberGroupDto} from "../shared/dto/member-group.dto";
 
 @Component({
   selector: 'app-groups-member',
@@ -11,7 +12,7 @@ import {GroupsDto} from "../shared/dto/groups.dto";
 })
 export class GroupsMemberComponent implements OnInit {
 
-  groupsWhereMember: string[];
+  groupsWhereMember: MemberGroupDto[];
   @Input() groupsWhereOwner: string[];
 
   constructor(private service: UserService, public dialog: MatDialog) {
@@ -25,7 +26,10 @@ export class GroupsMemberComponent implements OnInit {
     let dialogRef = this.dialog.open(GroupJoinComponent, {
       height: '350px',
       width: '350px',
-      data: <GroupsDto>{groupsWhereOwner: this.groupsWhereOwner, groupsWhereMember: this.groupsWhereMember}
+      data: <GroupsDto>{
+        groupsWhereOwner: this.groupsWhereOwner,
+        groupsWhereMember: this.groupsWhereMember.map(g => g.groupName)
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
