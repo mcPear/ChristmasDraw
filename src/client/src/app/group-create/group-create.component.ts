@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {UserEditComponent} from "../user-edit/user-edit.component";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {UserService} from "../shared/service/user.service";
 
 @Component({
   selector: 'app-group-create',
@@ -10,16 +11,23 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 export class GroupCreateComponent {
 
   groupName: string;
-  groups: string[];
+  groupExists = true;
 
   constructor(public dialogRef: MatDialogRef<UserEditComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: string[]) {
-    this.groups = data;
-    this.groupName = "mock";
+              private service: UserService) {
+    this.groupName = "example";
   }
 
   groupNameAvailable(name: string): boolean {
-    return this.groups.indexOf(name) == -1;
+    return false; //FIXME service
+  }
+
+  async checkIfGroupExists(name: string) {
+    this.groupExists =  await this.service.groupExists(name);
+  }
+
+  onKey(event: any) {
+    this.checkIfGroupExists(event.target.value);
   }
 
 }

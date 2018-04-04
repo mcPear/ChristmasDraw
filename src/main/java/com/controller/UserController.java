@@ -111,4 +111,17 @@ public class UserController {
         return userDao.findByPreferredUsername(preferredUsername);
     }
 
+    @RequestMapping(path = "/requestGroup/{groupName}", method = RequestMethod.POST)
+    @ResponseStatus(code = HttpStatus.CREATED)
+    private void requestGroup(@PathVariable String groupName, KeycloakPrincipal principal) {
+        Group storedGroup = groupDao.findByName(groupName);
+        if (storedGroup != null) {
+            User user = getUserByPrincipal(principal);
+            membershipDao.save(new Membership(null, false, false,
+                    false, true,
+                    user.getAbout(), user.getChildren(), storedGroup,
+                    user, null, null));
+        }
+    }
+
 }

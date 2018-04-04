@@ -1,6 +1,8 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {UserEditComponent} from "../user-edit/user-edit.component";
+import {UserService} from "../shared/service/user.service";
+import {GroupsDto} from "../shared/dto/groups.dto";
 
 @Component({
   selector: 'app-group-join',
@@ -10,17 +12,33 @@ import {UserEditComponent} from "../user-edit/user-edit.component";
 export class GroupJoinComponent {
 
   groupName: string;
-  groups: string[];
+  groupExists = false;
+  groupsWhereOwner: string[];
+  groupsWhereMember: string[];
 
   constructor(public dialogRef: MatDialogRef<UserEditComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: string[]) {
-    this.groups = data;
-    this.groupName = "mock";
+              @Inject(MAT_DIALOG_DATA) public data: GroupsDto,
+              private service: UserService) {
+    this.groupName = "example";
+    this.groupsWhereOwner = data.groupsWhereOwner;
+    this.groupsWhereMember = data.groupsWhereMember;
   }
 
 
-  groupNameAvailable(name: string): boolean {
-    return this.groups.indexOf(name) > -1;
+  async checkIfGroupExists(name: string) {
+    this.groupExists =  await this.service.groupExists(name);
+  }
+
+  isOwnedGroup(name: string): boolean{
+    return this.groupsWhereOwner.indexOf(name) != -1;
+  }
+
+  isJoinedGroup(name: string): boolean{
+    return this.groupsWhereMember.indexOf(name) != -1;
+  }
+
+  onKey(event: any) {
+    this.checkIfGroupExists(event.target.value);
   }
 
 }

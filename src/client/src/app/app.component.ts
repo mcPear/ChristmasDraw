@@ -12,11 +12,13 @@ import {GroupsDto} from "./shared/dto/groups.dto";
 export class AppComponent implements OnInit {
   title='ChristmasDraw';
   userDetails: KeycloakProfile;
+  groupsWhereOwner: string[];
 
-  constructor(private keycloakService: KeycloakService) {}
+  constructor(private keycloakService: KeycloakService, private service: UserService) {}
 
   async ngOnInit() {
     this.userDetails = await this.keycloakService.loadUserProfile();
+    this.groupsWhereOwner = await this.service.getOwnerGroups();
   }
 
   async doLogout() {

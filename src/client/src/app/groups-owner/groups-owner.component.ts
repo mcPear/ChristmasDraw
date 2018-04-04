@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {UserService} from "../shared/service/user.service";
 import {UserEditComponent} from "../user-edit/user-edit.component";
 import {MatDialog} from "@angular/material";
@@ -11,19 +11,21 @@ import {GroupCreateComponent} from "../group-create/group-create.component";
 })
 export class GroupsOwnerComponent implements OnInit {
 
-  groupsWhereOwner: string[];
+  @Input() groupsWhereOwner: string[];
 
   constructor(private service: UserService, public dialog: MatDialog) { }
 
   async ngOnInit() {
+  }
+
+  async refresh(){
     this.groupsWhereOwner = await this.service.getOwnerGroups();
   }
 
   openDialog(): void {
     let dialogRef = this.dialog.open(GroupCreateComponent, {
       height: '350px',
-      width: '350px',
-      data: this.groupsWhereOwner
+      width: '350px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -31,7 +33,7 @@ export class GroupsOwnerComponent implements OnInit {
       console.log(result);
       if(result) {
         this.service.createGroup(result)
-          .then(res => this.ngOnInit())
+          .then(res => this.refresh())
           .catch(err => console.log(err));
       }
     });

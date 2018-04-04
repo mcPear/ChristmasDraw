@@ -2,11 +2,11 @@
 <form class="example-form">
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Group name" required
-    [(ngModel)]="groupName" name="groupName">
+    [(ngModel)]="groupName" name="groupName" (keyup)="onKey($event)">
   </mat-form-field>
 </form>
 <mat-dialog-actions>
-  <button mat-raised-button [mat-dialog-close]="groupName">Save</button>
+  <button mat-raised-button [mat-dialog-close]="groupName" [disabled]="groupExists">Save</button>
   <button mat-raised-button [mat-dialog-close]=null>Cancel</button>
 </mat-dialog-actions>
-<p *ngIf="!groupNameAvailable(groupName)">This name is already in use</p>
+<p *ngIf="groupExists">This name is already in use</p>

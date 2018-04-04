@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div *ngIf="userDetails != undefined; else waitForUsername">
+<div *ngIf="userDetails != undefined && groupsWhereOwner!=undefined; else waitForUsername">
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>{{title}}</span>
@@ -12,13 +12,13 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <app-groups-member></app-groups-member>
+      <app-groups-member [groupsWhereOwner]='groupsWhereOwner'></app-groups-member>
     </div>
     <div class="col-sm">
       <app-user [username]='userDetails.username'></app-user>
     </div>
     <div class="col-sm">
-        <app-groups-owner></app-groups-owner>
+        <app-groups-owner [groupsWhereOwner]='groupsWhereOwner'></app-groups-owner>
     </div>
       </div>
 <ng-template #waitForUsername>Login problem</ng-template>

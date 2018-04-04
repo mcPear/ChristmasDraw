@@ -38,4 +38,14 @@ export class UserService {
   createGroup(name: string): Promise<boolean> {
     return this.http.post<boolean>('http://localhost:8090/api/user/create/'+name, {}).toPromise();
   }
+
+  groupExists(groupName: string): Promise<boolean> {
+    return this.http.get<boolean>('http://localhost:8090/api/group/exists/'+groupName)
+      .toPromise();
+  }
+
+  requestGroup(name: string): Promise<object> {
+    return this.http.post('http://localhost:8090/api/user/requestGroup/'+name, {}).toPromise();
+  }
+
 }
