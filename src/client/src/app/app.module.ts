@@ -20,6 +20,7 @@ import {RequestsComponent} from "./group/requests/requests.component";
 import {GroupContainerComponent} from "./group/group-container/group-container.component";
 import {UserGroupComponent} from "./group/user-group/user-group.component";
 import {UserComponent} from "./user/user.component";
+import {MembersComponent} from "./group/members/members.component";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {UserComponent} from "./user/user.component";
     UserDrawComponent,
     RequestsComponent,
     GroupContainerComponent,
-    UserGroupComponent
+    UserGroupComponent,
+    MembersComponent
   ],
   imports: [
     BrowserModule,

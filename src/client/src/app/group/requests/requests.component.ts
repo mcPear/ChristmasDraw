@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {UserDto} from "../../shared/dto/user.dto";
+import {UserService} from "../../shared/service/user.service";
 
 @Component({
   selector: 'app-requests',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./requests.component.css']
 })
 export class RequestsComponent implements OnInit {
+  @Input() groupName: string;
+  requests: UserDto[];
 
-  constructor() { }
+  constructor(private service: UserService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.requests = await this.service.getRequests(this.groupName);
+  }
+
+  async acceptRequest(username: string){
+    await this.service.acceptRequest(username, this.groupName);
+    this.ngOnInit();
   }
 
 }

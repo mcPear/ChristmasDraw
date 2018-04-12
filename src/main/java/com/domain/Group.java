@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "GROUPX")
 @Getter
@@ -44,5 +45,5 @@ public class Group {
     private String collectorContact;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
-    List<Membership> memberships;
+    Set<Membership> memberships;
 }

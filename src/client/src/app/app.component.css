@@ -14,3 +14,7 @@
   right: 0;
   overflow: auto;
 }
+
+.app-container{
+  padding: 16px;
+}

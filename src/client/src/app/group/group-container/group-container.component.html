@@ -1,12 +1,15 @@
-<div class="container">
+<div class="group-container">
   <div class="row">
     <div class="col-sm">
       <app-user-group [username]='username'></app-user-group>
     </div>
     <div class="col-sm">
-      <app-draw [groupName]='groupName'></app-draw>
+      <app-draw [groupName]="selectedGroup.name"></app-draw>
     </div>
     <div class="col-sm">
-      <app-user-draw [groupName]='groupName'></app-user-draw>
+      <app-user-draw [groupName]='selectedGroup.name'></app-user-draw>
+    </div>
+    <div class="col-sm" *ngIf="selectedGroup.isOwned">
+      <app-requests [groupName]='selectedGroup.name'></app-requests>
     </div>
 </div>

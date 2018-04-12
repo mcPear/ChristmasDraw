@@ -14,23 +14,23 @@
   </mat-toolbar-row>
   </mat-toolbar>
 
-<div class="container" *ngIf="!selectedGroup; else showGroupContainer">
+<div class="app-container" *ngIf="!selectedGroup; else showGroupContainer">
   <div class="row">
     <div class="col-sm">
-      <app-groups-member [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event)">
+      <app-groups-member [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event, false)">
       </app-groups-member>
     </div>
     <div class="col-sm">
       <app-user [username]='userDetails.username'></app-user>
     </div>
     <div class="col-sm">
-        <app-groups-owner [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event)">
+        <app-groups-owner [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event, true)">
         </app-groups-owner>
     </div>
           </div>
       </div>
           <ng-template #showGroupContainer>
-            <app-group-container [username]='userDetails.username' [groupName]='selectedGroup'></app-group-container>
+            <app-group-container [username]='userDetails.username' [selectedGroup]='selectedGroup'></app-group-container>
           </ng-template>
       </div>
 <ng-template #waitForUsername>Login problem

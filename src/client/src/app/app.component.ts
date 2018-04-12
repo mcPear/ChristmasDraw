@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {KeycloakProfile} from 'keycloak-js';
 import {KeycloakService} from 'keycloak-angular';
 import {UserService} from "./shared/service/user.service";
+import {SelectedGroupData} from "./shared/model/selected-group-data";
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,8 @@ export class AppComponent implements OnInit {
   title = 'ChristmasDrawApp';
   userDetails: KeycloakProfile;
   groupsWhereOwner: string[];
-  selectedGroup: string;
-  photoUrl='https://www.irelandsown.ie/wp-content/uploads/2017/12/hith-father-christmas-lights-iStock_000029514386Large.jpg';
+  selectedGroup: SelectedGroupData;
+  photoUrl = 'https://www.irelandsown.ie/wp-content/uploads/2017/12/hith-father-christmas-lights-iStock_000029514386Large.jpg';
 
   constructor(private keycloakService: KeycloakService, private service: UserService) {
   }
@@ -36,13 +37,13 @@ export class AppComponent implements OnInit {
     this.selectedGroup = undefined;
   }
 
-  selectGroup(name: string) { //FIXME causes reloading and requests
-    this.selectedGroup = name;
+  selectGroup(name: string, isOwned: boolean) { //FIXME causes reloading and requests
+    this.selectedGroup = <SelectedGroupData>{name: name, isOwned: isOwned};
   }
 
   getSelectedGroupOutput() {
     if (this.selectedGroup)
-      return ' in '+this.selectedGroup;
+      return ' in ' + this.selectedGroup.name;
     else
       return "";
   }

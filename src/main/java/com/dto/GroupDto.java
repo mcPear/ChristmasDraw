@@ -1,19 +1,23 @@
 package com.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class GroupDto {
 
-    private final String drawDate;
-    private final boolean isDrawn;
-    private final boolean countChildren;
-    private final BigDecimal giftValue;
-    private final BigDecimal childGiftValue;
-    private final String collectorContact;
+    private String drawDate;
+    private boolean isDrawn;
+    private boolean countChildren;
+    private BigDecimal giftValue;
+    private BigDecimal childGiftValue;
+    private String collectorContact;
 
 }

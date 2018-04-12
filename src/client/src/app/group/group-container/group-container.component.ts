@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {SelectedGroupData} from "../../shared/model/selected-group-data";
 
 @Component({
   selector: 'app-group-container',
@@ -8,7 +9,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class GroupContainerComponent implements OnInit {
 
   @Input() username: string;
-  @Input() groupName: string;
+  @Input() selectedGroup: SelectedGroupData;
 
   constructor() { }
 
