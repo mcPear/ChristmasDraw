@@ -1,4 +1,4 @@
-<mat-list *ngIf="groupsWhereOwner != undefined; else waitForGroups">
+<mat-list class="group-list" *ngIf="groupsWhereOwner != undefined; else waitForGroups">
   <h3 mat-subheader>Owned groups</h3>
   <button mat-raised-button (click)="openDialog()">Create</button>
   <mat-list-item *ngFor="let group of groupsWhereOwner">

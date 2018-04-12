@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {UserDto} from "../dto/user.dto";
-import {GroupsDto} from "../dto/groups.dto";
 import {MemberGroupDto} from "../dto/member-group.dto";
+import {GroupDto} from "../dto/group.dto";
 
 @Injectable()
 
@@ -37,21 +37,25 @@ export class UserService {
   }
 
   sendInvitationRequestToGroup(groupName: string): Promise<boolean> {
-    return this.http.get<boolean>('http://localhost:8090/api/user/join/'+groupName)
+    return this.http.get<boolean>('http://localhost:8090/api/user/join/' + groupName)
       .toPromise();
   }
 
   createGroup(name: string): Promise<boolean> {
-    return this.http.post<boolean>('http://localhost:8090/api/user/create/'+name, {}).toPromise();
+    return this.http.post<boolean>('http://localhost:8090/api/user/create/' + name, {}).toPromise();
   }
 
   groupExists(groupName: string): Promise<boolean> {
-    return this.http.get<boolean>('http://localhost:8090/api/group/exists/'+groupName)
+    return this.http.get<boolean>('http://localhost:8090/api/group/exists/' + groupName)
       .toPromise();
   }
 
   requestGroup(name: string): Promise<object> {
-    return this.http.post('http://localhost:8090/api/user/requestGroup/'+name, {}).toPromise();
+    return this.http.post('http://localhost:8090/api/user/requestGroup/' + name, {}).toPromise();
+  }
+
+  getGroup(name: string): Promise<GroupDto> {
+    return this.http.get<GroupDto>('http://localhost:8090/api/group/' + name).toPromise();
   }
 
 }

@@ -10,6 +10,7 @@ import com.dto.MemberGroupDto;
 import com.dto.UserDto;
 import com.mapper.UserMapper;
 import com.util.GlobalLogger;
+import com.util.PrincipalUtil;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class UserController {
 
     @GetMapping(path = "/draw/{groupName}")
     public UserDto getDrawUser(@PathVariable String groupName, KeycloakPrincipal principal) {
-        User user = getUserByPrincipal(principal);
+        User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
         List<Membership> selectedGroupMemberships = user.getMembershipsWhereUser()
                 .stream()
                 .filter(mem -> mem.getGroup().getName().equals(groupName))
@@ -92,7 +93,7 @@ public class UserController {
         Group storedGroup = groupDao.findByName(groupName);
         if (storedGroup == null) {
             Group createdGroup = groupDao.save(new Group(groupName));
-            User user = getUserByPrincipal(principal);
+            User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
             membershipDao.save(new Membership(null, true, true,
                     false, true,
                     user.getAbout(), user.getChildren(), createdGroup,
@@ -114,7 +115,7 @@ public class UserController {
     }
 
     private List<String> getUserGroupsWhereOwner(KeycloakPrincipal principal) {
-        User user = getUserByPrincipal(principal);
+        User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
         List<Membership> memberships = membershipDao.findByUserIdAndOwns(user.getId(), true);
         return memberships.stream()
                 .map(m -> m.getGroup().getName())
@@ -122,21 +123,11 @@ public class UserController {
     }
 
     private List<MemberGroupDto> getUserMemberGroupDtos(KeycloakPrincipal principal) {
-        User user = getUserByPrincipal(principal);
+        User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
         List<Membership> memberships = membershipDao.findByUserIdAndOwns(user.getId(), false);
         return memberships.stream()
                 .map(m -> new MemberGroupDto(m.getGroup().getName(), m.isAccepted()))
                 .collect(Collectors.toList());
-    }
-
-    private String getPreferredUsername(KeycloakPrincipal principal) {
-        AccessToken token = principal.getKeycloakSecurityContext().getToken();
-        return token.getPreferredUsername();
-    }
-
-    private User getUserByPrincipal(KeycloakPrincipal principal) {
-        String preferredUsername = getPreferredUsername(principal);
-        return userDao.findByPreferredUsername(preferredUsername);
     }
 
     @RequestMapping(path = "/requestGroup/{groupName}", method = RequestMethod.POST)
@@ -144,7 +135,7 @@ public class UserController {
     private void requestGroup(@PathVariable String groupName, KeycloakPrincipal principal) {
         Group storedGroup = groupDao.findByName(groupName);
         if (storedGroup != null) {
-            User user = getUserByPrincipal(principal);
+            User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
             membershipDao.save(new Membership(null, false, false,
                     false, true,
                     user.getAbout(), user.getChildren(), storedGroup,

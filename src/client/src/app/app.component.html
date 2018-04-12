@@ -1,5 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div *ngIf="userDetails != undefined && groupsWhereOwner!=undefined; else waitForUsername">
+<div class="overlay"
+[ngStyle]="{'background-image': 'url(' + photoUrl + ')'}"
+*ngIf="userDetails != undefined && groupsWhereOwner!=undefined; else waitForUsername">
 
 <mat-toolbar color="primary">
   <mat-toolbar-row>

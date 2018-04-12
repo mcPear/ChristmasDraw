@@ -12,22 +12,14 @@ export class UserDrawComponent implements OnInit {
 
   @Input() groupName: string;
   user: UserDto = null;
-  userMissing = true;
   childrenOutput: string;
 
   constructor(private service: UserService, public dialog: MatDialog) {
   }
 
   async ngOnInit() {
-    this.service.getDrawUser(this.groupName)
-      .then(data => {
-        this.user = data;
-        if (data) this.userMissing = false;
-      })
-      .catch(err => this.userMissing = false);
-    if (this.user) {
-      this.childrenOutput = this.getChildrenOutput(this.user.children);
-    }
+    this.user = await this.service.getDrawUser(this.groupName);
+    if (this.user) this.childrenOutput = this.getChildrenOutput(this.user.children);
   }
 
   getChildrenOutput(count: number): string {

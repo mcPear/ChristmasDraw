@@ -1,4 +1,5 @@
-<mat-list *ngIf="groupsWhereMember != undefined; else waitForGroups">
+<div >
+<mat-list class="group-list" *ngIf="groupsWhereMember != undefined; else waitForGroups">
   <h3 mat-subheader>Groups</h3>
   <button mat-raised-button (click)="openDialog()">Join</button>
   <mat-list-item *ngFor="let group of groupsWhereMember">
@@ -8,3 +9,4 @@
   </mat-list-item>
 </mat-list>
 <ng-template #waitForGroups>loading groups...</ng-template>
+</div>

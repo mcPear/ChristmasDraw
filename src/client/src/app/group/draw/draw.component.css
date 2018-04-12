@@ -1,0 +1,7 @@
+.subtitle {
+  display: block;
+  color: rgba(0,0,0,.54);
+  box-sizing: inherit;
+  font-size: 14px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}

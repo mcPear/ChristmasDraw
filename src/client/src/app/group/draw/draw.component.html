@@ -1,3 +1,18 @@
-<p>
-  draw works!
-</p>
+<mat-card class="example-card" *ngIf="group; else waitForGroup">
+  <mat-card-header></mat-card-header>
+  <mat-card-content>
+    <p class="subtitle">Due date of draw</p>
+    <p class="angular-with-newlines">{{getDrawDateOutput()}}</p>
+    <p class="subtitle">Already drawn</p>
+    <p class="angular-with-newlines">{{getIsDrawnOutput()}}</p>
+    <p class="subtitle">Include children</p>
+    <p class="angular-with-newlines">{{getCountChildrenOutput()}}</p>
+    <p class="subtitle">Value of gift</p>
+    <p class="angular-with-newlines">{{getGiftValueOutput()}}</p>
+    <p class="subtitle">Value of gift for child</p>
+    <p class="angular-with-newlines">{{getChildGiftValueOutput()}}</p>
+    <p class="subtitle">Contact to money collector</p>
+    <p class="angular-with-newlines">{{getCollectorContactOutput()}}</p>
+  </mat-card-content>
+</mat-card>
+<ng-template #waitForGroup>loading group information...</ng-template>
