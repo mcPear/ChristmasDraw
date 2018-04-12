@@ -3,7 +3,7 @@
   <button mat-raised-button (click)="openDialog()">Create</button>
   <mat-list-item *ngFor="let group of groupsWhereOwner">
     <h4 mat-line>{{group}}</h4>
-        <button mat-raised-button >Open</button>
+        <button mat-raised-button (click)="selectGroup(group)">Open</button>
         <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>

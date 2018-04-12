@@ -17,6 +17,11 @@ export class UserService {
       .toPromise();
   }
 
+  getDrawUser(groupName: string): Promise<UserDto> {
+    return this.http.get<UserDto>('http://localhost:8090/api/user/draw/' + groupName)
+      .toPromise();
+  }
+
   editUser(user: UserDto): Promise<Object> {
     return this.http.post('http://localhost:8090/api/user/edit', user).toPromise();
   }

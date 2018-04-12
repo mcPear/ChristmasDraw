@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {UserService} from "../shared/service/user.service";
 import {UserEditComponent} from "../user-edit/user-edit.component";
 import {MatDialog} from "@angular/material";
@@ -12,6 +12,8 @@ import {GroupCreateComponent} from "../group-create/group-create.component";
 export class GroupsOwnerComponent implements OnInit {
 
   @Input() groupsWhereOwner: string[];
+  @Output()
+  groupSelected = new EventEmitter<string>();
 
   constructor(private service: UserService, public dialog: MatDialog) { }
 
@@ -37,6 +39,10 @@ export class GroupsOwnerComponent implements OnInit {
           .catch(err => console.log(err));
       }
     });
+  }
+
+  selectGroup(name: string){
+    this.groupSelected.emit(name);
   }
 
 }

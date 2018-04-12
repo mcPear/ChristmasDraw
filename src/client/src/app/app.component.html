@@ -1,26 +1,38 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div *ngIf="userDetails != undefined && groupsWhereOwner!=undefined; else waitForUsername">
+
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>{{title}}</span>
     <span class="example-spacer"></span>
-    <span>{{userDetails.username}}</span>
+    <span>{{userDetails.username}}{{getSelectedGroupOutput()}}</span>
     <span class="example-spacer"></span>
+    <button mat-button (click)="deselectGroup()">Dashboard</button>
     <button mat-button (click)="doLogout()">Logout</button>
   </mat-toolbar-row>
-</mat-toolbar>
-<div class="container">
+  </mat-toolbar>
+
+<div class="container" *ngIf="!selectedGroup; else showGroupContainer">
   <div class="row">
     <div class="col-sm">
-      <app-groups-member [groupsWhereOwner]='groupsWhereOwner'></app-groups-member>
+      <app-groups-member [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event)">
+      </app-groups-member>
     </div>
     <div class="col-sm">
       <app-user [username]='userDetails.username'></app-user>
     </div>
     <div class="col-sm">
-        <app-groups-owner [groupsWhereOwner]='groupsWhereOwner'></app-groups-owner>
+        <app-groups-owner [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event)">
+        </app-groups-owner>
     </div>
+          </div>
       </div>
-<ng-template #waitForUsername>Login problem</ng-template>
+          <ng-template #showGroupContainer>
+            <app-group-container [username]='userDetails.username' [groupName]='selectedGroup'></app-group-container>
+          </ng-template>
+      </div>
+<ng-template #waitForUsername>Login problem
+  <button mat-button (click)="doLogout()">Logout</button>
+</ng-template>
 
 

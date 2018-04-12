@@ -57,6 +57,25 @@ public class UserController {
         return UserMapper.toDto(userDao.findByPreferredUsername(token.getPreferredUsername()));
     }//TODO move to service
 
+
+    @GetMapping(path = "/draw/{groupName}")
+    public UserDto getDrawUser(@PathVariable String groupName, KeycloakPrincipal principal) {
+        User user = getUserByPrincipal(principal);
+        List<Membership> selectedGroupMemberships = user.getMembershipsWhereUser()
+                .stream()
+                .filter(mem -> mem.getGroup().getName().equals(groupName))
+                .collect(Collectors.toList());
+
+        if (!selectedGroupMemberships.isEmpty()) {
+            Membership membership = selectedGroupMemberships.get(0);
+            User drawnUser = membership.getDrawnUser();
+            return drawnUser == null ? null : UserMapper.toDto(drawnUser);
+        } else {
+            throw new IllegalArgumentException(
+                    "User " + user.getPreferredUsername() + " is not a member of group " + groupName);
+        }
+    }
+
     @RequestMapping(path = "/edit", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     private void editUser(@RequestBody UserDto userDto) {

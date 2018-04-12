@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { KeycloakProfile } from 'keycloak-js';
-import {KeycloakOptions, KeycloakService} from 'keycloak-angular';
+import {Component, OnInit} from '@angular/core';
+import {KeycloakProfile} from 'keycloak-js';
+import {KeycloakService} from 'keycloak-angular';
 import {UserService} from "./shared/service/user.service";
-import {GroupsDto} from "./shared/dto/groups.dto";
 
 @Component({
   selector: 'app-root',
@@ -10,18 +9,40 @@ import {GroupsDto} from "./shared/dto/groups.dto";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title='ChristmasDraw';
+  title = 'ChristmasDrawApp';
   userDetails: KeycloakProfile;
   groupsWhereOwner: string[];
+  selectedGroup: string;
 
-  constructor(private keycloakService: KeycloakService, private service: UserService) {}
+  constructor(private keycloakService: KeycloakService, private service: UserService) {
+  }
 
   async ngOnInit() {
-    this.userDetails = await this.keycloakService.loadUserProfile();
-    this.groupsWhereOwner = await this.service.getOwnerGroups();
+    if (!this.userDetails) {
+      this.userDetails = await this.keycloakService.loadUserProfile();
+    }
+    this.service.getUser(this.userDetails.username);
+    if (!this.groupsWhereOwner) {
+      this.groupsWhereOwner = await this.service.getOwnerGroups();
+    }
   }
 
   async doLogout() {
     await this.keycloakService.logout();
+  }
+
+  deselectGroup() {
+    this.selectedGroup = undefined;
+  }
+
+  selectGroup(name: string) { //FIXME causes reloading and requests
+    this.selectedGroup = name;
+  }
+
+  getSelectedGroupOutput() {
+    if (this.selectedGroup)
+      return ' in '+this.selectedGroup;
+    else
+      return "";
   }
 }

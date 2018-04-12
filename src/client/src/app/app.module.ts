@@ -6,15 +6,20 @@ import {AppComponent} from "./app.component";
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "./material.module";
-import {UserComponent} from "./user/user.component";
 import {UserService} from "./shared/service/user.service";
 import {UserEditComponent} from "./user-edit/user-edit.component";
 import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
-import { FormsModule }   from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {GroupsMemberComponent} from "./groups-member/groups-member.component";
 import {GroupsOwnerComponent} from "./groups-owner/groups-owner.component";
 import {GroupJoinComponent} from "./group-join/group-join.component";
 import {GroupCreateComponent} from "./group-create/group-create.component";
+import {DrawComponent} from "./group/draw/draw.component";
+import {UserDrawComponent} from "./group/user-draw/user-draw.component";
+import {RequestsComponent} from "./group/requests/requests.component";
+import {GroupContainerComponent} from "./group/group-container/group-container.component";
+import {UserGroupComponent} from "./group/user-group/user-group.component";
+import {UserComponent} from "./user/user.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import {GroupCreateComponent} from "./group-create/group-create.component";
     GroupsMemberComponent,
     GroupsOwnerComponent,
     GroupJoinComponent,
-    GroupCreateComponent
+    GroupCreateComponent,
+    DrawComponent,
+    UserDrawComponent,
+    RequestsComponent,
+    GroupContainerComponent,
+    UserGroupComponent
   ],
   imports: [
     BrowserModule,
