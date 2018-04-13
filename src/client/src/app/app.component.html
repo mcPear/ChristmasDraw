@@ -1,6 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="overlay"
-[ngStyle]="{'background-image': 'url(' + photoUrl + ')'}"
 *ngIf="userDetails != undefined && groupsWhereOwner!=undefined; else waitForUsername">
 
 <mat-toolbar color="primary">
@@ -33,7 +32,8 @@
             <app-group-container [username]='userDetails.username' [selectedGroup]='selectedGroup'></app-group-container>
           </ng-template>
       </div>
-<ng-template #waitForUsername>Login problem
+<ng-template #waitForUsername>
+  <mat-spinner></mat-spinner>
   <button mat-button (click)="doLogout()">Logout</button>
 </ng-template>
 

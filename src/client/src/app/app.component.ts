@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
   userDetails: KeycloakProfile;
   groupsWhereOwner: string[];
   selectedGroup: SelectedGroupData;
-  photoUrl = 'https://www.irelandsown.ie/wp-content/uploads/2017/12/hith-father-christmas-lights-iStock_000029514386Large.jpg';
 
   constructor(private keycloakService: KeycloakService, private service: UserService) {
   }
