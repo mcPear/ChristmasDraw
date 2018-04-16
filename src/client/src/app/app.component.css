@@ -19,3 +19,8 @@
 .app-container{
   padding: 16px;
 }
+
+.app-toolbar{
+  background-color: rgba(178,34,34, .85);
+  color: cornsilk;
+}

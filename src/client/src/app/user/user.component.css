@@ -3,3 +3,7 @@ p { word-break: break-all }
 .angular-with-newlines {
   white-space: pre-wrap;
 }
+
+.white-alpha-background{
+  background-color: rgba(255, 255, 255, .90);
+}
