@@ -84,6 +84,21 @@ public class GroupController {
         membershipDao.save(membership);
     }
 
+    @GetMapping(path = "/members/{groupName}")
+    public List<UserDto> getMembers(@PathVariable String groupName, KeycloakPrincipal principal) {
+        User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
+        Group group = groupDao.findByName(groupName);
+        if (group != null) {
+            return group.getMemberships()
+                    .stream()
+                    .filter(Membership::isAccepted)
+                    .map(mem -> UserMapper.toDto(mem.getUser()))
+                    .collect(Collectors.toList());
+        } else {
+            throw new IllegalArgumentException("Group " + groupName + "doesn't exist");
+        }
+    }
+
 //    getRequests(groupName: string): Promise<UserDto[]> {
 //        return this.http.get<UserDto[]>('http://localhost:8090/api/group/requests/' + name).toPromise();
 //    }

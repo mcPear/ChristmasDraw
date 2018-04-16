@@ -1,0 +1,13 @@
+<mat-list class="group-list" *ngIf="members; else waitForMembers">
+  <h3 mat-line mat-subheader>Group members</h3>
+  <!--<button mat-icon-button (click)="saveIncludeMemberList()">
+  <mat-icon>backup</mat-icon>
+  </button>-->
+  <mat-list-item *ngFor="let member of members">
+    <h4 mat-line>{{member.firstName}} {{member.lastName}}</h4>
+    <h5 mat-line>{{member.preferredUsername}}</h5>
+    <mat-checkbox class="example-margin" >Include</mat-checkbox>
+        <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>
+<ng-template #waitForMembers><mat-spinner></mat-spinner></ng-template>

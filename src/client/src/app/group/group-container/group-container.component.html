@@ -10,6 +10,9 @@
       <app-user-draw [groupName]='selectedGroup.name'></app-user-draw>
     </div>
     <div class="col-sm" *ngIf="selectedGroup.isOwned">
-      <app-requests [groupName]='selectedGroup.name'></app-requests>
+      <app-members [groupName]='selectedGroup.name'></app-members>
+    </div>
+    <div class="col-sm" *ngIf="selectedGroup.isOwned">
+      <app-requests [groupName]='selectedGroup.name' (requestAccepted)="refreshMembers()"></app-requests>
     </div>
 </div>

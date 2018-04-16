@@ -1,5 +1,8 @@
 import {NgModule} from '@angular/core';
-import {MatButtonModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule, MatButtonToggleModule, MatCheckboxModule, MatIcon, MatIconModule,
+  MatToolbarModule
+} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -18,7 +21,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatInputModule,
     MatSliderModule,
     MatListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatCheckboxModule
   ],
   exports: [
     MatButtonModule,
@@ -29,7 +35,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatInputModule,
     MatSliderModule,
     MatListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatCheckboxModule
   ],
 })
 export class MaterialModule {
