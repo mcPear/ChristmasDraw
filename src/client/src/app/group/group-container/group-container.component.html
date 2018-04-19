@@ -4,7 +4,7 @@
       <app-user-group [username]='username'></app-user-group>
     </div>
     <div class="col-sm">
-      <app-draw [groupName]="selectedGroup.name"></app-draw>
+      <app-draw [selectedGroup]="selectedGroup" (drawPerformed)="refresh()"></app-draw>
     </div>
     <div class="col-sm">
       <app-user-draw [groupName]='selectedGroup.name'></app-user-draw>

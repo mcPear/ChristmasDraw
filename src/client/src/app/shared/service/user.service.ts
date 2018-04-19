@@ -67,6 +67,11 @@ export class UserService {
       'http://localhost:8090/api/group/accept/' + groupName + '/' + username, {}).toPromise();
   }
 
+  performDraw(groupName: string): Promise<object> {
+    return this.http.post(
+      'http://localhost:8090/api/group/draw/' + groupName , {}).toPromise();
+  }
+
   getMembers(groupName: string): Promise<UserDto[]> {
     return this.http.get<UserDto[]>('http://localhost:8090/api/group/members/' + groupName).toPromise();
   }
