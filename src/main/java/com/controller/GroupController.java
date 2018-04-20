@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -100,6 +101,27 @@ public class GroupController {
             throw new IllegalArgumentException("Group " + groupName + "doesn't exist");
         }
     }
+
+    @RequestMapping(path = "/draw/{groupName}", method = RequestMethod.POST)
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
+    private void performDraw(@PathVariable String groupName) {
+        Group group = groupDao.findByName(groupName);
+        Set<Membership> memberships = group.getMemberships();
+        if (memberships.size() < 2) throw new IllegalArgumentException("Group size should be greater than 2.");
+        List<User> users = memberships.stream().map(m -> m.getUser()).collect(Collectors.toList());
+        memberships.forEach(m -> {
+            int i = 0;
+            User chosenUser = users.get(i);
+            while (chosenUser.equals(m.getUser())) {
+                chosenUser = users.get(++i);
+            }
+            m.setDrawnUser(chosenUser);
+            membershipDao.save(m);
+        });
+        group.setDrawn(true);
+        groupDao.save(group);
+    }
+
 
     @GetMapping(path = "/getAll/{username}")
     public List<GroupSimpleDto> getGroups(@PathVariable String username, KeycloakPrincipal principal) {
