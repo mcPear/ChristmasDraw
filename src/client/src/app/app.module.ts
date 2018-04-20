@@ -22,6 +22,7 @@ import {UserGroupComponent} from "./group/user-group/user-group.component";
 import {UserComponent} from "./user/user.component";
 import {MembersComponent} from "./group/members/members.component";
 import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
+import {DenyRequestConfirmationComponent} from "./group/deny-request-confirmation/deny-request-confirmation.component";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
     GroupContainerComponent,
     UserGroupComponent,
     MembersComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    DenyRequestConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
   entryComponents: [
     UserEditComponent,
     GroupJoinComponent,
-    GroupCreateComponent
+    GroupCreateComponent,
+    DenyRequestConfirmationComponent
   ]
 })
 export class AppModule {

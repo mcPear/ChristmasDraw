@@ -126,7 +126,7 @@ public class UserController {
         User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
         List<Membership> memberships = membershipDao.findByUserIdAndOwns(user.getId(), false);
         return memberships.stream()
-                .map(m -> new MemberGroupDto(m.getGroup().getName(), m.isAccepted()))
+                .map(m -> new MemberGroupDto(m.getGroup().getName(), m.getAccepted()))
                 .collect(Collectors.toList());
     }
 
@@ -136,7 +136,7 @@ public class UserController {
         Group storedGroup = groupDao.findByName(groupName);
         if (storedGroup != null) {
             User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
-            membershipDao.save(new Membership(null, false, false,
+            membershipDao.save(new Membership(null, false, null,
                     false, true,
                     user.getAbout(), user.getChildren(), storedGroup,
                     user, null, null));

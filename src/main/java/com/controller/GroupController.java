@@ -66,7 +66,7 @@ public class GroupController {
         if (group != null) {
             return group.getMemberships()
                     .stream()
-                    .filter(mem -> !mem.isAccepted())
+                    .filter(mem -> mem.getAccepted() == null)
                     .map(mem -> UserMapper.toDto(mem.getUser()))
                     .collect(Collectors.toList());
         } else {
@@ -74,29 +74,30 @@ public class GroupController {
         }
     }
 
-    @RequestMapping(path = "/accept/{groupName}/{username}", method = RequestMethod.POST)
+    @RequestMapping(path = "/accept/{groupName}/{username}/{value}", method = RequestMethod.POST)
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    private void acceptRequest(@PathVariable String groupName, @PathVariable String username, KeycloakPrincipal principal) {
+    private void setAcceptedRequest(@PathVariable String groupName, @PathVariable String username,
+                                    @PathVariable String value) {
         Group group = groupDao.findByName(groupName);
         Membership membership = group.getMemberships()
                 .stream()
                 .filter(mem -> mem.getUser().getPreferredUsername().equals(username))
                 .collect(Collectors.toList())
                 .get(0);
-        membership.setAccepted(true);
+        membership.setAccepted(Boolean.valueOf(value));
+        System.out.println(Boolean.valueOf(value));
         membershipDao.save(membership);
     }
 
     @GetMapping(path = "/members/{groupName}")
-    public List<UserDto> getMembers(@PathVariable String groupName, KeycloakPrincipal principal) {
-        User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
+    public Set<UserDto> getMembers(@PathVariable String groupName, KeycloakPrincipal principal) {
         Group group = groupDao.findByName(groupName);
         if (group != null) {
             return group.getMemberships()
                     .stream()
-                    .filter(Membership::isAccepted)
+                    .filter(mem -> mem.getAccepted() != null && mem.getAccepted())
                     .map(mem -> UserMapper.toDto(mem.getUser()))
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
         } else {
             throw new IllegalArgumentException("Group " + groupName + "doesn't exist");
         }
@@ -126,25 +127,25 @@ public class GroupController {
     @GetMapping(path = "/getAll/{username}")
     public List<GroupSimpleDto> getGroups(@PathVariable String username, KeycloakPrincipal principal) {
         User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
-        if(user != null){
+        if (user != null) {
             List<Group> list = groupDao.findAll();
             List<GroupSimpleDto> dtoList = new ArrayList<>();
-            for (Group item: list) {
+            for (Group item : list) {
                 dtoList.add(new GroupSimpleDto(item.getId(), item.getName(), item.getDrawDate()));
             }
             return dtoList;
-        }else {
+        } else {
             throw new IllegalArgumentException("Something is not quite right");
         }
     }
 
     @DeleteMapping(path = "/delete/{groupName}/{username}")
-    public void deleteGroup(@PathVariable String groupName, @PathVariable String username, KeycloakPrincipal principal){
+    public void deleteGroup(@PathVariable String groupName, @PathVariable String username, KeycloakPrincipal principal) {
         User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
-        if(user != null) {
+        if (user != null) {
             Group group = groupDao.findByName(groupName);
             groupDao.delete(group.getId());
-        }else {
+        } else {
             throw new IllegalArgumentException("Something is not quite right");
         }
     }

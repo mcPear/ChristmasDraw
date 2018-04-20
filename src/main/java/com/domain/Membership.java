@@ -18,7 +18,7 @@ public class Membership {
 
     private boolean owns;
 
-    private boolean accepted;
+    private Boolean accepted;
 
     private boolean includeChildrenInDraw;
 
