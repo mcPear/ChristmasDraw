@@ -13,7 +13,7 @@
     <p class="angular-with-newlines">{{getChildGiftValueOutput()}}</p>
     <p class="subtitle">Contact to money collector</p>
     <p class="angular-with-newlines">{{getCollectorContactOutput()}}</p>
-    <button mat-raised-button (click)="performDraw()">Draw</button>
+    <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned">Draw</button>
   </mat-card-content>
 </mat-card>
 <ng-template #waitForGroup>loading group information...</ng-template>

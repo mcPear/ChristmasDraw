@@ -26,8 +26,8 @@
       <app-groups-owner [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event, true)">
       </app-groups-owner>
     </div>
-    <div class="col-sm">
-      <app-admin-panel *ngIf="isAdmin" [username]='userDetails.username'></app-admin-panel>
+    <div class="col-sm" *ngIf="isAdmin">
+      <app-admin-panel [username]='userDetails.username'></app-admin-panel>
     </div>
   </div>
 </div>
