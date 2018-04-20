@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {UserDto} from "../dto/user.dto";
 import {MemberGroupDto} from "../dto/member-group.dto";
 import {GroupDto} from "../dto/group.dto";
+import {GroupSimpleDto} from "../dto/group_simple";
+import {toPromise} from "rxjs/operator/toPromise";
 
 @Injectable()
 
@@ -69,6 +71,14 @@ export class UserService {
 
   getMembers(groupName: string): Promise<UserDto[]> {
     return this.http.get<UserDto[]>('http://localhost:8090/api/group/members/' + groupName).toPromise();
+  }
+
+  getGroups(username: string): Promise<GroupSimpleDto[]> {
+    return this.http.get<GroupSimpleDto[]>('http://localhost:8090/api/group/getAll/' + username).toPromise();
+  }
+
+  deleteGroup(username: string, groupName: number): Promise<object>{
+    return this.http.delete('http://localhost:8090/api/group/delete/' + groupName + '/' + username).toPromise();
   }
 
 }

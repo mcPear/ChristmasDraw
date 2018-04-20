@@ -1,0 +1,11 @@
+<mat-card class="group-list" *ngIf="user != undefined; else waitForUsername">
+  <h3 mat-subheader>Admin panel</h3>
+  <mat-list>
+    <mat-list-item  *ngFor="let item of groups; let index = index">
+      <h4 mat-line>#{{item.id}} {{item.name}} {{item.drawDate | date}}</h4>
+      <button  mat-raised-button (click)="deleteGroup(item)">Delete</button>
+      <mat-divider></mat-divider>
+    </mat-list-item >
+  </mat-list>
+</mat-card>
+<ng-template #waitForUsername><mat-spinner></mat-spinner></ng-template>

@@ -7,6 +7,7 @@ import com.domain.Group;
 import com.domain.Membership;
 import com.domain.User;
 import com.dto.GroupDto;
+import com.dto.GroupSimpleDto;
 import com.dto.UserDto;
 import com.mapper.GroupMapper;
 import com.mapper.UserMapper;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -99,6 +101,31 @@ public class GroupController {
         }
     }
 
+    @GetMapping(path = "/getAll/{username}")
+    public List<GroupSimpleDto> getGroups(@PathVariable String username, KeycloakPrincipal principal) {
+        User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
+        if(user != null){
+            List<Group> list = groupDao.findAll();
+            List<GroupSimpleDto> dtoList = new ArrayList<>();
+            for (Group item: list) {
+                dtoList.add(new GroupSimpleDto(item.getId(), item.getName(), item.getDrawDate()));
+            }
+            return dtoList;
+        }else {
+            throw new IllegalArgumentException("Something is not quite right");
+        }
+    }
+
+    @DeleteMapping(path = "/delete/{groupName}/{username}")
+    public void deleteGroup(@PathVariable String groupName, @PathVariable String username, KeycloakPrincipal principal){
+        User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
+        if(user != null) {
+            Group group = groupDao.findByName(groupName);
+            groupDao.delete(group.getId());
+        }else {
+            throw new IllegalArgumentException("Something is not quite right");
+        }
+    }
 //    getRequests(groupName: string): Promise<UserDto[]> {
 //        return this.http.get<UserDto[]>('http://localhost:8090/api/group/requests/' + name).toPromise();
 //    }

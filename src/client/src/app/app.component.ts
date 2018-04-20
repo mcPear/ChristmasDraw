@@ -14,8 +14,10 @@ export class AppComponent implements OnInit {
   userDetails: KeycloakProfile;
   groupsWhereOwner: string[];
   selectedGroup: SelectedGroupData;
+  isAdmin: boolean;
 
   constructor(private keycloakService: KeycloakService, private service: UserService) {
+    this.isAdmin = false;
   }
 
   async ngOnInit() {
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit {
     if (!this.groupsWhereOwner) {
       this.groupsWhereOwner = await this.service.getOwnerGroups();
     }
+    this.IsAdmin();
   }
 
   async doLogout() {
@@ -45,5 +48,13 @@ export class AppComponent implements OnInit {
       return ' in ' + this.selectedGroup.name;
     else
       return "";
+  }
+
+  IsAdmin(){
+    var roles = this.keycloakService.getUserRoles(true);
+    roles.forEach(value => {
+      if(value.localeCompare('admin') == 0)
+        this.isAdmin = true;
+    });
   }
 }

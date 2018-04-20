@@ -21,6 +21,7 @@ import {GroupContainerComponent} from "./group/group-container/group-container.c
 import {UserGroupComponent} from "./group/user-group/user-group.component";
 import {UserComponent} from "./user/user.component";
 import {MembersComponent} from "./group/members/members.component";
+import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MembersComponent} from "./group/members/members.component";
     RequestsComponent,
     GroupContainerComponent,
     UserGroupComponent,
-    MembersComponent
+    MembersComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
