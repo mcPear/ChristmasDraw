@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
       if(result) {
-        this.service.editUser(result)
+        this.service.updateUser(result)
           .then(res => this.ngOnInit())
           .catch(err => console.log(err));
       }

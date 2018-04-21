@@ -2,6 +2,7 @@ package com.mapper;
 
 import com.domain.User;
 import com.dto.UserDto;
+import org.keycloak.representations.AccessToken;
 
 public final class UserMapper {
 
@@ -13,6 +14,19 @@ public final class UserMapper {
                 user.getLastName(),
                 user.getAbout(),
                 user.getChildren()
+        );
+    }
+
+    public static User toUser(AccessToken token) {
+        return new User(
+                null,
+                token.getPreferredUsername(),
+                token.getGivenName(),
+                token.getFamilyName(),
+                null,
+                0,
+                null,
+                null
         );
     }
 

@@ -20,17 +20,17 @@ export class RequestsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.requests = await this.service.getRequests(this.groupName);
+    this.requests = await this.service.getGroupRequests(this.groupName);
   }
 
   async acceptRequest(username: string) {
-    await this.service.setAcceptedMembership(username, this.groupName, true);
+    await this.service.setAccepted(username, this.groupName, true);
     this.requestAccepted.emit();
     this.ngOnInit();
   }
 
   async rejectRequest(username: string) {
-    await this.service.setAcceptedMembership(username, this.groupName, false);
+    await this.service.setAccepted(username, this.groupName, false);
     this.ngOnInit();
   }
 

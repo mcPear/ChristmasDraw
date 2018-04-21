@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     if (!this.userDetails) {
       this.userDetails = await this.keycloakService.loadUserProfile();
     }
-    this.service.getUser(this.userDetails.username);
+    await this.service.getUser(this.userDetails.username);
     if (!this.groupsWhereOwner) {
       this.groupsWhereOwner = await this.service.getOwnerGroups();
     }

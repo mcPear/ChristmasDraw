@@ -4,86 +4,82 @@ import {UserDto} from "../dto/user.dto";
 import {MemberGroupDto} from "../dto/member-group.dto";
 import {GroupDto} from "../dto/group.dto";
 import {GroupSimpleDto} from "../dto/group_simple";
-import {toPromise} from "rxjs/operator/toPromise";
 
 @Injectable()
 
 export class UserService {
+  BASE_URL = 'http://localhost:8090/api/';
+  GROUP_URL = this.BASE_URL + 'group/';
+  USER_URL = this.BASE_URL + 'user/';
+  MEMBERSHIP_URL = this.BASE_URL + 'membership/';
 
   constructor(private http: HttpClient) {
   }
 
-
   getUser(username: string): Promise<UserDto> {
-    return this.http.get<UserDto>('http://localhost:8090/api/user/' + username)
+    return this.http.get<UserDto>(this.USER_URL + username)
       .toPromise();
   }
 
   getDrawUser(groupName: string): Promise<UserDto> {
-    return this.http.get<UserDto>('http://localhost:8090/api/user/draw/' + groupName)
+    return this.http.get<UserDto>(this.MEMBERSHIP_URL + 'drawUser/' + groupName)
       .toPromise();
   }
 
-  editUser(user: UserDto): Promise<Object> {
-    return this.http.post('http://localhost:8090/api/user/edit', user).toPromise();
+  updateUser(user: UserDto): Promise<Object> {
+    return this.http.post(this.USER_URL + 'update', user).toPromise();
   }
 
   getMemberGroups(): Promise<MemberGroupDto[]> {
-    return this.http.get<MemberGroupDto[]>('http://localhost:8090/api/user/groups/member')
+    return this.http.get<MemberGroupDto[]>(this.MEMBERSHIP_URL + 'groups/member')
       .toPromise();
   }
 
   getOwnerGroups(): Promise<string[]> {
-    return this.http.get<string[]>('http://localhost:8090/api/user/groups/owner')
-      .toPromise();
-  }
-
-  sendInvitationRequestToGroup(groupName: string): Promise<boolean> {
-    return this.http.get<boolean>('http://localhost:8090/api/user/join/' + groupName)
+    return this.http.get<string[]>(this.MEMBERSHIP_URL + 'groups/owner')
       .toPromise();
   }
 
   createGroup(name: string): Promise<boolean> {
-    return this.http.post<boolean>('http://localhost:8090/api/user/create/' + name, {}).toPromise();
+    return this.http.post<boolean>(this.GROUP_URL + 'create/' + name, {}).toPromise();
   }
 
   groupExists(groupName: string): Promise<boolean> {
-    return this.http.get<boolean>('http://localhost:8090/api/group/exists/' + groupName)
+    return this.http.get<boolean>(this.GROUP_URL + 'exists/' + groupName)
       .toPromise();
   }
 
   requestGroup(name: string): Promise<object> {
-    return this.http.post('http://localhost:8090/api/user/requestGroup/' + name, {}).toPromise();
+    return this.http.post(this.MEMBERSHIP_URL + 'requestGroup/' + name, {}).toPromise();
   }
 
   getGroup(name: string): Promise<GroupDto> {
-    return this.http.get<GroupDto>('http://localhost:8090/api/group/' + name).toPromise();
+    return this.http.get<GroupDto>(this.GROUP_URL + name).toPromise();
   }
 
-  getRequests(groupName: string): Promise<UserDto[]> {
-    return this.http.get<UserDto[]>('http://localhost:8090/api/group/requests/' + groupName).toPromise();
+  getGroupRequests(groupName: string): Promise<UserDto[]> {
+    return this.http.get<UserDto[]>(this.MEMBERSHIP_URL + 'requests/' + groupName).toPromise();
   }
 
-  setAcceptedMembership(username: string, groupName: string, value: boolean): Promise<object> {
+  setAccepted(username: string, groupName: string, value: boolean): Promise<object> {
     return this.http.post(
-      'http://localhost:8090/api/group/accept/' + groupName + '/' + username + '/' + value, {}).toPromise();
+      this.MEMBERSHIP_URL + 'accept/' + groupName + '/' + username + '/' + value, {}).toPromise();
   }
 
   performDraw(groupName: string): Promise<object> {
-    return this.http.post(
-      'http://localhost:8090/api/group/draw/' + groupName, {}).toPromise();
+    return this.http.post(this.MEMBERSHIP_URL + 'draw/' + groupName, {}).toPromise();
   }
 
   getMembers(groupName: string): Promise<UserDto[]> {
-    return this.http.get<UserDto[]>('http://localhost:8090/api/group/members/' + groupName).toPromise();
+    return this.http.get<UserDto[]>(this.MEMBERSHIP_URL + 'members/' + groupName).toPromise();
   }
 
-  getGroups(username: string): Promise<GroupSimpleDto[]> {
-    return this.http.get<GroupSimpleDto[]>('http://localhost:8090/api/group/getAll/' + username).toPromise();
+  getGroups(): Promise<GroupSimpleDto[]> {
+    return this.http.get<GroupSimpleDto[]>(this.GROUP_URL + 'getAll').toPromise();
   }
 
-  deleteGroup(username: string, groupName: number): Promise<object>{
-    return this.http.delete('http://localhost:8090/api/group/delete/' + groupName + '/' + username).toPromise();
+  deleteGroup(username: string, groupName: number): Promise<object> {
+    return this.http.delete(this.GROUP_URL + groupName).toPromise();
   }
 
 }

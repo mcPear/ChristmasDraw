@@ -20,7 +20,7 @@ export class AdminPanelComponent implements OnInit {
 
   async ngOnInit() {
     this.user = await this.service.getUser(this.username);
-    this.groups = await this.service.getGroups(this.username);
+    this.groups = await this.service.getGroups();
     console.log("xD");
   }
 

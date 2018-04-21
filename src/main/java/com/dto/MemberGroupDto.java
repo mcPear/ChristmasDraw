@@ -7,5 +7,5 @@ import lombok.Getter;
 @Getter
 public class MemberGroupDto {
     private String groupName;
-    private boolean requestAccepted;
+    private Boolean requestAccepted;
 }
