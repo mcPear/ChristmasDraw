@@ -19,7 +19,7 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public UserDto getOneDto(String preferredUsername, KeycloakPrincipal principal) { //FIXME strange flow
+    public UserDto getOneDto(String preferredUsername, KeycloakPrincipal principal) {
         User user = userDao.findByPreferredUsername(preferredUsername);
         return user == null ? save(principal) : UserMapper.toDto(user);
     }

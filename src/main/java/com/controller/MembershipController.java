@@ -43,22 +43,22 @@ public class MembershipController {
         membershipService.performDraw(groupName);
     }
 
-    @GetMapping(path = "/drawUser/{groupName}") //FIXME username/id
+    @GetMapping(path = "/drawUser/{groupName}") //FIXME use username/id
     public UserDto getDrawUser(@PathVariable String groupName, KeycloakPrincipal principal) {
         return membershipService.getDrawUser(groupName, principal);
     }
 
     @GetMapping(path = "/groups/member")
-    public List<MemberGroupDto> getUserMemberGroups(KeycloakPrincipal principal) { //FIXME username/id
+    public List<MemberGroupDto> getUserMemberGroups(KeycloakPrincipal principal) { //FIXME use username/id
         return membershipService.getUserMemberGroups(principal);
     }
 
     @GetMapping(path = "/groups/owner")
-    public List<String> getUserOwnerGroups(KeycloakPrincipal principal) { //FIXME username/id
+    public List<String> getUserOwnerGroups(KeycloakPrincipal principal) { //FIXME use username/id
         return membershipService.getUserOwnerGroups(principal);
     }
 
-    @RequestMapping(path = "/requestGroup/{groupName}", method = RequestMethod.POST) //FIXME username/id
+    @RequestMapping(path = "/requestGroup/{groupName}", method = RequestMethod.POST) //FIXME use username/id
     @ResponseStatus(code = HttpStatus.CREATED)
     private void requestGroup(@PathVariable String groupName, KeycloakPrincipal principal) {
         membershipService.addRequest(groupName, principal);

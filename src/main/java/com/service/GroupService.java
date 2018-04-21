@@ -63,7 +63,7 @@ public class GroupService {
         }
     }
 
-    public Boolean add(String groupName, KeycloakPrincipal principal) { //FIXME moved
+    public Boolean add(String groupName, KeycloakPrincipal principal) {
         Group storedGroup = groupDao.findByName(groupName);
         if (storedGroup == null) {
             Group createdGroup = groupDao.save(new Group(groupName));

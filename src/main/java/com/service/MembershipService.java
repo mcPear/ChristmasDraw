@@ -85,7 +85,7 @@ public class MembershipService {
         groupDao.save(group);
     }
 
-    public UserDto getDrawUser(String groupName, KeycloakPrincipal principal) { //FIXME moved
+    public UserDto getDrawUser(String groupName, KeycloakPrincipal principal) {
         User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
         List<Membership> selectedGroupMemberships = user.getMembershipsWhereUser()
                 .stream()
