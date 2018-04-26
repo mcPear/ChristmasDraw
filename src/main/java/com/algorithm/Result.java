@@ -1,4 +1,4 @@
-package com.maciek.algorithm;
+package com.algorithm;
 
 import java.util.List;
 
@@ -30,7 +30,6 @@ public class Result {
                 ", recursiveCalls= " + recursiveCallsCount +
                 ", returns= " + returnsCount +
                 ", time= " + executionTimeMillis +
-                //", algorithm= " + algorithm +
                 '}';
     }
 }

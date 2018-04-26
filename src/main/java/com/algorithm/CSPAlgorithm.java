@@ -1,4 +1,4 @@
-package com.maciek.algorithm;
+package com.algorithm;
 
 import java.util.ArrayList;
 import java.util.HashSet;

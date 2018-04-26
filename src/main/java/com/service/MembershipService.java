@@ -1,5 +1,8 @@
 package com.service;
 
+import com.algorithm.DrawForwardCheck;
+import com.algorithm.Options;
+import com.algorithm.Result;
 import com.dao.GroupDao;
 import com.dao.MembershipDao;
 import com.dao.UserDao;
@@ -9,12 +12,15 @@ import com.domain.User;
 import com.dto.MemberGroupDto;
 import com.dto.UserDto;
 import com.mapper.UserMapper;
+import com.util.GlobalLogger;
 import com.util.PrincipalUtil;
 import org.keycloak.KeycloakPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -69,18 +75,20 @@ public class MembershipService {
 
     public void performDraw(String groupName) { //FIXME forward-checking ?
         Group group = groupDao.findByName(groupName);
-        Set<Membership> memberships = group.getMemberships();
+        List<Membership> memberships = new ArrayList<>(group.getMemberships());
         if (memberships.size() < 2) throw new IllegalArgumentException("Group size should be greater than 2.");
-        List<User> users = memberships.stream().map(m -> m.getUser()).collect(Collectors.toList());
-        memberships.forEach(m -> {
-            int i = 0;
-            User chosenUser = users.get(i);
-            while (chosenUser.equals(m.getUser())) {
-                chosenUser = users.get(++i);
-            }
-            m.setDrawnUser(chosenUser);
-            membershipDao.save(m);
-        });
+        Random random = new Random(System.currentTimeMillis());
+        Result algorithmResult = new DrawForwardCheck(memberships.size(), Options.getDefaultInstance()).run();
+        List<List<Integer>> foundSolutions = algorithmResult.foundSolutions;
+        List<Integer> permutation = foundSolutions.get(random.nextInt(foundSolutions.size()));
+        GlobalLogger.info(""+permutation);
+        for (int i = 0; i < memberships.size(); i++) {
+            Membership membership = memberships.get(i);
+            User drawnUser = memberships.get(permutation.get(i) - 1).getUser();
+            membership.setDrawnUser(drawnUser);
+            membershipDao.save(membership);
+            System.out.println("i: "+i+" perm -1: "+(permutation.get(i) - 1));
+        }
         group.setDrawn(true);
         groupDao.save(group);
     }

@@ -1,17 +1,14 @@
 package com.algorithm;
 
-import com.maciek.algorithm.ForwardCheck;
-import com.maciek.algorithm.Options;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
 //count all domains
-public class QueenForwardCheck extends ForwardCheck {
+public class DrawForwardCheck extends ForwardCheck {
 
-    public QueenForwardCheck(int n, Options options) {
+    public DrawForwardCheck(int n, Options options) {
         super(n, options);
     }
 
@@ -28,23 +25,11 @@ public class QueenForwardCheck extends ForwardCheck {
         //update cell
         updatedDomains.get(theLastValueIndex).clear();
 
-        //update columns at right
-        int nextIndex = theLastValueIndex + 1;
-        for (int i = theLastValueIndex + 1; i < updatedDomains.size(); i++) {
-            List<Integer> domain = updatedDomains.get(i);
-            domain.remove(theLastValue);
-            domain.remove((Integer) (theLastValue + (i - nextIndex + 1)));
-            domain.remove((Integer) (theLastValue - (i - nextIndex + 1)));
+        //update others
+        for (int i = 0; i < updatedDomains.size(); i++) {
+            updatedDomains.get(i).remove(theLastValue);
         }
 
-        //update columns at left
-        int previousIndex = theLastValueIndex - 1;
-        for (int i = theLastValueIndex - 1; i >= 0; i--) {
-            List<Integer> domain = updatedDomains.get(i);
-            domain.remove(theLastValue);
-            domain.remove((Integer) (theLastValue + (previousIndex - i + 1)));
-            domain.remove((Integer) (theLastValue - (previousIndex - i + 1)));
-        }
         return updatedDomains;
     }
 
@@ -60,10 +45,13 @@ public class QueenForwardCheck extends ForwardCheck {
     }
 
     @Override
-    protected List<List<Integer>> getAllFullDomains() {
+    protected List<List<Integer>> getAllInitialDomains() {
         List<List<Integer>> domains = new ArrayList<>();
         for (int i = 1; i <= n; i++) {
-            domains.add(allKnownValues);
+            domains.add(new ArrayList<>(allKnownValues));
+        }
+        for (int i = 0; i < n; i++) {
+            domains.get(i).remove(new Integer(i + 1));
         }
         return domains;
     }

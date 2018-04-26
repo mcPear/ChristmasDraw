@@ -1,4 +1,4 @@
-package com.maciek.algorithm;
+package com.algorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,6 +43,8 @@ public abstract class ForwardCheck extends CSPAlgorithm {
         }
         if (options.countRecursiveCalls) recursiveCallsCount++;
         if (options.stopAtFirstSolution && !foundSolutions.isEmpty()) {
+            return;
+        } else if (options.stopAtHundredSolutions && foundSolutions.size() == 100) {
             return;
         }
 
@@ -113,7 +115,7 @@ public abstract class ForwardCheck extends CSPAlgorithm {
 
     public Result run() {
         long start = System.currentTimeMillis();
-        forwardCheck(getInitialSolution(), getAllFullDomains(), -1);
+        forwardCheck(getInitialSolution(), getAllInitialDomains(), -1);
         if (options.countExecutionTime) {
             executionTimeMillis = System.currentTimeMillis() - start;
         }
@@ -137,7 +139,7 @@ public abstract class ForwardCheck extends CSPAlgorithm {
 
     protected abstract boolean equalsInitialSolution(List<Integer> solution);
 
-    protected abstract List<List<Integer>> getAllFullDomains();
+    protected abstract List<List<Integer>> getAllInitialDomains();
 
     protected boolean isFullSolution(List<Integer> solution) {
         return !solution.contains(0);
