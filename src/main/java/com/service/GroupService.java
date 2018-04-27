@@ -14,6 +14,7 @@ import org.keycloak.KeycloakPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,13 +40,32 @@ public class GroupService {
         return GroupMapper.toDto(groupDao.findByName(name));
     }
 
+    public GroupSimpleDto getOneSimpleDto(String name) {
+        Group item = groupDao.findByName(name);
+        return new GroupSimpleDto( item.getId(),
+                item.getName(),
+                (item.getDrawDate() != null ? item.getDrawDate().getTime() : 0),
+                item.isDrawn(),
+                item.isCountChildren(),
+                item.getGiftValue(),
+                item.getChildGiftValue(),
+                item.getCollectorContact());
+    }
+
     public List<GroupSimpleDto> getAll(KeycloakPrincipal principal) {
         User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
         if (user != null) {
             List<Group> list = groupDao.findAll();
             List<GroupSimpleDto> dtoList = new ArrayList<>();
             for (Group item : list) {
-                dtoList.add(new GroupSimpleDto(item.getId(), item.getName(), item.getDrawDate()));
+                dtoList.add(new GroupSimpleDto( item.getId(),
+                                                item.getName(),
+                                                (item.getDrawDate() != null ? item.getDrawDate().getTime() : 0),
+                                                item.isDrawn(),
+                                                item.isCountChildren(),
+                                                item.getGiftValue(),
+                                                item.getChildGiftValue(),
+                                                item.getCollectorContact()));
             }
             return dtoList;
         } else {
@@ -75,6 +95,20 @@ public class GroupService {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void update(GroupSimpleDto group){
+        if(group != null && !group.getName().isEmpty()) {
+            Group groupDb = groupDao.findByName(group.getName());
+            groupDb.setDrawn(group.isDrawn());
+            groupDb.setDrawDate(new Timestamp(group.getDrawDate()));
+            groupDb.setGiftValue(group.getGiftValue());
+            groupDb.setCountChildren(group.isCountChildren());
+            groupDb.setChildGiftValue(group.getChildGiftValue());
+            groupDb.setCollectorContact(group.getCollectorContact());
+
+            groupDao.save(groupDb);
         }
     }
 

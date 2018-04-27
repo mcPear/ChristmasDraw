@@ -1,8 +1,4 @@
 package com.algorithm;
-
-import com.maciek.algorithm.ForwardCheck;
-import com.maciek.algorithm.Options;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;

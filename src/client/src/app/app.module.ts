@@ -23,6 +23,7 @@ import {UserComponent} from "./user/user.component";
 import {MembersComponent} from "./group/members/members.component";
 import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
 import {DenyRequestConfirmationComponent} from "./group/deny-request-confirmation/deny-request-confirmation.component";
+import { UserManegerComponent } from './user-maneger/user-maneger.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {DenyRequestConfirmationComponent} from "./group/deny-request-confirmatio
     UserGroupComponent,
     MembersComponent,
     AdminPanelComponent,
-    DenyRequestConfirmationComponent
+    DenyRequestConfirmationComponent,
+    UserManegerComponent
   ],
   imports: [
     BrowserModule,

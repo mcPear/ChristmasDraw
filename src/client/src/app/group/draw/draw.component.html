@@ -1,19 +1,22 @@
 <mat-card class="white-alpha-background" *ngIf="group; else waitForGroup">
-  <mat-card-header></mat-card-header>
-  <mat-card-content>
+  <mat-card-header><b>Group: </b> {{ group.name}}</mat-card-header>
     <p class="subtitle">Due date of draw</p>
-    <p class="angular-with-newlines">{{getDrawDateOutput()}}</p>
+  <form>
+    <input type="date" [ngModel]="group.drawDate | date:'yyyy-MM-dd'"  (change)="setCurrentData($event)" name="drawDate">
     <p class="subtitle">Already drawn</p>
     <p class="angular-with-newlines">{{getIsDrawnOutput()}}</p>
     <p class="subtitle">Include children</p>
-    <p class="angular-with-newlines">{{getCountChildrenOutput()}}</p>
+    <select (change)="setIncludeChildren($event)" name="defaultV">
+      <option *ngFor="let o of selectors" [(ngValue)]="defaultV">{{o}}</option>
+    </select>
     <p class="subtitle">Value of gift</p>
-    <p class="angular-with-newlines">{{getGiftValueOutput()}}</p>
+    <input type="number" [(ngModel)]="group.giftValue" name="giftValue">
     <p class="subtitle">Value of gift for child</p>
-    <p class="angular-with-newlines">{{getChildGiftValueOutput()}}</p>
+    <input type="number" [(ngModel)]="group.childGiftValue" name="childGiftValue">
     <p class="subtitle">Contact to money collector</p>
-    <p class="angular-with-newlines">{{getCollectorContactOutput()}}</p>
-    <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned">Draw</button>
-  </mat-card-content>
+    <input type="text" [(ngModel)] = "group.collectorContact" name="collectorContact">
+      <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned">Draw</button>
+      <button mat-raised-button type="submit" (click)="saveData()" >Save</button>
+  </form>
 </mat-card>
 <ng-template #waitForGroup>loading group information...</ng-template>

@@ -1,9 +1,11 @@
 package com.controller;
 
+import com.domain.Group;
 import com.dto.GroupDto;
 import com.dto.GroupSimpleDto;
 import com.service.GroupService;
 import org.keycloak.KeycloakPrincipal;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +26,8 @@ public class GroupController {
     }
 
     @GetMapping(path = "/{name}")
-    public GroupDto getOne(@PathVariable String name) {
-        return groupService.getOneDto(name);
+    public GroupSimpleDto getOne(@PathVariable String name) {
+        return groupService.getOneSimpleDto(name);
     }
 
     @GetMapping(path = "/getAll")
@@ -41,6 +43,12 @@ public class GroupController {
     @RequestMapping(path = "/create/{name}", method = RequestMethod.POST)
     private Boolean add(@PathVariable String name, KeycloakPrincipal principal) {
         return groupService.add(name, principal);
+    }
+
+    @RequestMapping(path = "/update", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody GroupSimpleDto group){
+        groupService.update(group);
     }
 
 }

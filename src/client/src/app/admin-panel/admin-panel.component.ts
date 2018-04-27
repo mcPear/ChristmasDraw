@@ -1,10 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {UserDto} from "../shared/dto/user.dto";
 import {UserService} from "../shared/service/user.service";
 import {MatDialog} from "@angular/material";
 import {GroupSimpleDto} from "../shared/dto/group_simple";
 import {isNullOrUndefined} from "util";
 import {DatePipe} from "@angular/common";
+import {GroupCreateComponent} from "../group-create/group-create.component";
+import {DrawComponent} from "../group/draw/draw.component";
+import {SelectedGroupData} from "../shared/model/selected-group-data";
 
 @Component({
   selector: 'app-admin-panel',
@@ -15,6 +18,7 @@ export class AdminPanelComponent implements OnInit {
   @Input() username: string;
   user: UserDto = null;
   groups: GroupSimpleDto[] = null;
+  groupSelected : SelectedGroupData;
 
   constructor(private service: UserService, public dialog: MatDialog) { }
 
@@ -34,5 +38,9 @@ export class AdminPanelComponent implements OnInit {
   async deleteGroup(group) {
     await this.service.deleteGroup(this.username, group.name);
     this.groups = this.groups.filter(item => item !== group);
+  }
+
+  showDetails(item) : void{
+    this.groupSelected = <SelectedGroupData>{name: item.name, isOwned:true};
   }
 }

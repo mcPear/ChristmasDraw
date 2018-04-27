@@ -9,6 +9,9 @@ import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -38,6 +41,23 @@ public class UserService {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         userDao.save(user);
+    }
+
+    public List<UserDto> getAll(){
+        List<User> users = userDao.findAll();
+        List<UserDto> userDtos = new ArrayList<>();
+        for (User user: users) {
+            userDtos.add(UserMapper.toDto(user));
+        }
+        return  userDtos;
+    }
+
+    public void delete(String username, KeycloakPrincipal principal){
+        AccessToken token = principal.getKeycloakSecurityContext().getToken();
+        User user = UserMapper.toUser(token);
+        UserDto userDto = getOneDto(username, principal);
+        if(user.getId() != userDto.getId())
+            userDao.delete(userDto.getId());
     }
 
 }

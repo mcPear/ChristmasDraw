@@ -1,4 +1,4 @@
-package com.maciek.algorithm;
+package com.algorithm;
 
 public class Options {
 

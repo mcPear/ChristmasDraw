@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GroupDto} from "../../shared/dto/group.dto";
 import {UserService} from "../../shared/service/user.service";
 import {SelectedGroupData} from "../../shared/model/selected-group-data";
+import {GroupSimpleDto} from "../../shared/dto/group_simple";
 
 @Component({
   selector: 'app-draw',
@@ -11,49 +12,50 @@ import {SelectedGroupData} from "../../shared/model/selected-group-data";
 export class DrawComponent implements OnInit {
   @Input() selectedGroup: SelectedGroupData;
   @Output() drawPerformed = new EventEmitter<string>();
-  group: GroupDto;
+  group: GroupSimpleDto;
+  defaultV: string;
+  selectors = [
+    "yes",
+    "no"
+  ];
 
   constructor(private service: UserService) {
   }
 
   async ngOnInit() {
     this.group = await this.service.getGroup(this.selectedGroup.name);
+    if(this.group.countChildren == true)
+      this.defaultV = 'yes';
+    else if(this.group.countChildren == false)
+      this.defaultV = 'no';
+    console.log(this.defaultV);
   }
 
   async performDraw() {
+    console.log(this.group);
     await this.service.performDraw(this.selectedGroup.name);
     this.drawPerformed.emit();
     this.ngOnInit();
   }
 
-  getDrawDateOutput() {
-    if (this.group.drawDate) return this.group.drawDate;
-    else return 'unknown';
-  }
 
   getIsDrawnOutput() {
     if (this.group.isDrawn) return 'yes';
     else return 'no';
   }
 
-  getCountChildrenOutput() {
-    if (this.group.countChildren) return 'yes';
-    else return 'no';
+  async saveData(){
+    await this.service.updateGroup(this.group);
   }
 
-  getGiftValueOutput() {
-    if (this.group.giftValue) return this.group.giftValue;
-    else return 'unknown';
+  setCurrentData(event){
+    this.group.drawDate = event.target.valueAsNumber;
   }
 
-  getChildGiftValueOutput() {
-    if (this.group.childGiftValue) return this.group.childGiftValue;
-    else return 'unknown';
+  setIncludeChildren(event){
+    if(event.target.value == 'yes')
+      this.group.countChildren = true;
+    else if(event.target.value == 'no')
+      this.group.countChildren = false;
   }
-
-  getCollectorContactOutput() {
-    if (this.group.collectorContact) return this.group.collectorContact;
-    else return 'unknown';
-  }
-
 }

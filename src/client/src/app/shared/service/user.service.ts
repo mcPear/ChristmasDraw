@@ -53,8 +53,8 @@ export class UserService {
     return this.http.post(this.MEMBERSHIP_URL + 'requestGroup/' + name, {}).toPromise();
   }
 
-  getGroup(name: string): Promise<GroupDto> {
-    return this.http.get<GroupDto>(this.GROUP_URL + name).toPromise();
+  getGroup(name: string): Promise<GroupSimpleDto> {
+    return this.http.get<GroupSimpleDto>(this.GROUP_URL + name).toPromise();
   }
 
   getGroupRequests(groupName: string): Promise<UserDto[]> {
@@ -80,6 +80,18 @@ export class UserService {
 
   deleteGroup(username: string, groupName: number): Promise<object> {
     return this.http.delete(this.GROUP_URL + groupName).toPromise();
+  }
+
+  updateGroup(group: GroupSimpleDto) : Promise<object>{
+    return this.http.post(this.GROUP_URL + 'update', group).toPromise();
+  }
+
+  getAllUsers(): Promise<UserDto[]>{
+    return this.http.get<UserDto[]>(this.USER_URL + 'getAll').toPromise();
+  }
+
+  deleteUser(username: string): Promise<object>{
+    return this.http.delete(this.USER_URL + username).toPromise();
   }
 
 }

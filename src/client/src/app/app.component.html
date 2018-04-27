@@ -16,18 +16,21 @@
 <div class="app-container" *ngIf="!selectedGroup; else showGroupContainer">
   <div class="row">
     <div class="col-sm">
-      <app-groups-member [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event, false)">
+      <app-groups-member *ngIf="!isAdmin" [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event, false)">
       </app-groups-member>
     </div>
-    <div class="col-sm">
+    <div class="col-sm" *ngIf="!isAdmin">
       <app-user [username]='userDetails.username'></app-user>
     </div>
-    <div class="col-sm">
+    <div class="col-sm" *ngIf="!isAdmin">
       <app-groups-owner [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event, true)">
       </app-groups-owner>
     </div>
     <div class="col-sm" *ngIf="isAdmin">
       <app-admin-panel [username]='userDetails.username'></app-admin-panel>
+    </div>
+    <div class="col-sm" *ngIf="isAdmin">
+      <app-user-maneger [username]='userDetails.username'></app-user-maneger>
     </div>
   </div>
 </div>
@@ -36,7 +39,7 @@
   </ng-template>
 </div>
 <ng-template #waitForUsername>
-  <mat-spinner class="overlay"></mat-spinner>
+  <mat-spinner></mat-spinner>
   <button mat-button (click)="doLogout()">Logout</button>
 </ng-template>
 
