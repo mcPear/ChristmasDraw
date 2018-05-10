@@ -20,7 +20,7 @@ export class GroupsMemberComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.groupsWhereMember = await this.service.getMemberGroups();
+    this.groupsWhereMember = await this.service.getJoinedGroups();
   }
 
   openDialog(): void {

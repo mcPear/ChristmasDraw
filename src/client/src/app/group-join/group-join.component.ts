@@ -26,7 +26,7 @@ export class GroupJoinComponent {
 
 
   async checkIfGroupExists(name: string) {
-    this.groupExists =  await this.service.groupExists(name);
+    this.groupExists =  await this.service.existsGroup(name);
   }
 
   isOwnedGroup(name: string): boolean{

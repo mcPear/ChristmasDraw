@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="overlay"
-*ngIf="userDetails != undefined && groupsWhereOwner!=undefined; else waitForUsername">
+*ngIf="userDetails != undefined && groupsWhereOwner!=undefined; else waitForData">
 
 <mat-toolbar class="app-toolbar">
   <mat-toolbar-row>
@@ -38,7 +38,7 @@
     <app-group-container [username]='userDetails.username' [selectedGroup]='selectedGroup'></app-group-container>
   </ng-template>
 </div>
-<ng-template #waitForUsername>
+<ng-template #waitForData>
   <mat-spinner></mat-spinner>
   <button mat-button (click)="doLogout()">Logout</button>
 </ng-template>

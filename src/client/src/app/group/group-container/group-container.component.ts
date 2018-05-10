@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {SelectedGroupData} from "../../shared/model/selected-group-data";
+import {SelectedGroup} from "../../shared/model/selected-group-data";
 import {MembersComponent} from "../members/members.component";
 import {UserDrawComponent} from "../user-draw/user-draw.component";
 import {DrawComponent} from "../draw/draw.component";
@@ -12,7 +12,7 @@ import {DrawComponent} from "../draw/draw.component";
 export class GroupContainerComponent implements OnInit {
 
   @Input() username: string;
-  @Input() selectedGroup: SelectedGroupData;
+  @Input() selectedGroup: SelectedGroup;
   @ViewChild(MembersComponent) membersComponent: MembersComponent;
   @ViewChild(UserDrawComponent) userDrawComponent: UserDrawComponent;
 

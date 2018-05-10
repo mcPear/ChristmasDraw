@@ -7,7 +7,7 @@ import {isNullOrUndefined} from "util";
 import {DatePipe} from "@angular/common";
 import {GroupCreateComponent} from "../group-create/group-create.component";
 import {DrawComponent} from "../group/draw/draw.component";
-import {SelectedGroupData} from "../shared/model/selected-group-data";
+import {SelectedGroup} from "../shared/model/selected-group-data";
 
 @Component({
   selector: 'app-admin-panel',
@@ -18,13 +18,13 @@ export class AdminPanelComponent implements OnInit {
   @Input() username: string;
   user: UserDto = null;
   groups: GroupSimpleDto[] = null;
-  groupSelected : SelectedGroupData;
+  groupSelected : SelectedGroup;
 
   constructor(private service: UserService, public dialog: MatDialog) { }
 
   async ngOnInit() {
     this.user = await this.service.getUser(this.username);
-    this.groups = await this.service.getGroups();
+    this.groups = await this.service.getAllGroups();
     console.log("xD");
   }
 
@@ -41,6 +41,6 @@ export class AdminPanelComponent implements OnInit {
   }
 
   showDetails(item) : void{
-    this.groupSelected = <SelectedGroupData>{name: item.name, isOwned:true};
+    this.groupSelected = <SelectedGroup>{name: item.name, isOwned:true};
   }
 }

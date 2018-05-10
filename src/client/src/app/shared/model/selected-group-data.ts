@@ -1,4 +1,4 @@
-export interface SelectedGroupData {
+export interface SelectedGroup {
   name: string,
   isOwned: boolean
 }

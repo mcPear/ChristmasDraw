@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserService} from "../shared/service/user.service";
 import {UserDto} from "../shared/dto/user.dto";
 import {MatDialog} from "@angular/material";
 import {UserEditComponent} from "../user-edit/user-edit.component";
@@ -15,11 +14,11 @@ export class UserComponent implements OnInit {
   user: UserDto = null;
   childrenOutput: string;
 
-  constructor(private service: UserService, public dialog: MatDialog, private cacheStorage: AppCacheStorage) {
+  constructor(public dialog: MatDialog, private cacheStorage: AppCacheStorage) {
   }
 
   async ngOnInit() {
-    this.user = await this.service.getUser(this.username);
+    this.user = await this.cacheStorage.getUserDto()
     this.childrenOutput = this.getChildrenOutput(this.user.children);
   }
 
@@ -33,19 +32,18 @@ export class UserComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      if(result) {
-        // this.service.updateUser(result)
-        this.cacheStorage.setUserDto(result)
+      if (result) {
+        this.cacheStorage.updateUserDto(result)
           .then(res => this.ngOnInit())
           .catch(err => console.log(err));
       }
     });
   }
 
-  getChildrenOutput(count: number):string{
-    if(count==0) return 'no children';
-    else if(count==1) return '1 child';
-    else return count+' children';
+  getChildrenOutput(count: number): string {
+    if (count == 0) return 'no children';
+    else if (count == 1) return '1 child';
+    else return count + ' children';
   }
 
 }

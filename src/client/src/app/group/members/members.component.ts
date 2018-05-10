@@ -14,7 +14,7 @@ export class MembersComponent implements OnInit {
   constructor(private service: UserService) { }
 
   async ngOnInit() {
-    this.members = await this.service.getMembers(this.groupName);
+    this.members = await this.service.getGroupMembers(this.groupName);
   }
 
   saveIncludeMemberList(){

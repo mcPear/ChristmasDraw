@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {KeycloakProfile} from 'keycloak-js';
 import {KeycloakService} from 'keycloak-angular';
-import {SelectedGroupData} from "./shared/model/selected-group-data";
+import {SelectedGroup} from "./shared/model/selected-group-data";
 import {AppCacheStorage} from "./shared/storage/app-cache-storage";
 
 @Component({
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   title = 'ChristmasDrawApp';
   userDetails: KeycloakProfile;
   groupsWhereOwner: string[];
-  selectedGroup: SelectedGroupData;
+  selectedGroup: SelectedGroup;
   isAdmin: boolean;
 
   constructor(private keycloakService: KeycloakService, private cacheStorage: AppCacheStorage) {
@@ -23,14 +23,18 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     if (!this.userDetails) {
       this.keycloakService.loadUserProfile()
-        .then(res => {
-          this.cacheStorage.initForUser(res.username)
-          this.userDetails = res
-          this.notifyBackendAboutUser()
-          this.loadGroupsWhereOwner()
+        .then(userProfile => {
+          this.initAfterUserProfileFetch(userProfile)
         })
     }
-    this.IsAdmin();
+    this.setIsAdmin();
+  }
+
+  initAfterUserProfileFetch(userProfile: KeycloakProfile) {
+    this.cacheStorage.initForUser(userProfile.username);
+    this.userDetails = userProfile;
+    this.notifyBackendAboutUser();
+    this.loadGroupsWhereOwner();
   }
 
   async doLogout() {
@@ -41,8 +45,8 @@ export class AppComponent implements OnInit {
     this.selectedGroup = undefined;
   }
 
-  selectGroup(name: string, isOwned: boolean) { //FIXME causes reloading and requests
-    this.selectedGroup = <SelectedGroupData>{name: name, isOwned: isOwned};
+  selectGroup(name: string, isOwned: boolean) {
+    this.selectedGroup = <SelectedGroup>{name: name, isOwned: isOwned};
   }
 
   getSelectedGroupOutput() {
@@ -52,8 +56,8 @@ export class AppComponent implements OnInit {
       return "";
   }
 
-  IsAdmin() {
-    var roles = this.keycloakService.getUserRoles(true);
+  setIsAdmin() {
+    let roles = this.keycloakService.getUserRoles(true);
     roles.forEach(value => {
       if (value.localeCompare('admin') == 0)
         this.isAdmin = true;
@@ -61,7 +65,7 @@ export class AppComponent implements OnInit {
   }
 
   async loadGroupsWhereOwner() {
-    this.groupsWhereOwner = await this.cacheStorage.getGroupsWhereOwner();
+    this.groupsWhereOwner = await this.cacheStorage.getOwnedGroups();
   }
 
   async notifyBackendAboutUser() {

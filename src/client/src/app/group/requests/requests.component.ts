@@ -25,13 +25,13 @@ export class RequestsComponent implements OnInit {
   }
 
   async acceptRequest(username: string) {
-    await this.service.setAccepted(username, this.groupName, true);
+    await this.service.setIsAcceptedRequest(username, this.groupName, true);
     this.requestAccepted.emit();
     this.ngOnInit();
   }
 
   async rejectRequest(username: string) {
-    await this.service.setAccepted(username, this.groupName, false);
+    await this.service.setIsAcceptedRequest(username, this.groupName, false);
     this.ngOnInit();
   }
 

@@ -22,7 +22,7 @@ export class GroupsOwnerComponent implements OnInit {
   }
 
   async refresh() {
-    this.groupsWhereOwner = await this.cacheStorage.getGroupsWhereOwner()
+    this.groupsWhereOwner = await this.cacheStorage.getOwnedGroups()
   }
 
   openDialog(): void {
@@ -35,7 +35,7 @@ export class GroupsOwnerComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
       if (result) {
-        this.cacheStorage.addGroupWhereOwner(result)
+        this.cacheStorage.addOwnedGroup(result)
           .then(res => this.refresh())
           .catch(err => console.log(err));
       }

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GroupDto} from "../../shared/dto/group.dto";
 import {UserService} from "../../shared/service/user.service";
-import {SelectedGroupData} from "../../shared/model/selected-group-data";
+import {SelectedGroup} from "../../shared/model/selected-group-data";
 import {GroupSimpleDto} from "../../shared/dto/group_simple";
 
 @Component({
@@ -10,7 +10,7 @@ import {GroupSimpleDto} from "../../shared/dto/group_simple";
   styleUrls: ['./draw.component.css']
 })
 export class DrawComponent implements OnInit {
-  @Input() selectedGroup: SelectedGroupData;
+  @Input() selectedGroup: SelectedGroup;
   @Output() drawPerformed = new EventEmitter<string>();
   group: GroupSimpleDto;
   defaultV: string;

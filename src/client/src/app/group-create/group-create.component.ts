@@ -23,7 +23,7 @@ export class GroupCreateComponent {
   }
 
   async checkIfGroupExists(name: string) {
-    this.groupExists =  await this.service.groupExists(name);
+    this.groupExists =  await this.service.existsGroup(name);
   }
 
   onKey(event: any) {
