@@ -3,6 +3,7 @@ import {UserService} from "../shared/service/user.service";
 import {UserDto} from "../shared/dto/user.dto";
 import {MatDialog} from "@angular/material";
 import {UserEditComponent} from "../user-edit/user-edit.component";
+import {AppCacheStorage} from "../shared/storage/app-cache-storage";
 
 @Component({
   selector: 'app-user',
@@ -14,7 +15,7 @@ export class UserComponent implements OnInit {
   user: UserDto = null;
   childrenOutput: string;
 
-  constructor(private service: UserService, public dialog: MatDialog) {
+  constructor(private service: UserService, public dialog: MatDialog, private cacheStorage: AppCacheStorage) {
   }
 
   async ngOnInit() {
@@ -33,7 +34,8 @@ export class UserComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
       if(result) {
-        this.service.updateUser(result)
+        // this.service.updateUser(result)
+        this.cacheStorage.setUserDto(result)
           .then(res => this.ngOnInit())
           .catch(err => console.log(err));
       }

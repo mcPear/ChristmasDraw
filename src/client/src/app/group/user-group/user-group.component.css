@@ -6,4 +6,5 @@ p { word-break: break-all }
 
 .angular-with-newlines {
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }

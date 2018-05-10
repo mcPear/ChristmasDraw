@@ -24,6 +24,7 @@ import {MembersComponent} from "./group/members/members.component";
 import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
 import {DenyRequestConfirmationComponent} from "./group/deny-request-confirmation/deny-request-confirmation.component";
 import { UserManegerComponent } from './user-maneger/user-maneger.component';
+import {AppCacheStorage} from "./shared/storage/app-cache-storage";
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { UserManegerComponent } from './user-maneger/user-maneger.component';
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
     UserService,
+    AppCacheStorage,
     {
       provide: APP_INITIALIZER,
       useFactory: initializer,

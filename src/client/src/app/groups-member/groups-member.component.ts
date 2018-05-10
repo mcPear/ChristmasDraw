@@ -14,8 +14,7 @@ export class GroupsMemberComponent implements OnInit {
 
   groupsWhereMember: MemberGroupDto[];
   @Input() groupsWhereOwner: string[];
-  @Output()
-  groupSelected = new EventEmitter<string>();
+  @Output() groupSelected = new EventEmitter<string>();
 
   constructor(private service: UserService, public dialog: MatDialog) {
   }
@@ -45,7 +44,7 @@ export class GroupsMemberComponent implements OnInit {
     });
   }
 
-  selectGroup(name: string){
+  selectGroup(name: string) {
     this.groupSelected.emit(name);
   }
 

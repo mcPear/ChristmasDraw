@@ -3,6 +3,7 @@ import {UserDto} from "../../shared/dto/user.dto";
 import {UserService} from "../../shared/service/user.service";
 import {MatDialog} from "@angular/material";
 import {DenyRequestConfirmationComponent} from "../deny-request-confirmation/deny-request-confirmation.component";
+import {AppCacheStorage} from "../../shared/storage/app-cache-storage";
 
 @Component({
   selector: 'app-requests',
@@ -16,7 +17,7 @@ export class RequestsComponent implements OnInit {
   @Output()
   requestAccepted = new EventEmitter<string>();
 
-  constructor(private service: UserService, public dialog: MatDialog) {
+  constructor(private service: UserService, public dialog: MatDialog, private cacheStorage: AppCacheStorage) {
   }
 
   async ngOnInit() {

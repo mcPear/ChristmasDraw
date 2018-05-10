@@ -3,6 +3,7 @@ import {UserService} from "../shared/service/user.service";
 import {UserEditComponent} from "../user-edit/user-edit.component";
 import {MatDialog} from "@angular/material";
 import {GroupCreateComponent} from "../group-create/group-create.component";
+import {AppCacheStorage} from "../shared/storage/app-cache-storage";
 
 @Component({
   selector: 'app-groups-owner',
@@ -11,17 +12,17 @@ import {GroupCreateComponent} from "../group-create/group-create.component";
 })
 export class GroupsOwnerComponent implements OnInit {
 
-  @Input() groupsWhereOwner: string[];
-  @Output()
-  groupSelected = new EventEmitter<string>();
+  @Input() groupsWhereOwner: string[]; //FIXME consider if needed
+  @Output() groupSelected = new EventEmitter<string>();
 
-  constructor(private service: UserService, public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private cacheStorage: AppCacheStorage) {
+  }
 
   async ngOnInit() {
   }
 
-  async refresh(){
-    this.groupsWhereOwner = await this.service.getOwnerGroups();
+  async refresh() {
+    this.groupsWhereOwner = await this.cacheStorage.getGroupsWhereOwner()
   }
 
   openDialog(): void {
@@ -33,15 +34,15 @@ export class GroupsOwnerComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      if(result) {
-        this.service.createGroup(result)
+      if (result) {
+        this.cacheStorage.addGroupWhereOwner(result)
           .then(res => this.refresh())
           .catch(err => console.log(err));
       }
     });
   }
 
-  selectGroup(name: string){
+  selectGroup(name: string) {
     this.groupSelected.emit(name);
   }
 

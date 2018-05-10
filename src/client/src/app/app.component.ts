@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {KeycloakProfile} from 'keycloak-js';
 import {KeycloakService} from 'keycloak-angular';
-import {UserService} from "./shared/service/user.service";
 import {SelectedGroupData} from "./shared/model/selected-group-data";
+import {AppCacheStorage} from "./shared/storage/app-cache-storage";
 
 @Component({
   selector: 'app-root',
@@ -16,17 +16,19 @@ export class AppComponent implements OnInit {
   selectedGroup: SelectedGroupData;
   isAdmin: boolean;
 
-  constructor(private keycloakService: KeycloakService, private service: UserService) {
+  constructor(private keycloakService: KeycloakService, private cacheStorage: AppCacheStorage) {
     this.isAdmin = false;
   }
 
   async ngOnInit() {
     if (!this.userDetails) {
-      this.userDetails = await this.keycloakService.loadUserProfile();
-    }
-    await this.service.getUser(this.userDetails.username);
-    if (!this.groupsWhereOwner) {
-      this.groupsWhereOwner = await this.service.getOwnerGroups();
+      this.keycloakService.loadUserProfile()
+        .then(res => {
+          this.cacheStorage.initForUser(res.username)
+          this.userDetails = res
+          this.notifyBackendAboutUser()
+          this.loadGroupsWhereOwner()
+        })
     }
     this.IsAdmin();
   }
@@ -50,11 +52,19 @@ export class AppComponent implements OnInit {
       return "";
   }
 
-  IsAdmin(){
+  IsAdmin() {
     var roles = this.keycloakService.getUserRoles(true);
     roles.forEach(value => {
-      if(value.localeCompare('admin') == 0)
+      if (value.localeCompare('admin') == 0)
         this.isAdmin = true;
     });
+  }
+
+  async loadGroupsWhereOwner() {
+    this.groupsWhereOwner = await this.cacheStorage.getGroupsWhereOwner();
+  }
+
+  async notifyBackendAboutUser() {
+    await this.cacheStorage.getUserDto();
   }
 }
