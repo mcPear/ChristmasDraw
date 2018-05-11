@@ -2,7 +2,7 @@
   <h3 mat-subheader>Admin panel</h3>
   <mat-list>
     <mat-list-item  *ngFor="let item of users; let index = index">
-      <h4 mat-line >{{item.firstName}} {{item.lastName}}-{{item.preferredUsername}}</h4>
+      <h4 mat-line (click)="showDetails(item)">{{item.firstName}} {{item.lastName}}-{{item.preferredUsername}}</h4>
       <button  mat-raised-button (click)="deleteUser(item)">Delete</button>
       <mat-divider></mat-divider>
     </mat-list-item >
