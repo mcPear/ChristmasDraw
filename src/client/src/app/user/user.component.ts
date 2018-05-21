@@ -41,7 +41,8 @@ export class UserComponent implements OnInit {
   }
 
   getChildrenOutput(count: number): string {
-    if (count == 0) return 'no children';
+    if(count == null) {return 'missing information about children'}
+    else if (count == 0) return 'no children';
     else if (count == 1) return '1 child';
     else return count + ' children';
   }
