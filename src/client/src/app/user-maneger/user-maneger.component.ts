@@ -14,19 +14,21 @@ export class UserManegerComponent implements OnInit {
   @Input() username: string;
   users: UserDto[];
   user: UserDto = null;
-  constructor(private service: UserService, public dialog: MatDialog) { }
+
+  constructor(private service: UserService, public dialog: MatDialog, public cacheStorage: AppCacheStorage) {
+  }
 
   async ngOnInit() {
     this.users = await this.service.getAllUsers();
     this.user = await this.service.getUser(this.username);
   }
 
-  async deleteUser(user){
+  async deleteUser(user) {
     await this.service.deleteUser(user.preferredUsername);
     this.users = this.users.filter(item => item !== user);
   }
 
-  showDetails(item) : void {
+  showDetails(item): void {
     console.log(item);
     let dialogRef = this.dialog.open(UserEditComponent, {
       height: '600px',
@@ -42,6 +44,7 @@ export class UserManegerComponent implements OnInit {
           .then(res => this.ngOnInit())
           .catch(err => console.log(err));
       }
-  }
+    });
 
+  }
 }
