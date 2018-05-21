@@ -6,7 +6,6 @@ import {GroupSimpleDto} from "../shared/dto/group_simple";
 import {isNullOrUndefined} from "util";
 import {DatePipe} from "@angular/common";
 import {GroupCreateComponent} from "../group-create/group-create.component";
-import {DrawComponent} from "../group/draw/draw.component";
 import {SelectedGroup} from "../shared/model/selected-group-data";
 
 @Component({

@@ -1,0 +1,47 @@
+<mat-card class="white-alpha-background" *ngIf="group; else waitForGroup">
+<h2 mat-dialog-title>{{group.name}} draw settings</h2>
+<form>
+  <section class="example-section">
+    <mat-form-field class="example-full-width">
+      <input matInput [matDatepicker]="picker" placeholder="Due date of draw"
+             (dateChange)="setCurrentData($event)"
+             [value]="group.drawDate | date:'yyyy-MM-dd'"
+             name="drawDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </section>
+
+  <section class="example-section">
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="group.giftValue" name="giftValue"
+             placeholder="Value of gift" [value]="group.giftValue">
+    </mat-form-field>
+  </section>
+
+  <section class="example-section">
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="group.childGiftValue" name="childGiftValue"
+             placeholder="Value of gift for child" [value]="group.childGiftValue">
+    </mat-form-field>
+  </section>
+
+  <mat-form-field class="example-full-width">
+    <input matInput [(ngModel)]="group.collectorContact" name="collectorContact"
+           placeholder="Contact to money collector" [value]="group.collectorContact">
+  </mat-form-field>
+
+  <section class="example-section">
+    <mat-checkbox class="example-margin" [(ngModel)]="group.countChildren"
+                  name="countChildrenCheckbox">Count children
+    </mat-checkbox>
+  </section>
+  <section class="example-section">
+    {{getIsDrawnOutput()}}
+  </section>
+
+  <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned">Draw</button>
+  <button mat-raised-button type="submit" (click)="saveData()">Save</button>
+</form>
+</mat-card>
+<ng-template #waitForGroup>loading group information...</ng-template>

@@ -14,7 +14,6 @@ import {GroupsMemberComponent} from "./groups-member/groups-member.component";
 import {GroupsOwnerComponent} from "./groups-owner/groups-owner.component";
 import {GroupJoinComponent} from "./group-join/group-join.component";
 import {GroupCreateComponent} from "./group-create/group-create.component";
-import {DrawComponent} from "./group/draw/draw.component";
 import {UserDrawComponent} from "./group/user-draw/user-draw.component";
 import {RequestsComponent} from "./group/requests/requests.component";
 import {GroupContainerComponent} from "./group/group-container/group-container.component";
@@ -23,8 +22,10 @@ import {UserComponent} from "./user/user.component";
 import {MembersComponent} from "./group/members/members.component";
 import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
 import {DenyRequestConfirmationComponent} from "./group/deny-request-confirmation/deny-request-confirmation.component";
-import { UserManegerComponent } from './user-maneger/user-maneger.component';
+import {UserManegerComponent} from './user-maneger/user-maneger.component';
 import {AppCacheStorage} from "./shared/storage/app-cache-storage";
+import {ImmutableDrawComponent} from "./group/immutable-draw/immutable-draw.component";
+import {MutableDrawComponent} from "./group/mutable-draw/mutable-draw.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,6 @@ import {AppCacheStorage} from "./shared/storage/app-cache-storage";
     GroupsOwnerComponent,
     GroupJoinComponent,
     GroupCreateComponent,
-    DrawComponent,
     UserDrawComponent,
     RequestsComponent,
     GroupContainerComponent,
@@ -43,7 +43,9 @@ import {AppCacheStorage} from "./shared/storage/app-cache-storage";
     MembersComponent,
     AdminPanelComponent,
     DenyRequestConfirmationComponent,
-    UserManegerComponent
+    UserManegerComponent,
+    ImmutableDrawComponent,
+    MutableDrawComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,6 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {SelectedGroup} from "../../shared/model/selected-group-data";
 import {MembersComponent} from "../members/members.component";
 import {UserDrawComponent} from "../user-draw/user-draw.component";
-import {DrawComponent} from "../draw/draw.component";
 
 @Component({
   selector: 'app-group-container',
@@ -26,7 +25,7 @@ export class GroupContainerComponent implements OnInit {
     this.membersComponent.ngOnInit();
   }
 
-  refresh(){
+  refresh() {
     this.userDrawComponent.ngOnInit();
     this.ngOnInit();
   }

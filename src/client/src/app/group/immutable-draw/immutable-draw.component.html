@@ -1,0 +1,17 @@
+<mat-card class="white-alpha-background" *ngIf="group; else waitForGroup">
+  <h2 mat-dialog-title>{{group.name}} draw settings</h2>
+  <mat-card-subtitle>Due date of draw:</mat-card-subtitle>
+  <p>{{group.drawDate | date:'yyyy-MM-dd'}}</p>
+  <mat-card-subtitle>Value of gift:</mat-card-subtitle>
+  <p>{{group.giftValue}}</p>
+  <mat-card-subtitle>Value of gift for child:</mat-card-subtitle>
+  <p>{{group.childGiftValue}}</p>
+  <mat-card-subtitle>Contact to money collector:</mat-card-subtitle>
+  <p>{{group.collectorContact}}</p>
+  <mat-card-subtitle>Include children:</mat-card-subtitle>
+  <p>{{getIncludeChildrenOutput()}}</p>
+  <section class="example-section">
+    {{getIsDrawnOutput()}}
+  </section>
+</mat-card>
+<ng-template #waitForGroup>loading group information...</ng-template>

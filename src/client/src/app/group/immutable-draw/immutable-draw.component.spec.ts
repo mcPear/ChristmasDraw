@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DrawComponent } from './draw.component';
+import { ImmutableDrawComponent } from './immutable-draw.component';
 
-describe('DrawComponent', () => {
-  let component: DrawComponent;
-  let fixture: ComponentFixture<DrawComponent>;
+describe('ImmutableDrawComponent', () => {
+  let component: ImmutableDrawComponent;
+  let fixture: ComponentFixture<ImmutableDrawComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DrawComponent ]
+      declarations: [ ImmutableDrawComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DrawComponent);
+    fixture = TestBed.createComponent(ImmutableDrawComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

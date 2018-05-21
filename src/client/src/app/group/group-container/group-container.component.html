@@ -3,8 +3,11 @@
     <div class="col-sm">
       <app-user-group [username]='username'></app-user-group>
     </div>
-    <div class="col-sm">
-      <app-draw [selectedGroup]="selectedGroup" (drawPerformed)="refresh()"></app-draw>
+    <div class="col-sm" *ngIf="!selectedGroup.isOwned">
+      <app-immutable-draw [selectedGroup]="selectedGroup" (drawPerformed)="refresh()"></app-immutable-draw>
+    </div>
+    <div class="col-sm" *ngIf="selectedGroup.isOwned">
+      <app-mutable-draw [selectedGroup]="selectedGroup" (drawPerformed)="refresh()"></app-mutable-draw>
     </div>
     <div class="col-sm">
       <app-user-draw [groupName]='selectedGroup.name'></app-user-draw>
@@ -15,4 +18,4 @@
     <div class="col-sm" *ngIf="selectedGroup.isOwned">
       <app-requests [groupName]='selectedGroup.name' (requestAccepted)="refreshMembers()"></app-requests>
     </div>
-</div>
+  </div>

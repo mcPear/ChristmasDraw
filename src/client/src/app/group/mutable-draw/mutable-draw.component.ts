@@ -1,16 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {GroupDto} from "../../shared/dto/group.dto";
-import {UserService} from "../../shared/service/user.service";
-import {SelectedGroup} from "../../shared/model/selected-group-data";
 import {GroupSimpleDto} from "../../shared/dto/group_simple";
 import {MatDatepickerInputEvent} from "@angular/material";
+import {UserService} from "../../shared/service/user.service";
+import {SelectedGroup} from "../../shared/model/selected-group-data";
 
 @Component({
-  selector: 'app-draw',
-  templateUrl: './draw.component.html',
-  styleUrls: ['./draw.component.css']
+  selector: 'app-mutable-draw',
+  templateUrl: './mutable-draw.component.html',
+  styleUrls: ['./mutable-draw.component.css']
 })
-export class DrawComponent implements OnInit {
+export class MutableDrawComponent implements OnInit {
   @Input() selectedGroup: SelectedGroup;
   @Output() drawPerformed = new EventEmitter<string>();
   group: GroupSimpleDto;
