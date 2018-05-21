@@ -14,7 +14,7 @@
   </mat-form-field>
   <mat-form-field class="example-margin">
     <input matInput type="number" placeholder="Children count" [value]="data.children"
-    required [(ngModel)]="resultData.children" name="children">
+    required [(ngModel)]="resultData.children" name="children"  min="0" max="100">
   </mat-form-field>
 </form>
 <mat-dialog-actions>

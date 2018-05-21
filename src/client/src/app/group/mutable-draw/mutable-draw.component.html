@@ -15,14 +15,14 @@
   <section class="example-section">
     <mat-form-field>
       <input matInput type="number" [(ngModel)]="group.giftValue" name="giftValue"
-             placeholder="Value of gift" [value]="group.giftValue">
+             placeholder="Value of gift" [value]="group.giftValue" min="0">
     </mat-form-field>
   </section>
 
   <section class="example-section">
     <mat-form-field>
       <input matInput type="number" [(ngModel)]="group.childGiftValue" name="childGiftValue"
-             placeholder="Value of gift for child" [value]="group.childGiftValue">
+             placeholder="Value of gift for child" [value]="group.childGiftValue" min="0">
     </mat-form-field>
   </section>
 
