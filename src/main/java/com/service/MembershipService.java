@@ -11,6 +11,7 @@ import com.domain.Membership;
 import com.domain.User;
 import com.dto.MemberGroupDto;
 import com.dto.UserDto;
+import com.dto.UserIncludeDto;
 import com.mapper.UserMapper;
 import com.util.GlobalLogger;
 import com.util.PrincipalUtil;
@@ -18,10 +19,7 @@ import org.keycloak.KeycloakPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,7 +59,7 @@ public class MembershipService {
         membershipDao.save(membership);
     }
 
-    public Set<UserDto> getGroupMembers(String groupName) {
+    public Set<UserIncludeDto> getGroupMembers(String groupName) {
         Group group = groupDao.findByName(groupName);
         if (group == null) {
             throw new IllegalArgumentException("Group " + groupName + "doesn't exist");
@@ -69,25 +67,28 @@ public class MembershipService {
         return group.getMemberships()
                 .stream()
                 .filter(mem -> mem.getAccepted() != null && mem.getAccepted())
-                .map(mem -> UserMapper.toDto(mem.getUser()))
+                .map(mem -> UserMapper.toIncludeDto(mem.getUser(), mem.isIncludeInDraw()))
                 .collect(Collectors.toSet());
     }
 
-    public void performDraw(String groupName) { //FIXME forward-checking ?
+    public void performDraw(String groupName) {
         Group group = groupDao.findByName(groupName);
-        List<Membership> memberships = new ArrayList<>(group.getMemberships());
-        if (memberships.size() < 2) throw new IllegalArgumentException("Group size should be greater than 2.");
+        List<Membership> memberships = group.getMemberships().stream()
+                .filter(Membership::isIncludeInDraw)
+                .collect(Collectors.toList());
+        if (memberships.size() < 2) throw new IllegalArgumentException(
+                "The number of users included in draw should be greater than 2.");
         Random random = new Random(System.currentTimeMillis());
         Result algorithmResult = new DrawForwardCheck(memberships.size(), Options.getDefaultInstance()).run();
         List<List<Integer>> foundSolutions = algorithmResult.foundSolutions;
         List<Integer> permutation = foundSolutions.get(random.nextInt(foundSolutions.size()));
-        GlobalLogger.info(""+permutation);
+        GlobalLogger.info("" + permutation);
         for (int i = 0; i < memberships.size(); i++) {
             Membership membership = memberships.get(i);
             User drawnUser = memberships.get(permutation.get(i) - 1).getUser();
             membership.setDrawnUser(drawnUser);
             membershipDao.save(membership);
-            System.out.println("i: "+i+" perm -1: "+(permutation.get(i) - 1));
+            System.out.println("i: " + i + " perm -1: " + (permutation.get(i) - 1));
         }
         group.setDrawn(true);
         groupDao.save(group);
@@ -118,7 +119,6 @@ public class MembershipService {
                 .collect(Collectors.toList());
     }
 
-    //TODO missing unaccepted (null) memberships
     public List<MemberGroupDto> getUserMemberGroups(KeycloakPrincipal principal) {
         User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
         List<Membership> memberships = membershipDao.findByUserIdAndOwns(user.getId(), false);
@@ -136,6 +136,17 @@ public class MembershipService {
                     user.getAbout(), user.getChildren(), storedGroup,
                     user, null, null));
         }
+    }
+
+    public void updateIncludeMembers(List<UserIncludeDto> userIncludeDtos, String groupName) { //TODO by group id
+        Map<String, Boolean> includesMap = new HashMap<>();
+        userIncludeDtos.forEach(dto -> includesMap.put(dto.getPreferredUsername(), dto.isInclude()));
+        Long groupId = groupDao.findByName(groupName).getId();
+        List<Membership> memberships = membershipDao.findByGroupId(groupId);
+        for (Membership mem : memberships) {
+            mem.setIncludeInDraw(includesMap.get(mem.getUser().getPreferredUsername()));
+        }
+        membershipDao.save(memberships);
     }
 
 }

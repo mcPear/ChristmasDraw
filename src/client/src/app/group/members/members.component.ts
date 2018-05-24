@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserDto} from "../../shared/dto/user.dto";
 import {UserService} from "../../shared/service/user.service";
+import {UserIncludeDto} from "../../shared/dto/user_include.dto";
 
 @Component({
   selector: 'app-members',
@@ -9,16 +9,17 @@ import {UserService} from "../../shared/service/user.service";
 })
 export class MembersComponent implements OnInit {
   @Input() groupName: string;
-  members: UserDto[];
+  members: UserIncludeDto[];
 
-  constructor(private service: UserService) { }
+  constructor(private service: UserService) {
+  }
 
   async ngOnInit() {
     this.members = await this.service.getGroupMembers(this.groupName);
   }
 
-  saveIncludeMemberList(){
-
+  async updateIncludeMembers() {
+    this.service.updateIncludeMembers(this.members, this.groupName);
   }
 
 }
