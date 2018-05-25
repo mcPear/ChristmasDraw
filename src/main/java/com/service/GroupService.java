@@ -42,7 +42,8 @@ public class GroupService {
 
     public GroupSimpleDto getOneSimpleDto(String name) {
         Group item = groupDao.findByName(name);
-        return new GroupSimpleDto( item.getId(),
+        if(item != null)
+            return new GroupSimpleDto( item.getId(),
                 item.getName(),
                 (item.getDrawDate() != null ? item.getDrawDate().getTime() : 0),
                 item.isDrawn(),
@@ -50,6 +51,7 @@ public class GroupService {
                 item.getGiftValue(),
                 item.getChildGiftValue(),
                 item.getCollectorContact());
+        else return null;
     }
 
     public List<GroupSimpleDto> getAll(KeycloakPrincipal principal) {

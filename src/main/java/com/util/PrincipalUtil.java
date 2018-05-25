@@ -9,7 +9,14 @@ public class PrincipalUtil {
 
     private static String getPreferredUsername(KeycloakPrincipal principal) {
         AccessToken token = principal.getKeycloakSecurityContext().getToken();
-        return token.getPreferredUsername();
+        String result;
+        try {
+            result = token.getPreferredUsername();
+        }catch (Exception ex){
+            System.out.println("Can't find user from token!");
+            return "mock";
+        }
+        return result;
     }
 
     public static User getUserByPrincipal(KeycloakPrincipal principal, UserDao userDao) {

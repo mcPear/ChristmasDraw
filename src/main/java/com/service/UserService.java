@@ -29,9 +29,11 @@ public class UserService {
 
     private UserDto save(KeycloakPrincipal principal) {
         AccessToken token = principal.getKeycloakSecurityContext().getToken();
-        User user = UserMapper.toUser(token);
-        userDao.save(user);
-        return UserMapper.toDto(user);
+        if(token != null) {
+            User user = UserMapper.toUser(token);
+            userDao.save(user);
+            return UserMapper.toDto(user);
+        }else return null;
     }
 
     public void update(UserDto userDto) {
