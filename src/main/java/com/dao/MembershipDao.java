@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface MembershipDao extends JpaRepository<Membership, Long> {
     List<Membership> findByUserIdAndOwns(long userId, boolean owns);
+    List<Membership> findByGroupId(long groupId);
 }

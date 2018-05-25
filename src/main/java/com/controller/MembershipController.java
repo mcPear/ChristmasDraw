@@ -2,6 +2,7 @@ package com.controller;
 
 import com.dto.MemberGroupDto;
 import com.dto.UserDto;
+import com.dto.UserIncludeDto;
 import com.service.MembershipService;
 import org.keycloak.KeycloakPrincipal;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class MembershipController {
     }
 
     @GetMapping(path = "/members/{name}")
-    public Set<UserDto> getGroupMembers(@PathVariable String name) {
+    public Set<UserIncludeDto> getGroupMembers(@PathVariable String name) {
         return membershipService.getGroupMembers(name);
     }
 
@@ -62,6 +63,12 @@ public class MembershipController {
     @ResponseStatus(code = HttpStatus.CREATED)
     private void requestGroup(@PathVariable String groupName, KeycloakPrincipal principal) {
         membershipService.addRequest(groupName, principal);
+    }
+
+    @RequestMapping(path = "/updateIncludeMembers/{groupName}", method = RequestMethod.POST)
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
+    private void updateIncludeMembers(@PathVariable String groupName, @RequestBody List<UserIncludeDto> userIncludeDtos) {
+        membershipService.updateIncludeMembers(userIncludeDtos, groupName);
     }
 
 }

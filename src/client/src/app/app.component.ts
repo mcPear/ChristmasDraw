@@ -33,8 +33,9 @@ export class AppComponent implements OnInit {
   initAfterUserProfileFetch(userProfile: KeycloakProfile) {
     this.cacheStorage.initForUser(userProfile.username);
     this.userDetails = userProfile;
-    this.notifyBackendAboutUser();
-    this.loadGroupsWhereOwner();
+    this.notifyBackendAboutUser().then(
+      () => this.loadGroupsWhereOwner()
+    );
   }
 
   async doLogout() {

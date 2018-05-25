@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserDto} from "../dto/user.dto";
 import {MemberGroupDto} from "../dto/member-group.dto";
 import {GroupSimpleDto} from "../dto/group_simple";
+import {UserIncludeDto} from "../dto/user_include.dto";
 
 @Injectable()
 
@@ -69,8 +70,8 @@ export class UserService {
     return this.http.post(this.MEMBERSHIP_URL + 'draw/' + groupName, {}).toPromise();
   }
 
-  getGroupMembers(groupName: string): Promise<UserDto[]> {
-    return this.http.get<UserDto[]>(this.MEMBERSHIP_URL + 'members/' + groupName).toPromise();
+  getGroupMembers(groupName: string): Promise<UserIncludeDto[]> {
+    return this.http.get<UserIncludeDto[]>(this.MEMBERSHIP_URL + 'members/' + groupName).toPromise();
   }
 
   getAllGroups(): Promise<GroupSimpleDto[]> {
@@ -91,6 +92,10 @@ export class UserService {
 
   deleteUser(username: string): Promise<object> {
     return this.http.delete(this.USER_URL + username).toPromise();
+  }
+
+  updateIncludeMembers(members: UserIncludeDto[], groupName: string): Promise<object> {
+    return this.http.post(this.MEMBERSHIP_URL + 'updateIncludeMembers/' + groupName, members).toPromise();
   }
 
 }
