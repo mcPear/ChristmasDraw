@@ -22,7 +22,6 @@ export class ImmutableDrawComponent implements OnInit {
     }
 
     async performDraw() {
-        console.log(this.group);
         await this.service.performDraw(this.selectedGroup.name);
         this.drawPerformed.emit();
         this.ngOnInit();

@@ -29,7 +29,6 @@ export class UserManegerComponent implements OnInit {
   }
 
   showDetails(item): void {
-    console.log(item);
     let dialogRef = this.dialog.open(UserEditComponent, {
       height: '600px',
       width: '700px',
@@ -37,8 +36,6 @@ export class UserManegerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
       if (result) {
         this.cacheStorage.updateUserDto(result)
           .then(res => this.ngOnInit())
