@@ -34,10 +34,10 @@ export class ImmutableDrawComponent implements OnInit {
         else return 'Not yet drawn';
     }
 
-  getIncludeChildrenOutput() {
-    if (this.group.countChildren) return 'yes';
-    else return 'no';
-  }
+    getIncludeChildrenOutput() {
+      if (this.group.countChildren) return 'yes';
+      else return 'no';
+    }
 
     async saveData(){
         await this.service.updateGroup(this.group);
@@ -45,5 +45,37 @@ export class ImmutableDrawComponent implements OnInit {
 
     setCurrentData(event: MatDatepickerInputEvent<Date>){
         this.group.drawDate = event.value.getTime();
+    }
+
+    addEvent(){
+      let date = this.group.drawDate;
+      if(date){
+          let start = new Date(this.group.drawDate);
+          let end = new Date(this.group.drawDate);
+          end.setHours( end.getHours() + 2 );
+          let builder = [];
+          let startISO = start.toISOString();
+          startISO = startISO.slice(0,19);
+          startISO = startISO.replace(/\-/g, '');
+          startISO = startISO.replace(/\:/g, '');
+
+          let endISO = end.toISOString();
+          endISO = endISO.slice(0,19);
+          endISO = endISO.replace(/\-/g, '');
+          endISO = endISO.replace(/\:/g, '');
+          builder.push(
+            'https://calendar.google.com/calendar/r/eventedit?text=',
+            'Draw+of+person+from+',
+            this.group.name.replace(/\ /g, '+'),
+            ' group',
+            '&dates=',
+            startISO,
+            '/',
+            endISO,
+            '&details=Draw+for+christmas+present'
+          );
+          let win = window.open(builder.join(''));
+          win.focus();
+        }
     }
 }

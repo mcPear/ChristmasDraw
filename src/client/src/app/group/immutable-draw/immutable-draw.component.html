@@ -1,7 +1,7 @@
 <mat-card class="white-alpha-background" *ngIf="group; else waitForGroup">
   <h2 mat-dialog-title>{{group.name}} draw settings</h2>
   <mat-card-subtitle>Due date of draw:</mat-card-subtitle>
-  <p>{{group.drawDate | date:'yyyy-MM-dd'}}</p>
+  <p>{{group.drawDate | date:'yyyy-MM-dd'}}<button mat-button class="leftButton" (click)="addEvent()">Dodaj do kalendarza</button></p>
   <mat-card-subtitle>Value of gift:</mat-card-subtitle>
   <p>{{group.giftValue}}</p>
   <mat-card-subtitle>Value of gift for child:</mat-card-subtitle>
