@@ -12,16 +12,17 @@ import {AppCacheStorage} from "../shared/storage/app-cache-storage";
 })
 export class GroupsOwnerComponent implements OnInit {
 
-  @Input() groupsWhereOwner: string[]; //FIXME consider if needed
+  groupsWhereOwner: string[];
   @Output() groupSelected = new EventEmitter<string>();
 
   constructor(public dialog: MatDialog, private cacheStorage: AppCacheStorage) {
   }
 
   async ngOnInit() {
+    this.loadGroupsWhereOwner()
   }
 
-  async refresh() {
+  async loadGroupsWhereOwner() {
     this.groupsWhereOwner = await this.cacheStorage.getOwnedGroups()
   }
 
@@ -32,11 +33,9 @@ export class GroupsOwnerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
       if (result) {
         this.cacheStorage.addOwnedGroup(result)
-          .then(res => this.refresh())
+          .then(res => this.loadGroupsWhereOwner())
           .catch(err => console.log(err));
       }
     });
