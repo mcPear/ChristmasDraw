@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material";
 import {GroupJoinComponent} from "../group-join/group-join.component";
 import {GroupsDto} from "../shared/dto/groups.dto";
 import {MemberGroupDto} from "../shared/dto/member-group.dto";
+import {AppCacheStorage} from "../shared/storage/app-cache-storage";
 
 @Component({
   selector: 'app-groups-member',
@@ -13,14 +14,15 @@ import {MemberGroupDto} from "../shared/dto/member-group.dto";
 export class GroupsMemberComponent implements OnInit {
 
   groupsWhereMember: MemberGroupDto[];
-  @Input() groupsWhereOwner: string[];
+  groupsWhereOwner: string[];
   @Output() groupSelected = new EventEmitter<string>();
 
-  constructor(private service: UserService, public dialog: MatDialog) {
+  constructor(private service: UserService, public dialog: MatDialog, private cacheStorage: AppCacheStorage) {
   }
 
   async ngOnInit() {
     this.groupsWhereMember = await this.service.getJoinedGroups();
+    this.groupsWhereOwner = await this.cacheStorage.getOwnedGroups()
   }
 
   openDialog(): void {
@@ -34,8 +36,6 @@ export class GroupsMemberComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
       if (result) {
         this.service.requestGroup(result)
           .then(res => this.ngOnInit())

@@ -16,14 +16,14 @@
 <div class="app-container" *ngIf="!selectedGroup; else showGroupContainer">
   <div class="row">
     <div class="col-sm">
-      <app-groups-member *ngIf="!isAdmin" [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event, false)">
+      <app-groups-member *ngIf="!isAdmin" (groupSelected)="selectGroup($event, false)">
       </app-groups-member>
     </div>
     <div class="col-sm" *ngIf="!isAdmin">
       <app-user [username]='userDetails.username'></app-user>
     </div>
     <div class="col-sm" *ngIf="!isAdmin">
-      <app-groups-owner [groupsWhereOwner]='groupsWhereOwner' (groupSelected)="selectGroup($event, true)">
+      <app-groups-owner (groupSelected)="selectGroup($event, true)">
       </app-groups-owner>
     </div>
     <div class="col-sm" *ngIf="isAdmin">

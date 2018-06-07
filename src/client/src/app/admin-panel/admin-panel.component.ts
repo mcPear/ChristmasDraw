@@ -24,7 +24,6 @@ export class AdminPanelComponent implements OnInit {
   async ngOnInit() {
     this.user = await this.service.getUser(this.username);
     this.groups = await this.service.getAllGroups();
-    console.log("xD");
   }
 
   generateData(timespan){
