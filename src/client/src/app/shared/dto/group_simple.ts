@@ -2,7 +2,7 @@ export interface GroupSimpleDto{
   id: number,
   name: string,
   drawDate: number,
-  isDrawn: boolean,
+  drawn: boolean,
   countChildren: boolean,
   giftValue: number,
   childGiftValue: number,

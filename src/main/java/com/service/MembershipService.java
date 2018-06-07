@@ -19,6 +19,7 @@ import org.keycloak.KeycloakPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -123,7 +124,7 @@ public class MembershipService {
         User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
         List<Membership> memberships = membershipDao.findByUserIdAndOwns(user.getId(), false);
         return memberships.stream()
-                .map(m -> new MemberGroupDto(m.getGroup().getName(), m.getAccepted()))
+                .map(m -> new MemberGroupDto(m.getGroup().getName(), m.getAccepted(), m.getGroup().isDrawn()))
                 .collect(Collectors.toList());
     }
 
@@ -147,6 +148,13 @@ public class MembershipService {
             mem.setIncludeInDraw(includesMap.get(mem.getUser().getPreferredUsername()));
         }
         membershipDao.save(memberships);
+    }
+
+    @Transactional
+    public void deleteMembership(String groupName, KeycloakPrincipal principal) {
+        User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
+        Group group = groupDao.findByName(groupName);
+        membershipDao.deleteByUserIdAndGroupId(user.getId(), group.getId());
     }
 
 }

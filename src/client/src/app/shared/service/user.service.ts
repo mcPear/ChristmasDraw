@@ -98,4 +98,8 @@ export class UserService {
     return this.http.post(this.MEMBERSHIP_URL + 'updateIncludeMembers/' + groupName, members).toPromise();
   }
 
+  deleteMembership(group: MemberGroupDto) {
+    return this.http.delete(this.MEMBERSHIP_URL + group.groupName).toPromise();
+  }
+
 }

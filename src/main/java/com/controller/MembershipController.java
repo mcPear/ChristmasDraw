@@ -8,6 +8,7 @@ import org.keycloak.KeycloakPrincipal;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
@@ -69,6 +70,12 @@ public class MembershipController {
     @ResponseStatus(code = HttpStatus.ACCEPTED)
     private void updateIncludeMembers(@PathVariable String groupName, @RequestBody List<UserIncludeDto> userIncludeDtos) {
         membershipService.updateIncludeMembers(userIncludeDtos, groupName);
+    }
+
+    @RequestMapping(path = "/{groupName}", method = RequestMethod.DELETE)
+    @ResponseStatus(code = HttpStatus.OK)
+    private void deleteMembership(@PathVariable String groupName, KeycloakPrincipal principal) {
+        membershipService.deleteMembership(groupName, principal);
     }
 
 }

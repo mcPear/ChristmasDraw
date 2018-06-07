@@ -5,6 +5,7 @@ import {GroupJoinComponent} from "../group-join/group-join.component";
 import {GroupsDto} from "../shared/dto/groups.dto";
 import {MemberGroupDto} from "../shared/dto/member-group.dto";
 import {AppCacheStorage} from "../shared/storage/app-cache-storage";
+import {LeaveGroupConfirmationComponent} from "../group/leave-group-confirmation/leave-group-confirmation.component";
 
 @Component({
   selector: 'app-groups-member',
@@ -46,6 +47,25 @@ export class GroupsMemberComponent implements OnInit {
 
   selectGroup(name: string) {
     this.groupSelected.emit(name);
+  }
+
+  async leaveGroup(group: MemberGroupDto) {
+    await this.service.deleteMembership(group); //todo
+    this.ngOnInit();
+  }
+
+  openLeaveConfirmationPopup(group: MemberGroupDto): void {
+    let dialogRef = this.dialog.open(LeaveGroupConfirmationComponent, {
+      height: '180px',
+      width: '350px',
+      data: group
+    });
+
+    dialogRef.afterClosed().subscribe(leave => {
+      if (leave) {
+        this.leaveGroup(group);
+      }
+    });
   }
 
 }

@@ -8,4 +8,5 @@ import lombok.Getter;
 public class MemberGroupDto {
     private String groupName;
     private Boolean requestAccepted;
+    private Boolean isDrawn;
 }

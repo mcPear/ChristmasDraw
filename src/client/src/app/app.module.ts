@@ -26,6 +26,7 @@ import {UserManegerComponent} from './user-maneger/user-maneger.component';
 import {AppCacheStorage} from "./shared/storage/app-cache-storage";
 import {ImmutableDrawComponent} from "./group/immutable-draw/immutable-draw.component";
 import {MutableDrawComponent} from "./group/mutable-draw/mutable-draw.component";
+import {LeaveGroupConfirmationComponent} from "./group/leave-group-confirmation/leave-group-confirmation.component";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {MutableDrawComponent} from "./group/mutable-draw/mutable-draw.component"
     MembersComponent,
     AdminPanelComponent,
     DenyRequestConfirmationComponent,
+    LeaveGroupConfirmationComponent,
     UserManegerComponent,
     ImmutableDrawComponent,
     MutableDrawComponent
@@ -71,7 +73,8 @@ import {MutableDrawComponent} from "./group/mutable-draw/mutable-draw.component"
     UserEditComponent,
     GroupJoinComponent,
     GroupCreateComponent,
-    DenyRequestConfirmationComponent
+    DenyRequestConfirmationComponent,
+    LeaveGroupConfirmationComponent
   ]
 })
 export class AppModule {

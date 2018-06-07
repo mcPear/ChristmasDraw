@@ -29,7 +29,7 @@ export class ImmutableDrawComponent implements OnInit {
 
 
     getIsDrawnOutput() {
-        if (this.group.isDrawn) return 'Already drawn';
+        if (this.group.drawn) return 'Already drawn';
         else return 'Not yet drawn';
     }
 
