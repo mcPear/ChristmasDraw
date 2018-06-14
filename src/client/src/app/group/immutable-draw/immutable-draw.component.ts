@@ -13,12 +13,14 @@ export class ImmutableDrawComponent implements OnInit {
     @Input() selectedGroup: SelectedGroup;
     @Output() drawPerformed = new EventEmitter<string>();
     group: GroupSimpleDto;
+    groupNameTranslationParam: Object;
 
     constructor(private service: UserService) {
     }
 
     async ngOnInit() {
         this.group = await this.service.getGroup(this.selectedGroup.name);
+        this.groupNameTranslationParam = {value: this.group.name}
     }
 
     async performDraw() {

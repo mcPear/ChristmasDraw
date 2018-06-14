@@ -1,15 +1,15 @@
-<h2 mat-dialog-title>Type group name</h2>
+<h2 mat-dialog-title><span translate>TYPE_GROUP_NAME</span></h2>
 <form class="example-form">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Group name" required
+    <input matInput placeholder="{{ groupNameTranslation }}" required
     [(ngModel)]="groupName" name="groupName" (keyup)="onKey($event)">
   </mat-form-field>
 </form>
 <mat-dialog-actions>
   <button mat-raised-button [mat-dialog-close]="groupName"
-  [disabled]="!groupExists || isOwnedGroup(groupName) || isJoinedGroup(groupName)">Request</button>
-  <button mat-raised-button [mat-dialog-close]=null>Cancel</button>
+  [disabled]="!groupExists || isOwnedGroup(groupName) || isJoinedGroup(groupName)"><span translate>REQUEST</span></button>
+  <button mat-raised-button [mat-dialog-close]=null><span translate>CANCEL</span></button>
 </mat-dialog-actions>
-<p *ngIf="!groupExists">This group doesn't exist.</p>
-<p *ngIf="isOwnedGroup(groupName)">This is one of your groups.</p>
-<p *ngIf="isJoinedGroup(groupName)">You are member of this group.</p>
+<p *ngIf="!groupExists"><span translate>MISSING_GROUP</span></p>
+<p *ngIf="isOwnedGroup(groupName)"><span translate>YOUR_GROUP</span></p>
+<p *ngIf="isJoinedGroup(groupName)"><span translate>YOU_ARE_MEMBER</span></p>

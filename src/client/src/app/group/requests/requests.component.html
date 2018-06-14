@@ -1,5 +1,5 @@
 <mat-list class="group-list" *ngIf="requests; else waitForRequests">
-  <h3 mat-subheader>Join requests</h3>
+  <h3 mat-subheader><span translate>JOIN_REQUESTS</span></h3>
   <mat-list-item *ngFor="let request of requests">
     <h4 mat-line>{{request.firstName}} {{request.lastName}}</h4>
     <h5 mat-line>{{request.preferredUsername}}</h5>

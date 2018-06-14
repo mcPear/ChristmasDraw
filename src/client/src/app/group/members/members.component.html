@@ -1,12 +1,12 @@
 <mat-list class="group-list" *ngIf="members; else waitForMembers">
-  <h3 mat-line mat-subheader>Group members</h3>
-  <button mat-raised-button (click)="updateIncludeMembers()">Remember includes</button>
+  <h3 mat-line mat-subheader><span translate>GROUP_MEMBERS</span></h3>
+  <button mat-raised-button (click)="updateIncludeMembers()"><span translate>REMEMBER_INCLUDES</span></button>
   <mat-list-item *ngFor="let member of members">
     <h4 mat-line>{{member.firstName}} {{member.lastName}}</h4>
     <h5 mat-line>{{member.preferredUsername}}</h5>
     <mat-checkbox class="example-margin" [(ngModel)]="member.include"
                   name="includeCheckbox">
-      Include
+      <span translate>INCLUDE</span>
     </mat-checkbox>
     <mat-divider></mat-divider>
   </mat-list-item>

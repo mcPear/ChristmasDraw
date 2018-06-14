@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {UserEditComponent} from "../user-edit/user-edit.component";
 import {UserService} from "../shared/service/user.service";
 import {GroupsDto} from "../shared/dto/groups.dto";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-group-join',
@@ -15,13 +16,17 @@ export class GroupJoinComponent {
   groupExists = false;
   groupsWhereOwner: string[];
   groupsWhereMember: string[];
+  groupNameTranslation: string;
 
   constructor(public dialogRef: MatDialogRef<UserEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: GroupsDto,
-              private service: UserService) {
+              private service: UserService, private translate: TranslateService) {
     this.groupName = "example";
     this.groupsWhereOwner = data.groupsWhereOwner;
     this.groupsWhereMember = data.groupsWhereMember;
+    this.translate.get('GROUP_NAME').subscribe((res: string) => {
+      this.groupNameTranslation = res
+    });
   }
 
 

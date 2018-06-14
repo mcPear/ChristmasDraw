@@ -11,10 +11,14 @@ import {UserDto} from "../../shared/dto/user.dto";
 export class DenyRequestConfirmationComponent {
 
   userDto: UserDto;
+  fullName: string;
+  fullNameTranslationParam: Object;
 
   constructor(public dialogRef: MatDialogRef<UserEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: UserDto) {
     this.userDto = data;
+    this.fullName = this.userDto.firstName + ' ' + this.userDto.lastName;
+    this.fullNameTranslationParam = {value: this.fullName}
   }
 
 }

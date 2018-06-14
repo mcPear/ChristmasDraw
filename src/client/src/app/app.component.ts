@@ -3,6 +3,7 @@ import {KeycloakProfile} from 'keycloak-js';
 import {KeycloakService} from 'keycloak-angular';
 import {SelectedGroup} from "./shared/model/selected-group-data";
 import {AppCacheStorage} from "./shared/storage/app-cache-storage";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,12 @@ export class AppComponent implements OnInit {
   groupsWhereOwner: string[];
   selectedGroup: SelectedGroup;
   isAdmin: boolean;
+  param = {value: 'world'};
 
-  constructor(private keycloakService: KeycloakService, private cacheStorage: AppCacheStorage) {
+  constructor(private keycloakService: KeycloakService, private cacheStorage: AppCacheStorage, translate: TranslateService) {
     this.isAdmin = false;
+    translate.setDefaultLang('en');
+    translate.use('en');
   }
 
   async ngOnInit() {

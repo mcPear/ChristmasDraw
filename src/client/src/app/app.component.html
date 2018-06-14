@@ -4,12 +4,12 @@
 
 <mat-toolbar class="app-toolbar">
   <mat-toolbar-row>
-    <span>{{title}}</span>
+    <span translate>APP_TITLE</span>
     <span class="example-spacer"></span>
     <span>{{userDetails.username}}{{getSelectedGroupOutput()}}</span>
     <span class="example-spacer"></span>
-    <button mat-button (click)="deselectGroup()">Dashboard</button>
-    <button mat-button (click)="doLogout()">Logout</button>
+    <button mat-button (click)="deselectGroup()" > <span translate>DASHBOARD</span></button>
+    <button mat-button (click)="doLogout()" ><span translate>LOGOUT</span></button>
   </mat-toolbar-row>
   </mat-toolbar>
 

@@ -1,23 +1,23 @@
-<h2 mat-dialog-title>Edit information about you</h2>
+<h2 mat-dialog-title><span translate>EDIT_INFORMATION</span></h2>
 <form class="example-form">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="First name" [value]="data.firstName" required
-    [(ngModel)]="resultData.firstName" name="firstName">
+    <input matInput placeholder="{{ firstNameTranslation}}" [value]="data.firstName" required
+           [(ngModel)]="resultData.firstName" name="firstName">
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Last name" [value]="data.lastName" required
-    [(ngModel)]="resultData.lastName" name="lastName">
+    <input matInput placeholder="{{ lastNameTranslation}}" [value]="data.lastName" required
+           [(ngModel)]="resultData.lastName" name="lastName">
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <textarea matTextareaAutosize matInput placeholder="About me" [value]="data.about"
-    [(ngModel)]="resultData.about" name="about"></textarea>
+    <textarea matTextareaAutosize matInput placeholder="{{ aboutMeTranslation}}" [value]="data.about"
+              [(ngModel)]="resultData.about" name="about"></textarea>
   </mat-form-field>
   <mat-form-field class="example-margin">
-    <input matInput type="number" placeholder="Children count" [value]="data.children"
-    required [(ngModel)]="resultData.children" name="children"  min="0" max="100">
+    <input matInput type="number" placeholder="{{ childrenCountTranslation}}" [value]="data.children"
+           required [(ngModel)]="resultData.children" name="children" min="0" max="100">
   </mat-form-field>
 </form>
 <mat-dialog-actions>
-  <button mat-raised-button [mat-dialog-close]="resultData">Save</button>
-  <button mat-raised-button [mat-dialog-close]=null>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="resultData"><span translate>SAVE</span></button>
+  <button mat-raised-button [mat-dialog-close]=null><span translate>CANCEL</span></button>
 </mat-dialog-actions>

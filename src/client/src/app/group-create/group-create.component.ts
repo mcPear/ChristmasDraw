@@ -1,7 +1,8 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {UserEditComponent} from "../user-edit/user-edit.component";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {MatDialogRef} from "@angular/material";
 import {UserService} from "../shared/service/user.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-group-create',
@@ -12,10 +13,14 @@ export class GroupCreateComponent {
 
   groupName: string;
   groupExists = true;
+  groupNameTranslation: string;
 
-  constructor(public dialogRef: MatDialogRef<UserEditComponent>,
-              private service: UserService) {
+  constructor(public dialogRef: MatDialogRef<UserEditComponent>, private service: UserService,
+              private translate: TranslateService) {
     this.groupName = "example";
+    this.translate.get('GROUP_NAME').subscribe((res: string) => {
+      this.groupNameTranslation = res
+    });
   }
 
   groupNameAvailable(name: string): boolean {
@@ -23,7 +28,7 @@ export class GroupCreateComponent {
   }
 
   async checkIfGroupExists(name: string) {
-    this.groupExists =  await this.service.existsGroup(name);
+    this.groupExists = await this.service.existsGroup(name);
   }
 
   onKey(event: any) {

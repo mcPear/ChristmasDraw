@@ -3,7 +3,7 @@ import {APP_INITIALIZER, NgModule} from "@angular/core";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {initializer} from "./utils/app-init";
 import {AppComponent} from "./app.component";
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "./material.module";
 import {UserService} from "./shared/service/user.service";
@@ -27,6 +27,12 @@ import {AppCacheStorage} from "./shared/storage/app-cache-storage";
 import {ImmutableDrawComponent} from "./group/immutable-draw/immutable-draw.component";
 import {MutableDrawComponent} from "./group/mutable-draw/mutable-draw.component";
 import {LeaveGroupConfirmationComponent} from "./group/leave-group-confirmation/leave-group-confirmation.component";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -55,7 +61,15 @@ import {LeaveGroupConfirmationComponent} from "./group/leave-group-confirmation/
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    TranslateModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},

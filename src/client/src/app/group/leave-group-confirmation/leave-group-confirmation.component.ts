@@ -11,10 +11,12 @@ import {MemberGroupDto} from "../../shared/dto/member-group.dto";
 export class LeaveGroupConfirmationComponent {
 
   groupDto: MemberGroupDto;
+  groupNameTranslationParam: Object;
 
   constructor(public dialogRef: MatDialogRef<UserEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: MemberGroupDto) {
     this.groupDto = data;
+    this.groupNameTranslationParam = {value: this.groupDto.groupName}
   }
 
 

@@ -1,14 +1,16 @@
 <mat-card class="white-alpha-background" *ngIf="group; else waitForGroup">
-  <h2 mat-dialog-title>{{group.name}} draw settings</h2>
-  <mat-card-subtitle>Due date of draw:</mat-card-subtitle>
-  <p>{{group.drawDate | date:'yyyy-MM-dd'}}<button mat-button class="leftButton" (click)="addEvent()">Dodaj do kalendarza</button></p>
-  <mat-card-subtitle>Value of gift:</mat-card-subtitle>
+  <h2 mat-dialog-title>{{ 'DRAW_SETTINGS' | translate:groupNameTranslationParam }}</h2>
+  <mat-card-subtitle><span translate>DUE_DATE</span></mat-card-subtitle>
+  <p>{{group.drawDate | date:'yyyy-MM-dd'}}
+    <button mat-button class="leftButton" (click)="addEvent()"><span translate>Add to calendar</span></button>
+  </p>
+  <mat-card-subtitle><span translate>VALUE_OF_GIFT</span></mat-card-subtitle>
   <p>{{group.giftValue}}</p>
-  <mat-card-subtitle>Value of gift for child:</mat-card-subtitle>
+  <mat-card-subtitle><span translate>VALUE_OF_GIFT_FOR_CHILD</span></mat-card-subtitle>
   <p>{{group.childGiftValue}}</p>
-  <mat-card-subtitle>Contact to money collector:</mat-card-subtitle>
+  <mat-card-subtitle><span translate>CONTACT</span></mat-card-subtitle>
   <p>{{group.collectorContact}}</p>
-  <mat-card-subtitle>Include children:</mat-card-subtitle>
+  <mat-card-subtitle><span translate>COUNT_CHILDREN</span></mat-card-subtitle>
   <p>{{getIncludeChildrenOutput()}}</p>
   <section class="example-section">
     {{getIsDrawnOutput()}}

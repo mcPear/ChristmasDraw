@@ -1,9 +1,9 @@
 <mat-list class="group-list" *ngIf="groupsWhereOwner != undefined; else waitForGroups">
-  <h3 mat-subheader>Owned groups</h3>
-  <button mat-raised-button (click)="openDialog()">Create</button>
+  <h3 mat-subheader><span translate>OWNED_GROUPS</span></h3>
+  <button mat-raised-button (click)="openDialog()"><span translate>CREATE</span></button>
   <mat-list-item *ngFor="let group of groupsWhereOwner">
     <h4 mat-line>{{group}}</h4>
-        <button mat-raised-button (click)="selectGroup(group)">Open</button>
+        <button mat-raised-button (click)="selectGroup(group)"><span translate>OPEN</span></button>
         <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>
