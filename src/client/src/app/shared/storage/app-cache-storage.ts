@@ -1,6 +1,7 @@
 import {UserDto} from "../dto/user.dto";
 import {Injectable} from "@angular/core";
 import {UserService} from "../service/user.service";
+import * as SecureLS from "../../../../node_modules/secure-ls/dist/secure-ls";
 
 @Injectable()
 
@@ -10,6 +11,7 @@ export class AppCacheStorage {
   ownedGroupsKey: string;
   userDtoKey: string;
   username: string;
+  secureLS = new SecureLS({encodingType: 'aes', isCompression: false});
 
   constructor(private userService: UserService) {
   }
@@ -21,45 +23,46 @@ export class AppCacheStorage {
   }
 
   async getOwnedGroups(): Promise<string[]> {
-    let cachedGroups = JSON.parse(localStorage.getItem(this.ownedGroupsKey));
-    if (cachedGroups === null) {
+    let cachedGroupsStringified = this.secureLS.get(this.ownedGroupsKey);
+    if (!cachedGroupsStringified) {
       return this.fetchOwnedGroups()
     } else {
-      return cachedGroups
+      return JSON.parse(cachedGroupsStringified
+      )
     }
   }
 
   private async fetchOwnedGroups(): Promise<string[]> {
     let serviceGroups = await this.userService.getOwnedGroups();
-    localStorage.setItem(this.ownedGroupsKey, JSON.stringify(serviceGroups as string[]));
+    this.secureLS.set(this.ownedGroupsKey, JSON.stringify(serviceGroups as string[]));
     return serviceGroups
   }
 
   getUserDto(): Promise<UserDto> {
-    let cachedUserDto = JSON.parse(localStorage.getItem(this.userDtoKey));
-    if (cachedUserDto === null) {
+    let cachedUserDtoStringified = this.secureLS.get(this.userDtoKey);
+    if (!this.secureLS.get(this.userDtoKey)) {
       return this.fetchUserDto()
     } else {
-      return cachedUserDto
+      return JSON.parse(cachedUserDtoStringified)
     }
   }
 
   private async fetchUserDto(): Promise<UserDto> {
     let userDto = await this.userService.getUser(this.username);
-    localStorage.setItem(this.userDtoKey, JSON.stringify(userDto as UserDto));
+    this.secureLS.set(this.userDtoKey, JSON.stringify(userDto as UserDto));
     return userDto
   }
 
 
   async updateUserDto(userDto: UserDto) {
-    localStorage.setItem(this.userDtoKey, JSON.stringify(userDto));
+    this.secureLS.set(this.userDtoKey, JSON.stringify(userDto));
     await this.userService.updateUser(userDto)
   }
 
   async addOwnedGroup(group: string) {
     let groups = await this.getOwnedGroups();
     groups.push(group);
-    localStorage.setItem(this.ownedGroupsKey, JSON.stringify(groups));
+    this.secureLS.set(this.ownedGroupsKey, JSON.stringify(groups));
     this.userService.createGroup(group)
   }
 
