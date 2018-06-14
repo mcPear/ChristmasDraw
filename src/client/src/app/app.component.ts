@@ -18,10 +18,10 @@ export class AppComponent implements OnInit {
   isAdmin: boolean;
   param = {value: 'world'};
 
-  constructor(private keycloakService: KeycloakService, private cacheStorage: AppCacheStorage, translate: TranslateService) {
+  constructor(private keycloakService: KeycloakService, private cacheStorage: AppCacheStorage,
+              private translate: TranslateService) {
     this.isAdmin = false;
     translate.setDefaultLang('en');
-    translate.use('pl');
   }
 
   async ngOnInit() {
@@ -75,5 +75,13 @@ export class AppComponent implements OnInit {
 
   async notifyBackendAboutUser() {
     await this.cacheStorage.getUserDto();
+  }
+
+  switchLanguage() {
+    if (this.translate.currentLang === 'pl') {
+      this.translate.use('en');
+    } else {
+      this.translate.use('pl');
+    }
   }
 }

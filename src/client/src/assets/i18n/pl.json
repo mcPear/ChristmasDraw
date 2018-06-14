@@ -34,7 +34,7 @@
   "ALREADY_DRAWN": "Rozlosowano",
   "NOT_YET_DRAWN": "Nie rozlosowano",
   "GROUP_MEMBERS": "Członkowie",
-  "REMEMBER_INCLUDES": "Zapamiętaj uwzględnionych członków",
+  "REMEMBER_INCLUDES": "Zapamiętaj uwzględnienia",
   "INCLUDE": "Uwzględnij",
   "JOIN_REQUESTS": "Prośby o dołączenie",
   "LOGOUT": "Wyloguj",
@@ -46,5 +46,6 @@
   "ADD_TO_CALENDAR": "Dodaj do kalendarza",
   "YOU_ARE_MEMBER": "Jesteś członkiem tej grupy.",
   "DRAW": "Rozlosuj",
+  "SWITCH_LANGUAGE": "EN",
   "WANT_TO_LEAVE_GROUP": "Czy chcesz opuścić grupę: {{value}} ?"
 }
