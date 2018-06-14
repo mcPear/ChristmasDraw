@@ -3,7 +3,7 @@
 <form>
   <section class="example-section">
     <mat-form-field class="example-full-width">
-      <input matInput [matDatepicker]="picker" placeholder="Due date of draw"
+      <input matInput [matDatepicker]="picker" placeholder="{{dueDateTranslation}}"
              (dateChange)="setCurrentData($event)"
              [value]="group.drawDate | date:'yyyy-MM-dd'"
              name="drawDate">
@@ -20,7 +20,7 @@
   </section>
 
   <section class="example-section">
-    <mat-form-field>
+    <mat-form-field class="example-full-width">
       <input matInput type="number" [(ngModel)]="group.childGiftValue" name="childGiftValue"
              placeholder="{{childGiftValueTranslation}}" [value]="group.childGiftValue" min="0">
     </mat-form-field>
@@ -40,8 +40,8 @@
     {{getIsDrawnOutput()}}
   </section>
 
-  <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned">Draw</button>
-  <button mat-raised-button type="submit" (click)="saveData()">Save</button>
+  <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned"><span translate>DRAW</span></button>
+  <button mat-raised-button type="submit" (click)="saveData()"><span translate>SAVE</span></button>
 </form>
 </mat-card>
 <ng-template #waitForGroup>loading group information...</ng-template>

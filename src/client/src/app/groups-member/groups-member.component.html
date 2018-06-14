@@ -1,7 +1,7 @@
 <div>
   <mat-list class="group-list"
             *ngIf="groupsWhereMember != undefined && groupsWhereOwner != undefined; else waitForGroups">
-    <h3 mat-subheader>Groups</h3>
+    <h3 mat-subheader><span translate>GROUPS</span></h3>
     <button mat-raised-button (click)="openDialog()">Join</button>
     <mat-list-item *ngFor="let group of groupsWhereMember">
       <h4 mat-line>{{group.groupName}}</h4>

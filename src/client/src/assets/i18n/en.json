@@ -45,5 +45,6 @@
   "NOBODY": "Nobody is assigned to you",
   "ADD_TO_CALENDAR": "Add to calendar",
   "YOU_ARE_MEMBER": "You are member of this group.",
+  "DRAW": "Draw",
   "WANT_TO_LEAVE_GROUP": "Do you want to leave group: {{value}} ?"
 }

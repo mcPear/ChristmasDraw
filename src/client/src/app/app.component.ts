@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   constructor(private keycloakService: KeycloakService, private cacheStorage: AppCacheStorage, translate: TranslateService) {
     this.isAdmin = false;
     translate.setDefaultLang('en');
-    translate.use('en');
+    translate.use('pl');
   }
 
   async ngOnInit() {
