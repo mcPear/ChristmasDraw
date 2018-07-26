@@ -3,6 +3,8 @@ import {UserDto} from "../shared/dto/user.dto";
 import {MatDialog} from "@angular/material";
 import {UserEditComponent} from "../user-edit/user-edit.component";
 import {AppCacheStorage} from "../shared/storage/app-cache-storage";
+import {TranslateService} from "@ngx-translate/core";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-user',
@@ -18,8 +20,7 @@ export class UserComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.user = await this.cacheStorage.getUserDto()
-    this.childrenOutput = this.getChildrenOutput(this.user.children);
+    this.user = await this.cacheStorage.getUserDto();
   }
 
   openEditDialog(): void {
@@ -36,13 +37,6 @@ export class UserComponent implements OnInit {
           .catch(err => console.log(err));
       }
     });
-  }
-
-  getChildrenOutput(count: number): string {
-    if(count == null) {return 'missing information about children'}
-    else if (count == 0) return 'no children';
-    else if (count == 1) return '1 child';
-    else return count + ' children';
   }
 
 }

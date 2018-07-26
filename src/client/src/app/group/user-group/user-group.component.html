@@ -4,7 +4,10 @@
     <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
     <mat-card-subtitle><span translate>ABOUT_ME</span></mat-card-subtitle>
     <pre class="angular-with-newlines">{{user.about}}</pre>
-    <p>{{childrenOutput}}</p>
+    <p *ngIf="user.children === undefined" translate>MISSING_CHILDREN_INFO</p>
+    <p *ngIf="user.children === 0" translate>NO_CHILDREN</p>
+    <p *ngIf="user.children === 1" translate>ONE_CHILD</p>
+    <p *ngIf="user.children > 1" translate>{{ user.children+' ' }}<span translate>CHILDREN</span></p>
   </mat-card-content>
 </mat-card>
 <ng-template #waitForUser><mat-spinner></mat-spinner></ng-template>
