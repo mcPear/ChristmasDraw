@@ -3,7 +3,7 @@
 <form>
   <section class="example-section">
     <mat-form-field class="example-full-width">
-      <input matInput [matDatepicker]="picker" placeholder="{{dueDateTranslation}}"
+      <input matInput [matDatepicker]="picker" placeholder="{{'DUE_DATE' | translate}}"
              (dateChange)="setCurrentData($event)"
              [value]="group.drawDate | date:'yyyy-MM-dd'"
              name="drawDate">
@@ -15,20 +15,20 @@
   <section class="example-section">
     <mat-form-field>
       <input matInput type="number" [(ngModel)]="group.giftValue" name="giftValue"
-             placeholder="{{giftValueTranslation}}" [value]="group.giftValue" min="0">
+             placeholder="{{'VALUE_OF_GIFT' | translate}}" [value]="group.giftValue" min="0">
     </mat-form-field>
   </section>
 
   <section class="example-section">
     <mat-form-field class="example-full-width">
       <input matInput type="number" [(ngModel)]="group.childGiftValue" name="childGiftValue"
-             placeholder="{{childGiftValueTranslation}}" [value]="group.childGiftValue" min="0">
+             placeholder="{{'VALUE_OF_GIFT_FOR_CHILD' | translate}}" [value]="group.childGiftValue" min="0">
     </mat-form-field>
   </section>
 
   <mat-form-field class="example-full-width">
     <input matInput [(ngModel)]="group.collectorContact" name="collectorContact"
-           placeholder="{{contactTranslation}}" [value]="group.collectorContact">
+           placeholder="{{'CONTACT' | translate}}" [value]="group.collectorContact">
   </mat-form-field>
 
   <section class="example-section">

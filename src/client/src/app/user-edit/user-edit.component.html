@@ -1,19 +1,19 @@
 <h2 mat-dialog-title><span translate>EDIT_INFORMATION</span></h2>
 <form class="example-form">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="{{ firstNameTranslation}}" [value]="data.firstName" required
+    <input matInput placeholder="{{'FIRST_NAME' | translate}}" [value]="data.firstName" required
            [(ngModel)]="resultData.firstName" name="firstName">
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="{{ lastNameTranslation}}" [value]="data.lastName" required
+    <input matInput placeholder="{{'LAST_NAME' | translate}}" [value]="data.lastName" required
            [(ngModel)]="resultData.lastName" name="lastName">
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <textarea matTextareaAutosize matInput placeholder="{{ aboutMeTranslation}}" [value]="data.about"
+    <textarea matTextareaAutosize matInput placeholder="{{'ABOUT_ME' | translate}}" [value]="data.about"
               [(ngModel)]="resultData.about" name="about"></textarea>
   </mat-form-field>
   <mat-form-field class="example-margin">
-    <input matInput type="number" placeholder="{{ childrenCountTranslation}}" [value]="data.children"
+    <input matInput type="number" placeholder="{{'CHILDREN_COUNT' | translate}}" [value]="data.children"
            required [(ngModel)]="resultData.children" name="children" min="0" max="100">
   </mat-form-field>
 </form>

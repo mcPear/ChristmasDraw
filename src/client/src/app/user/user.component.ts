@@ -3,8 +3,6 @@ import {UserDto} from "../shared/dto/user.dto";
 import {MatDialog} from "@angular/material";
 import {UserEditComponent} from "../user-edit/user-edit.component";
 import {AppCacheStorage} from "../shared/storage/app-cache-storage";
-import {TranslateService} from "@ngx-translate/core";
-import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-user',

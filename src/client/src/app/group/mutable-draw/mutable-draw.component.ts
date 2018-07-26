@@ -3,7 +3,6 @@ import {GroupSimpleDto} from "../../shared/dto/group_simple";
 import {MatDatepickerInputEvent} from "@angular/material";
 import {UserService} from "../../shared/service/user.service";
 import {SelectedGroup} from "../../shared/model/selected-group-data";
-import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-mutable-draw',
@@ -14,30 +13,14 @@ export class MutableDrawComponent implements OnInit {
   @Input() selectedGroup: SelectedGroup;
   @Output() drawPerformed = new EventEmitter<string>();
   group: GroupSimpleDto;
-  dueDateTranslation: string;
-  giftValueTranslation: string;
-  childGiftValueTranslation: string;
-  contactTranslation: string;
   groupNameTranslationParam: Object;
 
-  constructor(private service: UserService, private translate: TranslateService) {
+  constructor(private service: UserService) {
   }
 
   async ngOnInit() {
     this.group = await this.service.getGroup(this.selectedGroup.name);
     this.groupNameTranslationParam = {value: this.group.name}
-    this.translate.get('DUE_DATE').subscribe((res: string) => {
-      this.dueDateTranslation = res
-    });
-    this.translate.get('VALUE_OF_GIFT').subscribe((res: string) => {
-      this.giftValueTranslation = res
-    });
-    this.translate.get('VALUE_OF_GIFT_FOR_CHILD').subscribe((res: string) => {
-      this.childGiftValueTranslation = res
-    });
-    this.translate.get('CONTACT').subscribe((res: string) => {
-      this.contactTranslation = res
-    });
   }
 
   async performDraw() {
