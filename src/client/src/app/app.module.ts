@@ -29,6 +29,7 @@ import {MutableDrawComponent} from "./group/mutable-draw/mutable-draw.component"
 import {LeaveGroupConfirmationComponent} from "./group/leave-group-confirmation/leave-group-confirmation.component";
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {AppLanguageStorage} from "./shared/storage/app-language-storage";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -75,6 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
     UserService,
     AppCacheStorage,
+    AppLanguageStorage,
     {
       provide: APP_INITIALIZER,
       useFactory: initializer,
