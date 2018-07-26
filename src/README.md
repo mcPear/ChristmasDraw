@@ -11,10 +11,7 @@ for port :8090 copy default_applicatioin.properties to applicatioin.properties<b
 use own standalone version<br />
 import file src/keycloak/realm-export.json to keycloak<br />
 port :8080<br />
-admin login: maciek (sorry)<br />
-admin password: maciek<br />
 <br />
-//todo dockerize
 
 Tips<br />
 Don't forget about credentials when setting up keycloack config in future apps
