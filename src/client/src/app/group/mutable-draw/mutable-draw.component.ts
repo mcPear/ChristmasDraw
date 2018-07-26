@@ -18,8 +18,6 @@ export class MutableDrawComponent implements OnInit {
   giftValueTranslation: string;
   childGiftValueTranslation: string;
   contactTranslation: string;
-  alreadyDrawnTranslation: string;
-  notYetDrawnTranslation: string;
   groupNameTranslationParam: Object;
 
   constructor(private service: UserService, private translate: TranslateService) {
@@ -40,24 +38,12 @@ export class MutableDrawComponent implements OnInit {
     this.translate.get('CONTACT').subscribe((res: string) => {
       this.contactTranslation = res
     });
-    this.translate.get('ALREADY_DRAWN').subscribe((res: string) => {
-      this.alreadyDrawnTranslation = res
-    });
-    this.translate.get('NOT_YET_DRAWN').subscribe((res: string) => {
-      this.notYetDrawnTranslation = res
-    });
   }
 
   async performDraw() {
     await this.service.performDraw(this.selectedGroup.name).catch(err => err.stat);
     this.drawPerformed.emit();
     this.ngOnInit();
-  }
-
-
-  getIsDrawnOutput() {
-    if (this.group.drawn) return this.alreadyDrawnTranslation;
-    else return this.notYetDrawnTranslation;
   }
 
   async saveData() {

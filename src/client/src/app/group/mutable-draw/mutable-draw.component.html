@@ -37,7 +37,8 @@
     </mat-checkbox>
   </section>
   <section class="example-section">
-    {{getIsDrawnOutput()}}
+    <p *ngIf="group.drawn" translate>ALREADY_DRAWN</p>
+    <p *ngIf="!group.drawn" translate>NOT_YET_DRAWN</p>
   </section>
 
   <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned"><span translate>DRAW</span></button>
