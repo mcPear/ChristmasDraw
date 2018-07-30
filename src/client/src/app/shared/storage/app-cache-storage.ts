@@ -34,7 +34,7 @@ export class AppCacheStorage {
 
   private async fetchOwnedGroups(): Promise<string[]> {
     let serviceGroups = await this.userService.getOwnedGroups();
-    this.secureLS.set(this.ownedGroupsKey, JSON.stringify(serviceGroups as string[]));
+    this.cacheGroups(serviceGroups);
     return serviceGroups
   }
 
@@ -62,8 +62,31 @@ export class AppCacheStorage {
   async addOwnedGroup(group: string) {
     let groups = await this.getOwnedGroups();
     groups.push(group);
-    this.secureLS.set(this.ownedGroupsKey, JSON.stringify(groups));
+    this.cacheGroups(groups);
     this.userService.createGroup(group)
+  }
+
+  public async deleteGroup(name: string) {
+    this.userService.deleteGroup(name);
+    let cachedGroupsStringified = this.secureLS.get(this.ownedGroupsKey);
+    if (!cachedGroupsStringified) {
+      this.cacheGroups([name]);
+    } else {
+      let cachedGroups = JSON.parse(cachedGroupsStringified);
+      this.removeGroup(cachedGroups, name);
+      this.cacheGroups(cachedGroups);
+    }
+  }
+
+  private removeGroup(list: string[], name: string) {
+    let index = list.indexOf(name, 0);
+    if (index > -1) {
+      list.splice(index, 1);
+    }
+  }
+
+  private cacheGroups(names: string[]) {
+    this.secureLS.set(this.ownedGroupsKey, JSON.stringify(names as string[]));
   }
 
 }

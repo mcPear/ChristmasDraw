@@ -3,8 +3,11 @@
   <button mat-raised-button (click)="openDialog()"><span translate>CREATE</span></button>
   <mat-list-item *ngFor="let group of groupsWhereOwner">
     <h4 mat-line>{{group}}</h4>
-        <button mat-raised-button (click)="selectGroup(group)"><span translate>OPEN</span></button>
-        <mat-divider></mat-divider>
+    <button  class="left-button" mat-raised-button (click)="selectGroup(group)"><span translate>OPEN</span></button>
+    <button mat-raised-button (click)="openDeleteConfirmationPopup(group)"><span translate>DELETE</span></button>
+    <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>
-<ng-template #waitForGroups><mat-spinner></mat-spinner></ng-template>
+<ng-template #waitForGroups>
+  <mat-spinner></mat-spinner>
+</ng-template>

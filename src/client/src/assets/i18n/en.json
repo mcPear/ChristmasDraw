@@ -40,7 +40,7 @@
   "INCLUDE": "Include",
   "JOIN_REQUESTS": "Join requests",
   "LOGOUT": "Logout",
-  "WANT_TO_REJECT_REQUEST": "DO you want to reject request from {{value}} ?",
+  "WANT_TO_REJECT_REQUEST": "Do you want to reject request from {{value}} ?",
   "ACCEPT": "Accept",
   "REJECT": "Reject",
   "YES": "Yes",
@@ -49,5 +49,7 @@
   "YOU_ARE_MEMBER": "You are member of this group.",
   "DRAW": "Draw",
   "SWITCH_LANGUAGE": "PL",
-  "WANT_TO_LEAVE_GROUP": "Do you want to leave group: {{value}} ?"
+  "WANT_TO_LEAVE_GROUP": "Do you want to leave group: {{value}} ?",
+  "DELETE": "Delete",
+  "WANT_TO_DELETE_GROUP": "Do you want to delete group {{value}} ?"
 }

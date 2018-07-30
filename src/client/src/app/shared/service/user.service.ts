@@ -78,7 +78,7 @@ export class UserService {
     return this.http.get<GroupSimpleDto[]>(this.GROUP_URL + 'getAll').toPromise();
   }
 
-  deleteGroup(username: string, groupName: number): Promise<object> {
+  deleteGroup(groupName: string): Promise<object> {
     return this.http.delete(this.GROUP_URL + groupName).toPromise();
   }
 

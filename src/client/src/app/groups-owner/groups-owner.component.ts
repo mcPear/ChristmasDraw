@@ -1,9 +1,8 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {UserService} from "../shared/service/user.service";
-import {UserEditComponent} from "../user-edit/user-edit.component";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatDialog} from "@angular/material";
 import {GroupCreateComponent} from "../group-create/group-create.component";
 import {AppCacheStorage} from "../shared/storage/app-cache-storage";
+import {DeleteGroupConfirmationComponent} from "../delete-group-confirmation/delete-group-confirmation.component";
 
 @Component({
   selector: 'app-groups-owner',
@@ -15,7 +14,7 @@ export class GroupsOwnerComponent implements OnInit {
   groupsWhereOwner: string[];
   @Output() groupSelected = new EventEmitter<string>();
 
-  constructor(public dialog: MatDialog, private cacheStorage: AppCacheStorage) {
+  constructor(public dialog: MatDialog, private cacheStorage: AppCacheStorage, private storage: AppCacheStorage) {
   }
 
   async ngOnInit() {
@@ -43,6 +42,25 @@ export class GroupsOwnerComponent implements OnInit {
 
   selectGroup(name: string) {
     this.groupSelected.emit(name);
+  }
+
+  openDeleteConfirmationPopup(group: string): void {
+    let dialogRef = this.dialog.open(DeleteGroupConfirmationComponent, {
+      height: '180px',
+      width: '350px',
+      data: group
+    });
+
+    dialogRef.afterClosed().subscribe(isConfirmed => {
+      if (isConfirmed) {
+        this.deleteGroup(group);
+      }
+    });
+  }
+
+  async deleteGroup(name: string) {
+    await this.storage.deleteGroup(name);
+    this.ngOnInit();
   }
 
 }
