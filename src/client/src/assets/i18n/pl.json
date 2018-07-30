@@ -51,5 +51,6 @@
   "SWITCH_LANGUAGE": "EN",
   "WANT_TO_LEAVE_GROUP": "Czy chcesz opuścić grupę: {{value}} ?",
   "DELETE": "Usuń",
-  "WANT_TO_DELETE_GROUP": "Czy chcesz usunąć grupę {{value}} ?"
+  "WANT_TO_DELETE_GROUP": "Czy chcesz usunąć grupę {{value}} ?",
+  "JOIN": "Dołącz"
 }
