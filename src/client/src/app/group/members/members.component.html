@@ -1,6 +1,7 @@
 <mat-list class="group-list" *ngIf="members; else waitForMembers">
   <h3 mat-line mat-subheader><span translate>GROUP_MEMBERS</span></h3>
-  <button mat-raised-button (click)="updateIncludeMembers()"><span translate>REMEMBER_INCLUDES</span></button>
+  <button class="upper-button" mat-raised-button (click)="updateIncludeMembers()"><span translate>REMEMBER_INCLUDES</span></button>
+  <button mat-raised-button (click)="openAddMemberModal()"><span translate>ADD_MEMBER_BY_HAND</span></button>
   <mat-list-item *ngFor="let member of members">
     <h4 mat-line>{{member.firstName}} {{member.lastName}}</h4>
     <h5 mat-line>{{member.preferredUsername}}</h5>

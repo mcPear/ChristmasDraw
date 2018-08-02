@@ -102,4 +102,8 @@ export class UserService {
     return this.http.delete(this.MEMBERSHIP_URL + group.groupName).toPromise();
   }
 
+  addMember(groupName: string, user: UserDto) {
+    return this.http.post(this.MEMBERSHIP_URL + 'addMemberByHand/' + groupName, user).toPromise();
+  }
+
 }

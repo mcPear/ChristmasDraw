@@ -17,7 +17,7 @@ export class RequestsComponent implements OnInit {
   @Output()
   requestAccepted = new EventEmitter<string>();
 
-  constructor(private service: UserService, public dialog: MatDialog, private cacheStorage: AppCacheStorage) {
+  constructor(private service: UserService, public dialog: MatDialog) {
   }
 
   async ngOnInit() {

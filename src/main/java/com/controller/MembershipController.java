@@ -78,4 +78,10 @@ public class MembershipController {
         membershipService.deleteMembership(groupName, principal);
     }
 
+    @RequestMapping(path = "/addMemberByHand/{groupName}", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    private void addByHand(@PathVariable String groupName, @RequestBody UserDto userDto) {
+        membershipService.addByHand(groupName, userDto);
+    }
+
 }

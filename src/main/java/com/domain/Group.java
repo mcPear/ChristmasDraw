@@ -19,7 +19,7 @@ public class Group {
 
     public Group(String name) {
         this(null, name, null, false, false,
-                new BigDecimal(0), new BigDecimal(0), "not provided", null);
+                new BigDecimal(0), new BigDecimal(0), "-", null);
         this.name = name;
     }
 

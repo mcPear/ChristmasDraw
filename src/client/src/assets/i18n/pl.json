@@ -9,7 +9,6 @@
   "CHILDREN": "dzieci",
   "NO_CHILDREN": "brak dzieci",
   "MISSING_CHILDREN_INFO": "brak informacji o dzieciach",
-  "JOIN": "dołącz",
   "EDIT": "Edytuj",
   "CREATE": "Utwórz",
   "OPEN": "Otwórz",
@@ -52,5 +51,6 @@
   "WANT_TO_LEAVE_GROUP": "Czy chcesz opuścić grupę: {{value}} ?",
   "DELETE": "Usuń",
   "WANT_TO_DELETE_GROUP": "Czy chcesz usunąć grupę {{value}} ?",
-  "JOIN": "Dołącz"
+  "JOIN": "Dołącz",
+  "ADD_MEMBER_BY_HAND": "Dodaj członka ręcznie"
 }

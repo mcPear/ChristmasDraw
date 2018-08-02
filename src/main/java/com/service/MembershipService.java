@@ -157,4 +157,16 @@ public class MembershipService {
         membershipDao.deleteByUserIdAndGroupId(user.getId(), group.getId());
     }
 
+    public void addByHand(String groupName, UserDto userDto) {
+        Group storedGroup = groupDao.findByName(groupName);
+        if (storedGroup != null) { //todo else throw sth
+            Long maxId = userDao.findTopByOrderByIdDesc().getId();
+            User user = userDao.save(UserMapper.toUser(userDto, maxId));
+            membershipDao.save(new Membership(null, false, true,
+                    false, true,
+                    user.getAbout(), user.getChildren(), storedGroup,
+                    user, null, null));
+        }
+    }
+
 }
