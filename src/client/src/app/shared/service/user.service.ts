@@ -26,6 +26,11 @@ export class UserService {
       .toPromise();
   }
 
+  getDrawUserOfVirtual(groupName: string, username: string): Promise<UserDto> {
+    return this.http.get<UserDto>(this.MEMBERSHIP_URL + 'drawUserOfVirtual/' + groupName + "/" + username)
+      .toPromise();
+  }
+
   updateUser(user: UserDto): Promise<Object> {
     return this.http.post(this.USER_URL + 'update', user).toPromise();
   }
@@ -104,6 +109,11 @@ export class UserService {
 
   addMember(groupName: string, user: UserDto) {
     return this.http.post(this.MEMBERSHIP_URL + 'addMemberByHand/' + groupName, user).toPromise();
+  }
+
+  isVirtual(username: string): Promise<boolean> {
+    return this.http.get<boolean>(this.USER_URL + 'virtual/' + username)
+      .toPromise();
   }
 
 }

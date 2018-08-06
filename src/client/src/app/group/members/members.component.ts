@@ -4,6 +4,9 @@ import {UserIncludeDto} from "../../shared/dto/user_include.dto";
 import {MatDialog} from "@angular/material";
 import {UserEditComponent} from "../../user-edit/user-edit.component";
 import {UserDto} from "../../shared/dto/user.dto";
+import {UserDrawComponent} from "../user-draw/user-draw.component";
+import {DrawUserModalDto} from "../../shared/dto/draw_user_modal.dto";
+import {UserDrawModalComponent} from "../user-draw-modal/user-draw-modal.component";
 
 @Component({
   selector: 'app-members',
@@ -45,6 +48,37 @@ export class MembersComponent implements OnInit {
           .then(res => this.ngOnInit())
           .catch(err => console.log(err));
       }
+    });
+  }
+
+  openEditUserModal(member: UserIncludeDto) {
+    let user: UserDto = {
+      id: member.id,
+      preferredUsername: member.preferredUsername,
+      firstName: member.firstName,
+      lastName: member.lastName,
+      about: member.about,
+      children: member.children
+    } as UserDto;
+
+    let dialogRef = this.dialog.open(UserEditComponent, {
+      height: '600px',
+      width: '700px',
+      data: user
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.service.updateUser(result)
+          .then(res => this.ngOnInit())
+          .catch(err => console.log(err));
+      }
+    });
+  }
+
+  openDrawnUserModal(member: UserIncludeDto) {
+    this.dialog.open(UserDrawModalComponent, {
+      data: {groupName: this.groupName, username: member.preferredUsername} as DrawUserModalDto
     });
   }
 

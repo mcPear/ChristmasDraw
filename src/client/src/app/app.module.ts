@@ -31,6 +31,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {AppLanguageStorage} from "./shared/storage/app-language-storage";
 import {DeleteGroupConfirmationComponent} from "./delete-group-confirmation/delete-group-confirmation.component";
+import {UserDrawModalComponent} from "./group/user-draw-modal/user-draw-modal.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -56,7 +57,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserManegerComponent,
     ImmutableDrawComponent,
     MutableDrawComponent,
-    DeleteGroupConfirmationComponent
+    DeleteGroupConfirmationComponent,
+    UserDrawModalComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +95,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     GroupCreateComponent,
     DenyRequestConfirmationComponent,
     LeaveGroupConfirmationComponent,
-    DeleteGroupConfirmationComponent
+    DeleteGroupConfirmationComponent,
+    UserDrawModalComponent
   ]
 })
 export class AppModule {

@@ -112,6 +112,23 @@ public class MembershipService {
 
     }
 
+    public UserDto getDrawUser(String groupName, String username) {
+        User user = userDao.findByPreferredUsername(username);
+        List<Membership> selectedGroupMemberships = user.getMembershipsWhereUser()
+                .stream()
+                .filter(mem -> mem.getGroup().getName().equals(groupName))
+                .collect(Collectors.toList());
+
+        if (selectedGroupMemberships.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "User " + user.getPreferredUsername() + " is not a member of group " + groupName);
+        }
+        Membership membership = selectedGroupMemberships.get(0);
+        User drawnUser = membership.getDrawnUser();
+        return drawnUser == null ? null : UserMapper.toDto(drawnUser);
+
+    }
+
     public List<String> getUserOwnerGroups(KeycloakPrincipal principal) {
         User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
         List<Membership> memberships = membershipDao.findByUserIdAndOwns(user.getId(), true);

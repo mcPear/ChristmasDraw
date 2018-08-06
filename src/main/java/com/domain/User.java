@@ -36,6 +36,8 @@ public class User {
 
     private Integer children;
 
+    private Boolean virtual;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Membership> membershipsWhereUser;
 

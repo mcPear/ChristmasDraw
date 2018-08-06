@@ -50,6 +50,11 @@ public class MembershipController {
         return membershipService.getDrawUser(groupName, principal);
     }
 
+    @GetMapping(path = "/drawUserOfVirtual/{groupName}/{username}")
+    public UserDto getDrawUserOfVirtual(@PathVariable String groupName, @PathVariable String username) {
+        return membershipService.getDrawUser(groupName, username);
+    }
+
     @GetMapping(path = "/groups/member")
     public List<MemberGroupDto> getUserMemberGroups(KeycloakPrincipal principal) { //FIXME use username/id
         return membershipService.getUserMemberGroups(principal);

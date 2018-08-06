@@ -19,7 +19,8 @@ public final class UserMapper {
                 user.getLastName(),
                 user.getAbout(),
                 user.getChildren(),
-                include
+                include,
+                user.getVirtual()
         );
     }
 
@@ -30,7 +31,8 @@ public final class UserMapper {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getAbout(),
-                user.getChildren()
+                user.getChildren(),
+                user.getVirtual()
         );
     }
 
@@ -42,6 +44,7 @@ public final class UserMapper {
                 token.getFamilyName(),
                 null,
                 0,
+                false,
                 null,
                 null
         );
@@ -50,11 +53,12 @@ public final class UserMapper {
     public static User toUser(UserDto dto, Long maxId) {
         return new User(
                 null,
-                getLogin(dto, maxId), //todo use sequence
+                getLogin(dto, maxId),
                 dto.getFirstName(),
                 dto.getLastName(),
                 dto.getAbout(),
                 dto.getChildren(),
+                true,
                 null,
                 null
         );

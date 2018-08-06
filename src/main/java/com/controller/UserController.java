@@ -40,4 +40,8 @@ public class UserController {
         userService.delete(username, principal);
     }
 
+    @GetMapping(path = "/virtual/{username}")
+    public Boolean isVirtual(@PathVariable String username){
+        return userService.isVirtual(username);
+    }
 }

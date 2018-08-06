@@ -44,7 +44,7 @@ public class UserServiceTests {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         keycloakPrincipal = new KeycloakPrincipal("something", new KeycloakSecurityContext());
-        User user = new User(1L,"test1","Artur", "Walega", "Something About", 0, null, null);
+        User user = new User(1L,"test1","Artur", "Walega", "Something About", 0,false, null, null);
         when(userDao.findByPreferredUsername("test1")).thenReturn(user);
     }
 
@@ -58,8 +58,8 @@ public class UserServiceTests {
     @Test
     public void TestFinAll(){
         List<User> users = new ArrayList<>();
-        User user1 = new User(1L,"test1","Artur", "Walega", "Something About", 0, null, null);
-        User user2 = new User(2L,"test2","Michał", "Walega", "Something About", 0, null, null);
+        User user1 = new User(1L,"test1","Artur", "Walega", "Something About", 0, false, null, null);
+        User user2 = new User(2L,"test2","Michał", "Walega", "Something About", 0, false, null, null);
         users.add(user1);
         users.add(user2);
         when(userDao.findAll()).thenReturn(users);

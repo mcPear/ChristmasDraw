@@ -62,4 +62,8 @@ public class UserService {
             userDao.delete(userDto.getId());
     }
 
+    public Boolean isVirtual(String username){
+        return userDao.findByPreferredUsername(username).getVirtual();
+    }
+
 }

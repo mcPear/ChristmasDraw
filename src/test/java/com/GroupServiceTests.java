@@ -49,7 +49,7 @@ public class GroupServiceTests {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         keycloakPrincipal = new KeycloakPrincipal("something", new KeycloakSecurityContext());
-        User user = new User(1L,"test","Artur", "Walega", "Something About", 0, null, null);
+        User user = new User(1L,"test","Artur", "Walega", "Something About", 0, false, null, null);
         when(userDao.findByPreferredUsername("mock")).thenReturn(user);
     }
 
