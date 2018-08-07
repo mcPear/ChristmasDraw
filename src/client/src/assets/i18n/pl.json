@@ -3,7 +3,7 @@
   "APP_TITLE": "Świąteczne losowanie",
   "DASHBOARD": "Pulpit",
   "GROUPS": "Grupy",
-  "OWNED_GROUPS": "Zarządzane grupy",
+  "CREATED_GROUPS": "Stworzone grupy",
   "ABOUT_ME": "O mnie",
   "ONE_CHILD": "1 dziecko",
   "CHILDREN": "dzieci",
@@ -53,5 +53,6 @@
   "WANT_TO_DELETE_GROUP": "Czy chcesz usunąć grupę {{value}} ?",
   "JOIN": "Dołącz",
   "ADD_MEMBER_BY_HAND": "Dodaj członka ręcznie",
-  "CLOSE": "Zamknij"
+  "CLOSE": "Zamknij",
+  "PRESENT_A_GIFT": "Podaruj prezent"
 }

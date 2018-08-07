@@ -3,7 +3,7 @@
   "APP_TITLE": "Gift Exchange App",
   "DASHBOARD": "Dashboard",
   "GROUPS": "Groups",
-  "OWNED_GROUPS": "Owned groups",
+  "CREATED_GROUPS": "Created groups",
   "ABOUT_ME": "About me",
   "ONE_CHILD": "1 child",
   "CHILDREN": "children",
@@ -53,5 +53,6 @@
   "WANT_TO_DELETE_GROUP": "Do you want to delete group {{value}} ?",
   "JOIN": "Join",
   "ADD_MEMBER_BY_HAND": "Add member by hand",
-  "CLOSE": "Close"
+  "CLOSE": "Close",
+  "PRESENT_A_GIFT": "Present a gift"
 }

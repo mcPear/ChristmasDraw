@@ -1,6 +1,5 @@
-<mat-card class="white-alpha-background" *ngIf="user != null; else waitForUser">
-  <mat-card-header>
-  </mat-card-header>
+<mat-card class="app-card" *ngIf="user != null; else waitForUser">
+  <mat-card-subtitle class="app-card-or-modal-header"><span translate>ABOUT_ME</span></mat-card-subtitle>
   <mat-card-content>
     <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
     <pre class="angular-with-newlines">{{user.about}}</pre>
