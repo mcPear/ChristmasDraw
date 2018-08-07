@@ -18,7 +18,7 @@ import java.util.Set;
 public class Group {
 
     public Group(String name) {
-        this(null, name, null, false, false,
+        this(null, name, new Timestamp(System.currentTimeMillis()), false, false,
                 new BigDecimal(0), new BigDecimal(0), "-", null);
         this.name = name;
     }

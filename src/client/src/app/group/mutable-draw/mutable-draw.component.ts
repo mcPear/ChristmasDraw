@@ -24,8 +24,10 @@ export class MutableDrawComponent implements OnInit {
   }
 
   async performDraw() {
-    await this.service.performDraw(this.selectedGroup.name).catch(err => err.stat);
-    this.drawPerformed.emit();
+    await this.saveData();
+    await this.service.performDraw(this.selectedGroup.name)
+      .catch(err => err.stat)
+      .then(() => this.drawPerformed.emit());
     this.ngOnInit();
   }
 
