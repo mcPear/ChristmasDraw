@@ -50,6 +50,7 @@ public class GroupService {
                 item.isCountChildren(),
                 item.getGiftValue(),
                 item.getChildGiftValue(),
+                item.getCalculatedChildGiftValue(),
                 item.getCollectorContact());
         else return null;
     }
@@ -67,6 +68,7 @@ public class GroupService {
                                                 item.isCountChildren(),
                                                 item.getGiftValue(),
                                                 item.getChildGiftValue(),
+                                                item.getCalculatedChildGiftValue(),
                                                 item.getCollectorContact()));
             }
             return dtoList;

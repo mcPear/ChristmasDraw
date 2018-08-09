@@ -56,5 +56,6 @@
   "ADD_MEMBER_BY_HAND": "Dodaj członka ręcznie",
   "CLOSE": "Zamknij",
   "PRESENT_A_GIFT": "Podaruj prezent",
-  "STATE": "Stan"
+  "STATE": "Stan",
+  "CHILD_GIFT_DUE": "Składka dla dzieci"
 }

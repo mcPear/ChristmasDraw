@@ -6,5 +6,6 @@ export interface GroupSimpleDto{
   countChildren: boolean,
   giftValue: number,
   childGiftValue: number,
+  calculatedChildGiftValue: number,
   collectorContact: string
 }

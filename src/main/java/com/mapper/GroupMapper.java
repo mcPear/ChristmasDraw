@@ -12,6 +12,7 @@ public final class GroupMapper {
                 group.isCountChildren(),
                 group.getGiftValue(),
                 group.getChildGiftValue(),
+                group.getCalculatedChildGiftValue(),
                 group.getCollectorContact()
         );
     }

@@ -20,5 +20,6 @@ public class GroupSimpleDto {
     private boolean countChildren;
     private BigDecimal giftValue;
     private BigDecimal childGiftValue;
+    private BigDecimal calculatedChildGiftValue;
     private String collectorContact;
 }

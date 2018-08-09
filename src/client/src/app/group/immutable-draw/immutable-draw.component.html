@@ -1,20 +1,28 @@
 <mat-card class="app-card" *ngIf="group; else waitForGroup">
-  <mat-card-subtitle class="app-card-or-modal-header">{{ 'DRAW_SETTINGS' | translate:groupNameTranslationParam }}</mat-card-subtitle>
+  <mat-card-subtitle class="app-card-or-modal-header">{{ 'DRAW_SETTINGS' | translate:groupNameTranslationParam }}
+  </mat-card-subtitle>
   <p class="app-label"><span translate>DUE_DATE</span></p>
-  <p>{{group.drawDate | date:'dd.MM.yyyy'}}
+  <p class="value-under-app-label">{{group.drawDate | date:'dd.MM.yyyy'}}
     <button mat-button class="leftButton" (click)="addEvent()"><span translate>Add to calendar</span></button>
   </p>
   <p class="app-label"><span translate>VALUE_OF_GIFT</span></p>
-  <p>{{group.giftValue}}</p>
-  <p class="app-label"><span translate>VALUE_OF_GIFT_FOR_CHILD</span></p>
-  <p>{{group.childGiftValue}}</p>
-  <p class="app-label"><span translate>CONTACT</span></p>
-  <p>{{group.collectorContact}}</p>
+  <p class="value-under-app-label">{{group.giftValue}}</p>
+
   <p class="app-label"><span translate>COUNT_CHILDREN</span></p>
-  <p *ngIf="group.countChildren" translate>YES</p>
-  <p *ngIf="!group.countChildren" translate>NO</p>
+  <p class="value-under-app-label" *ngIf="group.countChildren" translate>YES</p>
+  <p class="value-under-app-label" *ngIf="!group.countChildren" translate>NO</p>
+
+  <p class="app-label" *ngIf="group.countChildren"><span translate>VALUE_OF_GIFT_FOR_CHILD</span></p>
+  <p class="value-under-app-label" *ngIf="group.countChildren">{{group.childGiftValue}}</p>
+
+  <p class="app-label" *ngIf="group.countChildren&&group.drawn"><span translate>CHILD_GIFT_DUE</span></p>
+  <p class="value-under-app-label" *ngIf="group.countChildren&&group.drawn">{{group.calculatedChildGiftValue}}</p>
+
+  <p class="app-label" *ngIf="group.countChildren"><span translate>CONTACT</span></p>
+  <p class="value-under-app-label" *ngIf="group.countChildren">{{group.collectorContact}}</p>
+
   <p class="app-label"><span translate>STATE</span></p>
-  <p *ngIf="group.drawn" translate>ALREADY_DRAWN</p>
-  <p *ngIf="!group.drawn" translate>NOT_YET_DRAWN</p>
+  <p class="value-under-app-label" *ngIf="group.drawn" translate>ALREADY_DRAWN</p>
+  <p class="value-under-app-label" *ngIf="!group.drawn" translate>NOT_YET_DRAWN</p>
 </mat-card>
 <ng-template #waitForGroup>loading group information...</ng-template>

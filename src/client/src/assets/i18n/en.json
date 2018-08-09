@@ -27,7 +27,7 @@
   "NAME_IN_USE": "This name is already in use",
   "DUE_DATE": "Due date of draw",
   "IN": "in",
-  "DRAW_SETTINGS": "{{value}} draw settings",
+  "DRAW_SETTINGS": "Draw settings of {{value}}",
   "VALUE_OF_GIFT": "Value of gift",
   "VALUE_OF_GIFT_FOR_CHILD": "Value of gift for child",
   "CONTACT": "Contact to money collector",
@@ -56,5 +56,6 @@
   "ADD_MEMBER_BY_HAND": "Add member by hand",
   "CLOSE": "Close",
   "PRESENT_A_GIFT": "Present a gift",
-  "STATE": "State"
+  "STATE": "State",
+  "CHILD_GIFT_DUE": "Children gifts due"
 }

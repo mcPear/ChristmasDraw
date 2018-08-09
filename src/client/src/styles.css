@@ -7,6 +7,7 @@ body {
 
 .app-card{
   background-color: rgba(255, 255, 255, .90);
+  padding-top: 16px !important;
 }
 
 .app-card-or-modal-header{
@@ -14,7 +15,7 @@ body {
   font-family: Roboto,"Helvetica Neue",sans-serif;
   font-size: 14px;
   font-weight: 500;
-  margin-top: -8px;
+  margin-bottom: 20px !important;
 }
 
 .app-label{
@@ -25,4 +26,11 @@ body {
   top: 1.28125em;
   text-align: left;
   font-size: 0.8em;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.value-under-app-label{
+  margin-top: 8px;
+  margin-bottom: 24px;
 }

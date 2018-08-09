@@ -20,6 +20,12 @@
       </mat-form-field>
     </section>
 
+    <div class="count-children-checkbox">
+      <mat-checkbox [(ngModel)]="group.countChildren"
+                    name="countChildrenCheckbox"><span translate>COUNT_CHILDREN</span>
+      </mat-checkbox>
+    </div>
+
     <section class="example-section">
       <mat-form-field class="example-full-width">
         <input matInput type="number" [(ngModel)]="group.childGiftValue" name="childGiftValue"
@@ -27,16 +33,16 @@
       </mat-form-field>
     </section>
 
-    <mat-form-field class="example-full-width">
-      <input matInput [(ngModel)]="group.collectorContact" name="collectorContact"
-             placeholder="{{'CONTACT' | translate}}" [value]="group.collectorContact">
-    </mat-form-field>
-
     <section class="example-section">
-      <mat-checkbox class="example-margin" [(ngModel)]="group.countChildren"
-                    name="countChildrenCheckbox"><span translate>COUNT_CHILDREN</span>
-      </mat-checkbox>
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="group.collectorContact" name="collectorContact"
+               placeholder="{{'CONTACT' | translate}}" [value]="group.collectorContact">
+      </mat-form-field>
     </section>
+
+    <p class="app-label" *ngIf="group.countChildren&&group.drawn"><span translate>CHILD_GIFT_DUE</span></p>
+    <p *ngIf="group.countChildren&&group.drawn">{{group.calculatedChildGiftValue}}</p>
+
     <p class="app-label"><span translate>STATE</span></p>
     <p *ngIf="group.drawn" translate>ALREADY_DRAWN</p>
     <p *ngIf="!group.drawn" translate>NOT_YET_DRAWN</p>
