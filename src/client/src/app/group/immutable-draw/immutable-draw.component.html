@@ -1,19 +1,20 @@
 <mat-card class="app-card" *ngIf="group; else waitForGroup">
-  <h2 mat-dialog-title>{{ 'DRAW_SETTINGS' | translate:groupNameTranslationParam }}</h2>
-  <mat-card-subtitle><span translate>DUE_DATE</span></mat-card-subtitle>
-  <p>{{group.drawDate | date:'yyyy-MM-dd'}}
+  <mat-card-subtitle class="app-card-or-modal-header">{{ 'DRAW_SETTINGS' | translate:groupNameTranslationParam }}</mat-card-subtitle>
+  <p class="app-label"><span translate>DUE_DATE</span></p>
+  <p>{{group.drawDate | date:'dd.MM.yyyy'}}
     <button mat-button class="leftButton" (click)="addEvent()"><span translate>Add to calendar</span></button>
   </p>
-  <mat-card-subtitle><span translate>VALUE_OF_GIFT</span></mat-card-subtitle>
+  <p class="app-label"><span translate>VALUE_OF_GIFT</span></p>
   <p>{{group.giftValue}}</p>
-  <mat-card-subtitle><span translate>VALUE_OF_GIFT_FOR_CHILD</span></mat-card-subtitle>
+  <p class="app-label"><span translate>VALUE_OF_GIFT_FOR_CHILD</span></p>
   <p>{{group.childGiftValue}}</p>
-  <mat-card-subtitle><span translate>CONTACT</span></mat-card-subtitle>
+  <p class="app-label"><span translate>CONTACT</span></p>
   <p>{{group.collectorContact}}</p>
-  <mat-card-subtitle><span translate>COUNT_CHILDREN</span></mat-card-subtitle>
-  <p>{{getIncludeChildrenOutput()}}</p>
-  <section class="example-section">
-    {{getIsDrawnOutput()}}
-  </section>
+  <p class="app-label"><span translate>COUNT_CHILDREN</span></p>
+  <p *ngIf="group.countChildren" translate>YES</p>
+  <p *ngIf="!group.countChildren" translate>NO</p>
+  <p class="app-label"><span translate>STATE</span></p>
+  <p *ngIf="group.drawn" translate>ALREADY_DRAWN</p>
+  <p *ngIf="!group.drawn" translate>NOT_YET_DRAWN</p>
 </mat-card>
 <ng-template #waitForGroup>loading group information...</ng-template>

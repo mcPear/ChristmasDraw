@@ -29,12 +29,6 @@ export class ImmutableDrawComponent implements OnInit {
         this.ngOnInit();
     }
 
-
-    getIsDrawnOutput() {
-        if (this.group.drawn) return 'Already drawn';
-        else return 'Not yet drawn';
-    }
-
     getIncludeChildrenOutput() {
       if (this.group.countChildren) return 'yes';
       else return 'no';

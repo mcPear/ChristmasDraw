@@ -1,3 +1,5 @@
+@import "../../../styles.css";
+
 .subtitle {
     display: block;
     color: rgba(0,0,0,.54);
@@ -26,3 +28,4 @@
     align-items: center;
     height: 100px;
 }
+

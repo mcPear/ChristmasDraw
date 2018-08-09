@@ -16,3 +16,13 @@ body {
   font-weight: 500;
   margin-top: -8px;
 }
+
+.app-label{
+  width: 133.33333%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgba(0,0,0,.54);
+  top: 1.28125em;
+  text-align: left;
+  font-size: 0.8em;
+}

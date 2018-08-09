@@ -31,7 +31,7 @@
   "VALUE_OF_GIFT": "Wartość prezentu",
   "VALUE_OF_GIFT_FOR_CHILD": "Wartość prezentu dla dziecka",
   "CONTACT": "Kontakt do skarbnika",
-  "COUNT_CHILDREN": "Włącz dzieci",
+  "COUNT_CHILDREN": "Uwzględnij dzieci",
   "ALREADY_DRAWN": "Rozlosowano",
   "NOT_YET_DRAWN": "Nie rozlosowano",
   "GROUP_MEMBERS": "Członkowie",
@@ -43,6 +43,7 @@
   "ACCEPT": "Akceptuj",
   "REJECT": "Odrzuć",
   "YES": "Tak",
+  "NO": "Nie",
   "NOBODY": "Nikt jeszcze nie jest do ciebie przypisany.",
   "ADD_TO_CALENDAR": "Dodaj do kalendarza",
   "YOU_ARE_MEMBER": "Jesteś członkiem tej grupy.",
@@ -54,5 +55,6 @@
   "JOIN": "Dołącz",
   "ADD_MEMBER_BY_HAND": "Dodaj członka ręcznie",
   "CLOSE": "Zamknij",
-  "PRESENT_A_GIFT": "Podaruj prezent"
+  "PRESENT_A_GIFT": "Podaruj prezent",
+  "STATE": "Stan"
 }

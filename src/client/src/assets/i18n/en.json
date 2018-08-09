@@ -43,6 +43,7 @@
   "ACCEPT": "Accept",
   "REJECT": "Reject",
   "YES": "Yes",
+  "NO": "No",
   "NOBODY": "Nobody is assigned to you",
   "ADD_TO_CALENDAR": "Add to calendar",
   "YOU_ARE_MEMBER": "You are member of this group.",
@@ -54,5 +55,6 @@
   "JOIN": "Join",
   "ADD_MEMBER_BY_HAND": "Add member by hand",
   "CLOSE": "Close",
-  "PRESENT_A_GIFT": "Present a gift"
+  "PRESENT_A_GIFT": "Present a gift",
+  "STATE": "State"
 }
