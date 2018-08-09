@@ -1,13 +1,15 @@
 package com.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "GROUPX")
@@ -19,7 +21,7 @@ public class Group {
 
     public Group(String name) {
         this(null, name, new Timestamp(System.currentTimeMillis()), false, false,
-                new BigDecimal(0), new BigDecimal(0), "-", null);
+                new BigDecimal(0), new BigDecimal(0), null, "-", null);
         this.name = name;
     }
 
@@ -41,6 +43,8 @@ public class Group {
     private BigDecimal giftValue;
 
     private BigDecimal childGiftValue;
+
+    private BigDecimal calculatedChildGiftValue;
 
     private String collectorContact;
 

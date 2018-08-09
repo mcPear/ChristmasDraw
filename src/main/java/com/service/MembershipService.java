@@ -20,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -91,8 +93,21 @@ public class MembershipService {
             membershipDao.save(membership);
             System.out.println("i: " + i + " perm -1: " + (permutation.get(i) - 1));
         }
+        BigDecimal v = calculateChildGiftValue(memberships, group);
+        if (group.isCountChildren()) {
+            group.setCalculatedChildGiftValue(v);
+        }
         group.setDrawn(true);
         groupDao.save(group);
+    }
+
+    private BigDecimal calculateChildGiftValue(List<Membership> memberships, Group group) {
+        int allChildrenCount = memberships.stream().map(Membership::getUser).mapToInt(User::getChildren).sum();
+        int membershipsCount = memberships.stream().filter(m -> m.isIncludeInDraw() && (m.getAccepted() != null && m.getAccepted()))
+                .collect(Collectors.toList()).size();
+        return new BigDecimal(allChildrenCount)
+                .multiply(group.getChildGiftValue())
+                .divide(new BigDecimal(membershipsCount), RoundingMode.HALF_UP);
     }
 
     public UserDto getDrawUser(String groupName, KeycloakPrincipal principal) {
