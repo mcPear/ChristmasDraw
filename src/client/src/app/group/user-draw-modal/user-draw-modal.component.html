@@ -1,12 +1,8 @@
 <div *ngIf="user; else missingUser">
-  <mat-card-subtitle class="app-card-or-modal-header"><span translate>GIVE_TO</span></mat-card-subtitle>
+  <mat-card-subtitle class="app-card-or-modal-header"><span translate>PRESENT_A_GIFT</span></mat-card-subtitle>
   <mat-card-content>
     <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
     <pre class="angular-with-newlines">{{user.about}}</pre>
-    <p *ngIf="user.children === undefined" translate>MISSING_CHILDREN_INFO</p>
-    <p *ngIf="user.children === 0" translate>NO_CHILDREN</p>
-    <p *ngIf="user.children === 1" translate>ONE_CHILD</p>
-    <p *ngIf="user.children > 1" translate>{{ user.children+' ' }}<span translate>CHILDREN</span></p>
   </mat-card-content>
 </div>
 
