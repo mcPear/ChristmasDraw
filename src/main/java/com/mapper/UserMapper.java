@@ -65,7 +65,7 @@ public final class UserMapper {
     }
 
     private static String getLogin(UserDto dto, Long maxId) {
-        return deAccent(dto.getFirstName().toLowerCase()) + maxId;
+        return deAccent(dto.getFirstName().toLowerCase()) + (maxId + 1);
     }
 
     private static String deAccent(String str) {
