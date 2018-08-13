@@ -9,6 +9,7 @@ import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,18 +23,23 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public UserDto getOneDto(String preferredUsername, KeycloakPrincipal principal) {
+    public UserDto getOneDto(String preferredUsername, KeycloakPrincipal principal, HttpServletRequest request) {
+        String lang = getLang(request);
         User user = userDao.findByPreferredUsername(preferredUsername);
-        return user == null ? save(principal) : UserMapper.toDto(user);
+        return user == null ? save(principal, lang) : UserMapper.toDto(user);
     }
 
-    private UserDto save(KeycloakPrincipal principal) {
+    private UserDto save(KeycloakPrincipal principal, String lang) {
         AccessToken token = principal.getKeycloakSecurityContext().getToken();
-        if(token != null) {
-            User user = UserMapper.toUser(token);
+        if (token != null) {
+            User user = UserMapper.toUser(token, lang);
             userDao.save(user);
             return UserMapper.toDto(user);
-        }else return null;
+        } else return null;
+    }
+
+    private String getLang(HttpServletRequest request) {
+        return request.getHeader("Accept-Language").substring(0, 2);
     }
 
     public void update(UserDto userDto) {
@@ -45,24 +51,23 @@ public class UserService {
         userDao.save(user);
     }
 
-    public List<UserDto> getAll(){
+    public List<UserDto> getAll() {
         List<User> users = userDao.findAll();
         List<UserDto> userDtos = new ArrayList<>();
-        for (User user: users) {
+        for (User user : users) {
             userDtos.add(UserMapper.toDto(user));
         }
-        return  userDtos;
+        return userDtos;
     }
 
-    public void delete(String username, KeycloakPrincipal principal){
-        AccessToken token = principal.getKeycloakSecurityContext().getToken();
-        User user = UserMapper.toUser(token);
-        UserDto userDto = getOneDto(username, principal);
-        if(user.getId() != userDto.getId())
-            userDao.delete(userDto.getId());
+    public void delete(String username) {
+        User user = userDao.findByPreferredUsername(username);
+        if (user != null) {
+            userDao.delete(user);
+        }
     }
 
-    public Boolean isVirtual(String username){
+    public Boolean isVirtual(String username) {
         return userDao.findByPreferredUsername(username).getVirtual();
     }
 

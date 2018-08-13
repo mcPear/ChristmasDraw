@@ -28,15 +28,17 @@ import java.util.stream.Collectors;
 @Service
 public class MembershipService {
 
-    private UserDao userDao;
-    private GroupDao groupDao;
-    private MembershipDao membershipDao;
+    private final UserDao userDao;
+    private final GroupDao groupDao;
+    private final MembershipDao membershipDao;
+    private final MailService mailService;
 
     @Autowired
-    public MembershipService(UserDao userDao, GroupDao groupDao, MembershipDao membershipDao) {
+    public MembershipService(UserDao userDao, GroupDao groupDao, MembershipDao membershipDao, MailService mailService) {
         this.userDao = userDao;
         this.groupDao = groupDao;
         this.membershipDao = membershipDao;
+        this.mailService = mailService;
     }
 
     public List<UserDto> getGroupRequests(String name) {
@@ -99,6 +101,12 @@ public class MembershipService {
         }
         group.setDrawn(true);
         groupDao.save(group);
+        sendMails(memberships, groupName);
+    }
+
+    //todo lang from user entity, set by front
+    private void sendMails(List<Membership> memberships, String groupName) {
+        memberships.forEach(m -> mailService.send(m.getUser(), m.getDrawnUser(), groupName));
     }
 
     private BigDecimal calculateChildGiftValue(List<Membership> memberships, Group group) {

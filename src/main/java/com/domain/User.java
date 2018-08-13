@@ -31,12 +31,16 @@ public class User {
     @NotNull
     private String lastName;
 
+    private String email;
+
     @Lob
     private String about;
 
     private Integer children;
 
     private Boolean virtual;
+
+    private String lang;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Membership> membershipsWhereUser;

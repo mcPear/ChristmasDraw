@@ -12,7 +12,9 @@ public class UserDto {
     private String preferredUsername;
     private String firstName;
     private String lastName;
+    private String email;
     private String about;
     private Integer children;
     private Boolean isVirtual;
+    private String lang;
 }

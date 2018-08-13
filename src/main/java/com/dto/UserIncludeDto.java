@@ -3,9 +3,9 @@ package com.dto;
 public class UserIncludeDto extends UserDto {
     private boolean include;
 
-    public UserIncludeDto(Long id, String preferredUsername, String firstName,
-                          String lastName, String about, Integer children, boolean include, Boolean isVirtual) {
-        super(id, preferredUsername, firstName, lastName, about, children, isVirtual);
+    public UserIncludeDto(Long id, String preferredUsername, String firstName, String lastName, String email,
+                          String about, Integer children, boolean include, Boolean isVirtual, String lang) {
+        super(id, preferredUsername, firstName, lastName, email, about, children, isVirtual, lang);
         this.include = include;
     }
 

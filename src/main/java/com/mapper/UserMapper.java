@@ -17,10 +17,12 @@ public final class UserMapper {
                 user.getPreferredUsername(),
                 user.getFirstName(),
                 user.getLastName(),
+                user.getEmail(),
                 user.getAbout(),
                 user.getChildren(),
                 include,
-                user.getVirtual()
+                user.getVirtual(),
+                user.getLang()
         );
     }
 
@@ -30,21 +32,25 @@ public final class UserMapper {
                 user.getPreferredUsername(),
                 user.getFirstName(),
                 user.getLastName(),
+                user.getEmail(),
                 user.getAbout(),
                 user.getChildren(),
-                user.getVirtual()
+                user.getVirtual(),
+                user.getLang()
         );
     }
 
-    public static User toUser(AccessToken token) {
+    public static User toUser(AccessToken token, String lang) {
         return new User(
                 null,
                 token.getPreferredUsername(),
                 token.getGivenName(),
                 token.getFamilyName(),
+                token.getEmail(),
                 null,
                 0,
                 false,
+                lang,
                 null,
                 null
         );
@@ -56,9 +62,11 @@ public final class UserMapper {
                 getLogin(dto, maxId),
                 dto.getFirstName(),
                 dto.getLastName(),
+                dto.getEmail(),
                 dto.getAbout(),
                 dto.getChildren(),
                 true,
+                dto.getLang(),
                 null,
                 null
         );
