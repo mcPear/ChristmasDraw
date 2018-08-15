@@ -13,6 +13,7 @@ import com.dto.MemberGroupDto;
 import com.dto.UserDto;
 import com.dto.UserIncludeDto;
 import com.mapper.UserMapper;
+import com.service.mail.MailService;
 import com.util.GlobalLogger;
 import com.util.PrincipalUtil;
 import org.keycloak.KeycloakPrincipal;
@@ -101,12 +102,13 @@ public class MembershipService {
         }
         group.setDrawn(true);
         groupDao.save(group);
-        sendMails(memberships, groupName);
+        sendMails(memberships);
     }
 
-    //todo lang from user entity, set by front
-    private void sendMails(List<Membership> memberships, String groupName) {
-        memberships.forEach(m -> mailService.send(m.getUser(), m.getDrawnUser(), groupName));
+    private void sendMails(List<Membership> memberships) {
+        memberships.stream()
+                .filter(m -> m.getAccepted() != null & m.getAccepted() && m.isIncludeInDraw() && !m.getUser().getVirtual())
+                .forEach(mailService::send);
     }
 
     private BigDecimal calculateChildGiftValue(List<Membership> memberships, Group group) {
