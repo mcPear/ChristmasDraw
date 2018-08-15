@@ -16,7 +16,8 @@ import java.util.List;
 public class Membership {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_membership_seq")
+    @SequenceGenerator(name = "id_membership_seq", sequenceName = "id_membership_seq", allocationSize = 1)
     private Long id;
 
     private boolean owns;

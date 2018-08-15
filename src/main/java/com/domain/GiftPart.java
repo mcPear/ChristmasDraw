@@ -17,7 +17,8 @@ import java.math.BigDecimal;
 public class GiftPart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_giftPart_seq")
+    @SequenceGenerator(name = "id_giftPart_seq", sequenceName = "id_giftPart_seq", allocationSize = 1)
     private Long id;
 
     @NotNull
@@ -27,7 +28,7 @@ public class GiftPart {
     @NotNull
     private BigDecimal value;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "membership_id")
     private Membership membership;
 }
