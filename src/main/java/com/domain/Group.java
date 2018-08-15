@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ import java.util.Set;
 public class Group {
 
     public Group(String name) {
-        this(null, name, new Timestamp(System.currentTimeMillis()), false, false,
+        this(null, name, new Date(System.currentTimeMillis()), false, false,
                 new BigDecimal(0), new BigDecimal(0), null, "-", null);
         this.name = name;
     }
@@ -35,7 +36,7 @@ public class Group {
     @Column(unique = true)
     private String name;
 
-    private Timestamp drawDate;
+    private Date drawDate;
 
     private boolean isDrawn;
 
