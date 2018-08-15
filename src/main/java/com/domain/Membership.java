@@ -24,14 +24,7 @@ public class Membership {
 
     private Boolean accepted;
 
-    private boolean includeChildrenInDraw;
-
     private boolean includeInDraw;
-
-    @Lob
-    private String about;
-
-    private Integer children;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "group_id")

@@ -174,9 +174,7 @@ public class MembershipService {
         Group storedGroup = groupDao.findByName(groupName);
         if (storedGroup != null) {
             User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
-            membershipDao.save(new Membership(null, false, null,
-                    false, true,
-                    user.getAbout(), user.getChildren(), storedGroup,
+            membershipDao.save(new Membership(null, false, null, true,storedGroup,
                     user, null, null));
         }
     }
@@ -204,10 +202,8 @@ public class MembershipService {
         if (storedGroup != null) { //todo else throw sth
             Long maxId = userDao.findTopByOrderByIdDesc().getId();
             User user = userDao.save(UserMapper.toUser(userDto, maxId));
-            membershipDao.save(new Membership(null, false, true,
-                    false, true,
-                    user.getAbout(), user.getChildren(), storedGroup,
-                    user, null, null));
+            membershipDao.save(new Membership(null, false, true, true, storedGroup, user,
+                    null, null));
         }
     }
 

@@ -92,9 +92,7 @@ public class GroupService {
         if (storedGroup == null) {
             Group createdGroup = groupDao.save(new Group(groupName));
             User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
-            membershipDao.save(new Membership(null, true, true,
-                    false, true,
-                    user.getAbout(), user.getChildren(), createdGroup,
+            membershipDao.save(new Membership(null, true, true, true, createdGroup,
                     user, null, null));
             return true;
         } else {
