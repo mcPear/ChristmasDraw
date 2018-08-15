@@ -28,3 +28,4 @@ src/main/resources/application.properties
 
 ## H2 ##
 test.mv.db
+test.trace.db
