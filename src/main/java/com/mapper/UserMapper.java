@@ -10,8 +10,7 @@ import java.util.regex.Pattern;
 
 public final class UserMapper {
 
-    public static UserIncludeDto toIncludeDto(User user, boolean include) {
-        System.out.println(include);
+    public static UserIncludeDto toIncludeDto(User user, boolean includeInFutureDraw, Boolean includedInLastDraw) {
         return new UserIncludeDto(
                 user.getId(),
                 user.getPreferredUsername(),
@@ -20,7 +19,8 @@ public final class UserMapper {
                 user.getEmail(),
                 user.getAbout(),
                 user.getChildren(),
-                include,
+                includeInFutureDraw,
+                includedInLastDraw,
                 user.getVirtual(),
                 user.getLang()
         );

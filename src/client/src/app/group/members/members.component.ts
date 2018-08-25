@@ -80,6 +80,6 @@ export class MembersComponent implements OnInit {
     this.dialog.open(UserDrawModalComponent, {
       data: {groupName: this.groupName, username: member.preferredUsername} as DrawUserModalDto
     });
-  }
+  } //todo test after draw/maybe enforce refresh
 
 }

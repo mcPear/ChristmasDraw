@@ -1,22 +1,30 @@
 package com.dto;
 
 public class UserIncludeDto extends UserDto {
-    private boolean include;
+    private boolean includeInFutureDraw;
+    private Boolean includedInLastDraw;
 
     public UserIncludeDto(Long id, String preferredUsername, String firstName, String lastName, String email,
-                          String about, Integer children, boolean include, Boolean isVirtual, String lang) {
+                          String about, Integer children, boolean includeInFutureDraw, Boolean includedInLastDraw,
+                          Boolean isVirtual, String lang) {
         super(id, preferredUsername, firstName, lastName, email, about, children, isVirtual, lang);
-        this.include = include;
+        this.includeInFutureDraw = includeInFutureDraw;
+        this.includedInLastDraw = includedInLastDraw;
     }
 
-    public UserIncludeDto() {
+    public boolean isIncludeInFutureDraw() {
+        return includeInFutureDraw;
     }
 
-    public boolean isInclude() {
-        return include;
+    public void setIncludeInFutureDraw(boolean includeInFutureDraw) {
+        this.includeInFutureDraw = includeInFutureDraw;
     }
 
-    public void setInclude(boolean include) {
-        this.include = include;
+    public Boolean getIncludedInLastDraw() {
+        return includedInLastDraw;
+    }
+
+    public void setIncludedInLastDraw(Boolean includedInLastDraw) {
+        this.includedInLastDraw = includedInLastDraw;
     }
 }

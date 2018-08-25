@@ -11,3 +11,7 @@
 .upper-button{
   margin-bottom: 9px;
 }
+
+.line-through{
+  text-decoration: line-through;
+}

@@ -15,13 +15,13 @@ INSERT INTO PUBLIC.GROUPX (ID, CALCULATED_CHILD_GIFT_VALUE, CHILD_GIFT_VALUE, CO
 VALUES (nextval('id_group_seq'), NULL, 100, '601 302 738', TRUE, '2018-12-01', 150, FALSE, 'rodzina'),
   (nextval('id_group_seq'), NULL, 200, '603 392 721', FALSE, '2018-07-02', 300, TRUE, 'kompania');
 
-INSERT INTO PUBLIC.MEMBERSHIP (ID, ACCEPTED, INCLUDE_IN_DRAW, OWNS, DRAWN_USER_ID,
+INSERT INTO PUBLIC.MEMBERSHIP (ID, ACCEPTED, INCLUDE_IN_FUTURE_DRAW, INCLUDED_IN_LAST_DRAW, OWNS, DRAWN_USER_ID,
                                GROUP_ID, USER_ID)
 VALUES
-  (nextval('id_membership_seq'), TRUE, TRUE, TRUE, NULL, 1, 1),
-  (nextval('id_membership_seq'), TRUE, TRUE, FALSE, NULL, 1, 2),
-  (nextval('id_membership_seq'), NULL, FALSE, FALSE, NULL, 1, 3),
-  (nextval('id_membership_seq'), TRUE, TRUE, FALSE, NULL, 1, 4),
-  (nextval('id_membership_seq'), TRUE, TRUE, FALSE, 2, 2, 1),
-  (nextval('id_membership_seq'), TRUE, TRUE, TRUE, 1, 2, 2),
-  (nextval('id_membership_seq'), TRUE, TRUE, FALSE, NULL, 1, 5);
+  (nextval('id_membership_seq'), TRUE, TRUE, NULL, TRUE, NULL, 1, 1),
+  (nextval('id_membership_seq'), TRUE, TRUE, NULL, FALSE, NULL, 1, 2),
+  (nextval('id_membership_seq'), NULL, FALSE, NULL, FALSE, NULL, 1, 3),
+  (nextval('id_membership_seq'), TRUE, TRUE, NULL, FALSE, NULL, 1, 4),
+  (nextval('id_membership_seq'), TRUE, TRUE, NULL, FALSE, 2, 2, 1),
+  (nextval('id_membership_seq'), TRUE, TRUE, NULL, TRUE, 1, 2, 2),
+  (nextval('id_membership_seq'), TRUE, TRUE, NULL, FALSE, NULL, 1, 5);

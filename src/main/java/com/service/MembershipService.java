@@ -16,6 +16,7 @@ import com.mapper.UserMapper;
 import com.service.mail.MailService;
 import com.util.GlobalLogger;
 import com.util.PrincipalUtil;
+import javafx.util.Pair;
 import org.keycloak.KeycloakPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,9 @@ public class MembershipService {
                 .collect(Collectors.toList())
                 .get(0);
         membership.setAccepted(Boolean.valueOf(value));
+        if (Boolean.valueOf(value)) {
+            membership.setIncludedInLastDraw(false);
+        }
         membershipDao.save(membership);
     }
 
@@ -73,14 +77,14 @@ public class MembershipService {
         return group.getMemberships()
                 .stream()
                 .filter(mem -> mem.getAccepted() != null && mem.getAccepted())
-                .map(mem -> UserMapper.toIncludeDto(mem.getUser(), mem.isIncludeInDraw()))
+                .map(mem -> UserMapper.toIncludeDto(mem.getUser(), mem.isIncludeInFutureDraw(), mem.getIncludedInLastDraw()))
                 .collect(Collectors.toSet());
     }
 
     public void performDraw(String groupName) {
         Group group = groupDao.findByName(groupName);
         List<Membership> memberships = group.getMemberships().stream()
-                .filter(Membership::isIncludeInDraw)
+                .filter(Membership::isIncludeInFutureDraw)
                 .collect(Collectors.toList());
         if (memberships.size() < 2) throw new IllegalArgumentException(
                 "The number of users included in draw should be greater than 2.");
@@ -93,6 +97,7 @@ public class MembershipService {
             Membership membership = memberships.get(i);
             User drawnUser = memberships.get(permutation.get(i) - 1).getUser();
             membership.setDrawnUser(drawnUser);
+            membership.setIncludedInLastDraw(true);
             membershipDao.save(membership);
             System.out.println("i: " + i + " perm -1: " + (permutation.get(i) - 1));
         }
@@ -102,18 +107,23 @@ public class MembershipService {
         }
         group.setDrawn(true);
         groupDao.save(group);
-        sendMails(memberships);
+        try {
+            sendMails(memberships);
+            sendMails(memberships);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendMails(List<Membership> memberships) {
         memberships.stream()
-                .filter(m -> m.getAccepted() != null & m.getAccepted() && m.isIncludeInDraw() && !m.getUser().getVirtual())
+                .filter(m -> m.getAccepted() != null & m.getAccepted() && m.isIncludeInFutureDraw() && !m.getUser().getVirtual())
                 .forEach(mailService::send);
     }
 
     private BigDecimal calculateChildGiftValue(List<Membership> memberships, Group group) {
         int allChildrenCount = memberships.stream().map(Membership::getUser).mapToInt(User::getChildren).sum();
-        int membershipsCount = memberships.stream().filter(m -> m.isIncludeInDraw() && (m.getAccepted() != null && m.getAccepted()))
+        int membershipsCount = memberships.stream().filter(m -> m.isIncludeInFutureDraw() && (m.getAccepted() != null && m.getAccepted()))
                 .collect(Collectors.toList()).size();
         return new BigDecimal(allChildrenCount)
                 .multiply(group.getChildGiftValue())
@@ -174,18 +184,23 @@ public class MembershipService {
         Group storedGroup = groupDao.findByName(groupName);
         if (storedGroup != null) {
             User user = PrincipalUtil.getUserByPrincipal(principal, userDao);
-            membershipDao.save(new Membership(null, false, null, true,storedGroup,
-                    user, null, null));
+            membershipDao.save(new Membership(null, false, null, true,
+                    null, storedGroup, user, null, null));
         }
     }
 
     public void updateIncludeMembers(List<UserIncludeDto> userIncludeDtos, String groupName) { //TODO by group id
-        Map<String, Boolean> includesMap = new HashMap<>();
-        userIncludeDtos.forEach(dto -> includesMap.put(dto.getPreferredUsername(), dto.isInclude()));
+        Map<String, Pair<Boolean, Boolean>> includesMap = new HashMap<>();
+        userIncludeDtos.forEach(dto -> includesMap.put(
+                dto.getPreferredUsername(),
+                new Pair<>(dto.isIncludeInFutureDraw(), dto.getIncludedInLastDraw())
+        ));
         Long groupId = groupDao.findByName(groupName).getId();
         List<Membership> memberships = membershipDao.findByGroupId(groupId);
         for (Membership mem : memberships) {
-            mem.setIncludeInDraw(includesMap.get(mem.getUser().getPreferredUsername()));
+            Pair<Boolean, Boolean> includes = includesMap.get(mem.getUser().getPreferredUsername());
+            mem.setIncludeInFutureDraw(includes.getKey());
+            mem.setIncludedInLastDraw(includes.getValue());
         }
         membershipDao.save(memberships);
     }
@@ -202,8 +217,8 @@ public class MembershipService {
         if (storedGroup != null) { //todo else throw sth
             Long maxId = userDao.findTopByOrderByIdDesc().getId();
             User user = userDao.save(UserMapper.toUser(userDto, maxId));
-            membershipDao.save(new Membership(null, false, true, true, storedGroup, user,
-                    null, null));
+            membershipDao.save(new Membership(null, false, true, true,
+                    false, storedGroup, user, null, null));
         }
     }
 

@@ -24,7 +24,9 @@ public class Membership {
 
     private Boolean accepted;
 
-    private boolean includeInDraw;
+    private boolean includeInFutureDraw;
+
+    private Boolean includedInLastDraw;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "group_id")

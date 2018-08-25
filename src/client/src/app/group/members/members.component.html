@@ -3,7 +3,9 @@
   <button class="upper-button" mat-raised-button (click)="updateIncludeMembers()"><span translate>REMEMBER_INCLUDES</span></button>
   <button mat-raised-button (click)="openAddMemberModal()"><span translate>ADD_MEMBER_BY_HAND</span></button>
   <mat-list-item *ngFor="let member of members">
-    <h4 mat-line>{{member.firstName}} {{member.lastName}}</h4>
+    <h4 mat-line [style.text-decoration]=
+      "member.includedInLastDraw || member.includedInLastDraw==null ? 'inherit':'line-through'" >
+      {{member.firstName}} {{member.lastName}}</h4>
     <h5 mat-line>{{member.preferredUsername}}</h5>
     <button mat-icon-button *ngIf="member.isVirtual" (click)="openEditUserModal(member)">
       <mat-icon>edit</mat-icon>
@@ -11,7 +13,7 @@
     <button mat-icon-button *ngIf="member.isVirtual" (click)="openDrawnUserModal(member)">
       <mat-icon>face</mat-icon>
     </button>
-    <mat-checkbox class="example-margin" [(ngModel)]="member.include"
+    <mat-checkbox class="example-margin" [(ngModel)]="member.includeInFutureDraw"
                   name="includeCheckbox">
       <span translate>INCLUDE</span>
     </mat-checkbox>
