@@ -4,6 +4,7 @@ import {UserDto} from "../dto/user.dto";
 import {MemberGroupDto} from "../dto/member-group.dto";
 import {GroupSimpleDto} from "../dto/group_simple";
 import {UserIncludeDto} from "../dto/user_include.dto";
+import {GiftPartDto} from "../dto/gift-part.dto";
 
 @Injectable()
 
@@ -12,6 +13,7 @@ export class UserService {
   GROUP_URL = this.BASE_URL + 'group/';
   USER_URL = this.BASE_URL + 'user/';
   MEMBERSHIP_URL = this.BASE_URL + 'membership/';
+  GIFT_PART_URL = this.BASE_URL + 'giftPart/';
 
   constructor(private http: HttpClient) {
   }
@@ -114,6 +116,14 @@ export class UserService {
   isVirtual(username: string): Promise<boolean> {
     return this.http.get<boolean>(this.USER_URL + 'virtual/' + username)
       .toPromise();
+  }
+
+  getAllGiftParts(groupname: string): Promise<GiftPartDto[]> {
+    return this.http.get<GiftPartDto[]>(this.GIFT_PART_URL + groupname).toPromise();
+  }
+
+  updateGiftParts(dtos: GiftPartDto[], groupName: string): Promise<object> {
+    return this.http.post(this.GIFT_PART_URL + "/" + groupName, dtos).toPromise();
   }
 
 }

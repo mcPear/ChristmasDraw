@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   constructor(private keycloakService: KeycloakService, private cacheStorage: AppCacheStorage,
               private langStorage: AppLanguageStorage) {
-    this.isAdmin = false;
+    this.isAdmin = false;//todo jakoś pobierz membership id do przekazania
   }
 
   async ngOnInit() {

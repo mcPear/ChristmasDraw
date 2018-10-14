@@ -10,7 +10,8 @@ public final class GiftPartMapper {
         return new GiftPartDto(
                 giftPart.getId(),
                 giftPart.getName(),
-                giftPart.getValue()
+                giftPart.getValue(),
+                giftPart.getMembership().getId()
         );
     }
 

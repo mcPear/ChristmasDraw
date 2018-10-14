@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ 'GIFT_BAG' | translate:fullNameTranslationParam }}</h2>
+
+<mat-list class="group-list" *ngIf="giftParts != undefined; else waitForGiftParts">
+  <mat-list-item *ngFor="let it of giftParts">
+    <h4 mat-line>{{it.name}} - {{it.value}}</h4>
+    <button mat-raised-button (click)="delete(it)"><span translate>DELETE</span></button>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+    <h4 mat-line class="app-default-font"><span translate>SUM</span>: {{sum()}}</h4>
+</mat-list>
+
+<form class="example-form-gift">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="{{ 'NAME' | translate}}" [(ngModel)]="nameInput" name="groupName">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="{{ 'VALUE' | translate}}" [(ngModel)]="valueInput" name="groupName" type="number">
+  </mat-form-field>
+
+</form>
+
+<ng-template #waitForGiftParts>
+  <mat-spinner></mat-spinner>
+</ng-template>
+
+
+<mat-dialog-actions>
+  <button mat-raised-button (click)="add()"><span translate>ADD</span></button>
+  <button mat-raised-button [mat-dialog-close]="giftParts"><span translate>SAVE</span></button>
+  <button mat-raised-button [mat-dialog-close]=null><span translate>CANCEL</span></button>
+</mat-dialog-actions>

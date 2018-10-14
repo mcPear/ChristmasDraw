@@ -2,6 +2,7 @@ package com.controller;
 
 import com.dto.GiftPartDto;
 import com.service.GiftPartService;
+import org.keycloak.KeycloakPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,24 +19,15 @@ public class GiftPartController {
         this.service = service;
     }
 
-    @GetMapping("/{membershipId}")
-    public List<GiftPartDto> getAll(@PathVariable Long membershipId) {
-        return service.getAll(membershipId);
+    @GetMapping("/{group}")
+    public List<GiftPartDto> getAll(@PathVariable String group, KeycloakPrincipal principal) {
+        return service.getAll(group, principal);
     }
 
-    @PostMapping("/add/{membershipId}")
-    public void add(@RequestBody GiftPartDto dto, @PathVariable Long membershipId) {
-        service.add(dto, membershipId);
-    }
-
-    @PostMapping("/update")
-    public void update(@RequestBody GiftPartDto dto) {
-        service.update(dto);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    @PostMapping("/{groupName}")
+    public void update(@RequestBody List<GiftPartDto> dtos, @PathVariable String groupName,
+                       KeycloakPrincipal principal) {
+        service.update(dtos, groupName, principal);
     }
 
 }

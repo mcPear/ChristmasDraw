@@ -5,3 +5,7 @@ p { word-break: break-all }
 .angular-with-newlines {
   white-space: pre-wrap;
 }
+
+.upper-button{
+  margin-bottom: 9px;
+}

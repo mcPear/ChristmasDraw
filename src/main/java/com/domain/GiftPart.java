@@ -18,8 +18,8 @@ import java.math.BigDecimal;
 public class GiftPart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_giftPart_seq")
-    @SequenceGenerator(name = "id_giftPart_seq", sequenceName = "id_giftPart_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_giftpart_seq")
+    @SequenceGenerator(name = "id_giftpart_seq", sequenceName = "id_giftpart_seq", allocationSize = 1)
     private Long id;
 
     @NotNull

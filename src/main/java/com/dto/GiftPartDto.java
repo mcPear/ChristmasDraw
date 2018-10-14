@@ -15,4 +15,5 @@ public class GiftPartDto {
     private Long id;
     private String name;
     private BigDecimal value;
+    private Long membershipId;
 }

@@ -25,3 +25,20 @@ VALUES
   (nextval('id_membership_seq'), TRUE, TRUE, NULL, FALSE, 2, 2, 1),
   (nextval('id_membership_seq'), TRUE, TRUE, NULL, TRUE, 1, 2, 2),
   (nextval('id_membership_seq'), TRUE, TRUE, NULL, FALSE, NULL, 1, 5);
+
+INSERT INTO GIFT_PART (ID, NAME, VALUE, MEMBERSHIP_ID)
+VALUES
+  (nextval('id_giftpart_seq'), 'kubek', 20, 1),
+  (nextval('id_giftpart_seq'), 't-shirt', 60, 1),
+  (nextval('id_giftpart_seq'), 'czekoladki', 20, 1),
+  (nextval('id_giftpart_seq'), 'yerba', 45, 1),
+  (nextval('id_giftpart_seq'), 'kubek', 20, 7),
+  (nextval('id_giftpart_seq'), 't-shirt', 60, 5),
+  (nextval('id_giftpart_seq'), 'plecak', 20, 2),
+  (nextval('id_giftpart_seq'), 'yerba', 31, 2),
+  (nextval('id_giftpart_seq'), 'poduszka', 20, 3),
+  (nextval('id_giftpart_seq'), 't-shirt', 60, 4),
+  (nextval('id_giftpart_seq'), 'bombonierka', 20, 5),
+  (nextval('id_giftpart_seq'), 'herbata', 22, 5);
+
+

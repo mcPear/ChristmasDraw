@@ -57,5 +57,11 @@
   "CLOSE": "Close",
   "PRESENT_A_GIFT": "Present a gift",
   "STATE": "State",
-  "CHILD_GIFT_DUE": "Children gifts due"
+  "CHILD_GIFT_DUE": "Children gifts due",
+  "GIFT": "Gift",
+  "GIFT_BAG": "Gift bag",
+  "NAME": "Name",
+  "VALUE": "Value",
+  "ADD": "Add",
+  "SUM": "Total"
 }

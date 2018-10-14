@@ -4,6 +4,7 @@
     <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
     <pre class="angular-with-newlines">{{user.about}}</pre>
   </mat-card-content>
+  <button class="upper-button" mat-raised-button (click)="openGiftModal()"><span translate>GIFT</span></button>
 </mat-card>
 
 <ng-template #missingUser>

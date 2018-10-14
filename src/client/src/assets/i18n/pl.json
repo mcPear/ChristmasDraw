@@ -57,5 +57,11 @@
   "CLOSE": "Zamknij",
   "PRESENT_A_GIFT": "Podaruj prezent",
   "STATE": "Stan",
-  "CHILD_GIFT_DUE": "Składka dla dzieci"
+  "CHILD_GIFT_DUE": "Składka dla dzieci",
+  "GIFT": "Prezent",
+  "GIFT_BAG": "Worek na prezenty",
+  "NAME": "Nazwa",
+  "VALUE": "Wartość",
+  "ADD": "Dodaj",
+  "SUM": "Razem"
 }
