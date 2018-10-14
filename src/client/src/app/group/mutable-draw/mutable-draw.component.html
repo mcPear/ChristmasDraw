@@ -20,6 +20,13 @@
       </mat-form-field>
     </section>
 
+    <section class="example-section">
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="group.currency" name="currency"
+               placeholder="{{'CURRENCY' | translate}}" [value]="group.currency">
+      </mat-form-field>
+    </section>
+
     <div class="count-children-checkbox">
       <mat-checkbox [(ngModel)]="group.countChildren"
                     name="countChildrenCheckbox"><span translate>COUNT_CHILDREN</span>

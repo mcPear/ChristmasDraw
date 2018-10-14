@@ -13,7 +13,8 @@ public final class GroupMapper {
                 group.getGiftValue(),
                 group.getChildGiftValue(),
                 group.getCalculatedChildGiftValue(),
-                group.getCollectorContact()
+                group.getCollectorContact(),
+                group.getCurrency()
         );
     }
 

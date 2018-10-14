@@ -16,8 +16,8 @@
   "CANCEL": "Anuluj",
   "GROUP_NAME": "Nazwa grupy",
   "TYPE_GROUP_NAME": "Wprowadź nazwę grupy",
-  "MISSING_GROUP": "Taka grupa nie istnieje.",
-  "YOUR_GROUP": "To jest jedna z twoich grup.",
+  "MISSING_GROUP": "Taka grupa nie istnieje",
+  "YOUR_GROUP": "To jest jedna z twoich grup",
   "FIRST_NAME": "Imię",
   "EDIT_INFORMATION": "Edytuj swoje dane",
   "LAST_NAME": "Nazwisko",
@@ -44,9 +44,9 @@
   "REJECT": "Odrzuć",
   "YES": "Tak",
   "NO": "Nie",
-  "NOBODY": "Nikt jeszcze nie jest do ciebie przypisany.",
+  "NOBODY": "Nikt jeszcze nie jest do ciebie przypisany",
   "ADD_TO_CALENDAR": "Dodaj do kalendarza",
-  "YOU_ARE_MEMBER": "Jesteś członkiem tej grupy.",
+  "YOU_ARE_MEMBER": "Jesteś członkiem tej grupy",
   "DRAW": "Rozlosuj",
   "SWITCH_LANGUAGE": "EN",
   "WANT_TO_LEAVE_GROUP": "Czy chcesz opuścić grupę: {{value}} ?",
@@ -63,5 +63,6 @@
   "NAME": "Nazwa",
   "VALUE": "Wartość",
   "ADD": "Dodaj",
-  "SUM": "Razem"
+  "SUM": "Razem",
+  "CURRENCY": "Waluta"
 }

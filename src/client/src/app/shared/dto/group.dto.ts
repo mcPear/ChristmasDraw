@@ -4,5 +4,6 @@ export interface GroupDto {
   countChildren: boolean,
   giftValue: number,
   childGiftValue: number,
-  collectorContact: string
+  collectorContact: string,
+  currency: string
 }

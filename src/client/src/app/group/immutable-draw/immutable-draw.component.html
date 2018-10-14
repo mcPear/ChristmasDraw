@@ -6,17 +6,17 @@
     <button mat-button class="leftButton" (click)="addEvent()"><span translate>Add to calendar</span></button>
   </p>
   <p class="app-label"><span translate>VALUE_OF_GIFT</span></p>
-  <p class="value-under-app-label">{{group.giftValue}}</p>
+  <p class="value-under-app-label">{{group.giftValue}} {{group.currency}}</p>
 
   <p class="app-label"><span translate>COUNT_CHILDREN</span></p>
   <p class="value-under-app-label" *ngIf="group.countChildren" translate>YES</p>
   <p class="value-under-app-label" *ngIf="!group.countChildren" translate>NO</p>
 
   <p class="app-label" *ngIf="group.countChildren"><span translate>VALUE_OF_GIFT_FOR_CHILD</span></p>
-  <p class="value-under-app-label" *ngIf="group.countChildren">{{group.childGiftValue}}</p>
+  <p class="value-under-app-label" *ngIf="group.countChildren">{{group.childGiftValue}} {{group.currency}}</p>
 
   <p class="app-label" *ngIf="group.countChildren&&group.drawn"><span translate>CHILD_GIFT_DUE</span></p>
-  <p class="value-under-app-label" *ngIf="group.countChildren&&group.drawn">{{group.calculatedChildGiftValue}}</p>
+  <p class="value-under-app-label" *ngIf="group.countChildren&&group.drawn">{{group.calculatedChildGiftValue}} {{group.currency}}</p>
 
   <p class="app-label" *ngIf="group.countChildren"><span translate>CONTACT</span></p>
   <p class="value-under-app-label" *ngIf="group.countChildren">{{group.collectorContact}}</p>

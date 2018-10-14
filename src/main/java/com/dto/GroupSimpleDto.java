@@ -22,4 +22,5 @@ public class GroupSimpleDto {
     private BigDecimal childGiftValue;
     private BigDecimal calculatedChildGiftValue;
     private String collectorContact;
+    private String currency;
 }

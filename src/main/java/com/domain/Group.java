@@ -22,7 +22,8 @@ public class Group {
 
     public Group(String name) {
         this(null, name, new Date(System.currentTimeMillis()), false, false,
-                new BigDecimal(0), new BigDecimal(0), null, "-", null);
+                new BigDecimal(0), new BigDecimal(0), null, "-", "",
+                null);
         this.name = name;
     }
 
@@ -49,6 +50,8 @@ public class Group {
     private BigDecimal calculatedChildGiftValue;
 
     private String collectorContact;
+
+    private String currency;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     Set<Membership> memberships;

@@ -51,7 +51,8 @@ public class GroupService {
                     item.getGiftValue(),
                     item.getChildGiftValue(),
                     item.getCalculatedChildGiftValue(),
-                    item.getCollectorContact());
+                    item.getCollectorContact(),
+                    item.getCurrency());
         else return null;
     }
 
@@ -69,7 +70,8 @@ public class GroupService {
                         item.getGiftValue(),
                         item.getChildGiftValue(),
                         item.getCalculatedChildGiftValue(),
-                        item.getCollectorContact()));
+                        item.getCollectorContact(),
+                        item.getCurrency()));
             }
             return dtoList;
         } else {
@@ -109,6 +111,7 @@ public class GroupService {
             groupDb.setCountChildren(group.isCountChildren());
             groupDb.setChildGiftValue(group.getChildGiftValue());
             groupDb.setCollectorContact(group.getCollectorContact());
+            groupDb.setCurrency(group.getCurrency());
 
             groupDao.save(groupDb);
         }

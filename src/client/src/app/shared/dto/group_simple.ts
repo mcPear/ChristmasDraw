@@ -7,5 +7,6 @@ export interface GroupSimpleDto{
   giftValue: number,
   childGiftValue: number,
   calculatedChildGiftValue: number,
-  collectorContact: string
+  collectorContact: string,
+  currency: string
 }

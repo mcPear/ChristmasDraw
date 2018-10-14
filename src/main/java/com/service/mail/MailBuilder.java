@@ -81,17 +81,18 @@ public class MailBuilder {
         if (group.isCountChildren()) {
             switch (lang) {
                 case "pl":
-                    template = "W losowaniu zostały uwzględnione dzieci. Składka na prezent dla dzieci wynosi %s .\n" +
+                    template = "W losowaniu zostały uwzględnione dzieci. Składka na prezent dla dzieci wynosi %s%s.\n" +
                             "Kontakt do osoby zbierającej pieniądze: %s.\n\n";
                     break;
                 case "en":
-                    template = "Draw includes children. Due for children gifts is %s .\n" +
+                    template = "Draw includes children. Due for children gifts is %s%s.\n" +
                             "Money collector contact: %s.\n\n";
                     break;
                 default:
                     throw new IllegalArgumentException("Missing mail text language: " + lang);
             }
-            builder.append(String.format(template, group.getCalculatedChildGiftValue(), group.getCollectorContact()));
+            builder.append(String.format(template, group.getCalculatedChildGiftValue(), " " + group.getCurrency(),
+                    group.getCollectorContact()));
         }
         return this;
     }

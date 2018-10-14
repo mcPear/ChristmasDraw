@@ -16,8 +16,8 @@
   "CANCEL": "Cancel",
   "GROUP_NAME": "Group name",
   "TYPE_GROUP_NAME": "Type group name",
-  "MISSING_GROUP": "This group doesn't exist.",
-  "YOUR_GROUP": "This is one of your groups.",
+  "MISSING_GROUP": "This group doesn't exist",
+  "YOUR_GROUP": "This is one of your groups",
   "FIRST_NAME": "First name",
   "EDIT_INFORMATION": "Edit information about you",
   "LAST_NAME": "Last name",
@@ -46,7 +46,7 @@
   "NO": "No",
   "NOBODY": "Nobody is assigned to you",
   "ADD_TO_CALENDAR": "Add to calendar",
-  "YOU_ARE_MEMBER": "You are member of this group.",
+  "YOU_ARE_MEMBER": "You are member of this group",
   "DRAW": "Draw",
   "SWITCH_LANGUAGE": "PL",
   "WANT_TO_LEAVE_GROUP": "Do you want to leave group: {{value}} ?",
@@ -63,5 +63,6 @@
   "NAME": "Name",
   "VALUE": "Value",
   "ADD": "Add",
-  "SUM": "Total"
+  "SUM": "Total",
+  "CURRENCY": "Currency"
 }
