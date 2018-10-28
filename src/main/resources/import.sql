@@ -11,9 +11,9 @@ VALUES (nextval('id_user_seq'), 'Jestem porucznikiem, chorągwi pancernej księc
    'userV1@gmail.com', 'Andrzej', 'pl', 'Kmicic', 'userV1', TRUE);
 
 INSERT INTO PUBLIC.GROUPX (ID, CALCULATED_CHILD_GIFT_VALUE, CHILD_GIFT_VALUE, COLLECTOR_CONTACT, COUNT_CHILDREN, DRAW_DATE,
-                           GIFT_VALUE, IS_DRAWN, NAME)
-VALUES (nextval('id_group_seq'), NULL, 100, '601 302 738', TRUE, '2018-12-01', 150, FALSE, 'rodzina'),
-  (nextval('id_group_seq'), NULL, 200, '603 392 721', FALSE, '2018-07-02', 300, TRUE, 'kompania');
+                           GIFT_VALUE, IS_DRAWN, NAME, CURRENCY)
+VALUES (nextval('id_group_seq'), NULL, 100, '601 302 738', TRUE, '2018-12-01', 150, FALSE, 'rodzina', 'zł'),
+  (nextval('id_group_seq'), NULL, 200, '603 392 721', FALSE, '2018-07-02', 300, TRUE, 'kompania', 'zł');
 
 INSERT INTO PUBLIC.MEMBERSHIP (ID, ACCEPTED, INCLUDE_IN_FUTURE_DRAW, INCLUDED_IN_LAST_DRAW, OWNS, DRAWN_USER_ID,
                                GROUP_ID, USER_ID)
