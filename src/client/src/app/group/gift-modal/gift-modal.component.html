@@ -9,13 +9,13 @@
     <h4 mat-line class="app-default-font"><span translate>SUM</span>: {{sum()}}</h4>
 </mat-list>
 
-<form class="example-form-gift">
+<form class="example-form-gift" #f="ngForm">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="{{ 'NAME' | translate}}" [(ngModel)]="nameInput" name="groupName">
+    <input matInput placeholder="{{ 'NAME' | translate}}" [(ngModel)]="nameInput" name="groupName" required>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="{{ 'VALUE' | translate}}" [(ngModel)]="valueInput" name="groupName" type="number">
+    <input matInput placeholder="{{ 'VALUE' | translate}}" [(ngModel)]="valueInput" name="giftPartValue" type="number" required>
   </mat-form-field>
 
 </form>
@@ -26,7 +26,7 @@
 
 
 <mat-dialog-actions>
-  <button mat-raised-button (click)="add()"><span translate>ADD</span></button>
+  <button mat-raised-button (click)="add()" [disabled]="!f.form.valid"><span translate>ADD</span></button>
   <button mat-raised-button [mat-dialog-close]="giftParts"><span translate>SAVE</span></button>
   <button mat-raised-button [mat-dialog-close]=null><span translate>CANCEL</span></button>
 </mat-dialog-actions>
