@@ -5,10 +5,11 @@
     <button mat-raised-button (click)="openDialog()"><span translate>JOIN</span></button>
     <mat-list-item *ngFor="let group of groupsWhereMember">
       <h4 mat-line>{{group.groupName}}</h4>
-      <button mat-raised-button [disabled]="!group.requestAccepted" (click)="selectGroup(group.groupName)"><span
+      <button mat-raised-button [disabled]="!group.requestAccepted" (click)="selectGroup(group.groupName)" class="left-button"><span
         translate>OPEN</span></button>
-      <button mat-icon-button [disabled]="group.isDrawn" (click)="openLeaveConfirmationPopup(group)">
-        <mat-icon>close</mat-icon>
+      <button mat-raised-button [disabled]="group.isDrawn" (click)="openLeaveConfirmationPopup(group)">
+        <span
+          translate>LEAVE</span>
       </button>
       <mat-divider></mat-divider>
     </mat-list-item>
