@@ -11,6 +11,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -28,7 +29,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     MatButtonModule,
@@ -45,7 +48,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
 })
 export class MaterialModule {

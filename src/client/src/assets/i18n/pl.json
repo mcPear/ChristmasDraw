@@ -53,7 +53,7 @@
   "DELETE": "Usuń",
   "WANT_TO_DELETE_GROUP": "Czy chcesz usunąć grupę {{value}} ?",
   "JOIN": "Dołącz",
-  "ADD_MEMBER_BY_HAND": "Dodaj członka ręcznie",
+  "ADD_MEMBER_BY_HAND": "Dodaj członka bez konta",
   "CLOSE": "Zamknij",
   "PRESENT_A_GIFT": "Podaruj prezent",
   "STATE": "Stan",

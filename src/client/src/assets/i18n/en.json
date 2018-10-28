@@ -53,7 +53,7 @@
   "DELETE": "Delete",
   "WANT_TO_DELETE_GROUP": "Do you want to delete group {{value}} ?",
   "JOIN": "Join",
-  "ADD_MEMBER_BY_HAND": "Add member by hand",
+  "ADD_MEMBER_BY_HAND": "Add member without account",
   "CLOSE": "Close",
   "PRESENT_A_GIFT": "Present a gift",
   "STATE": "State",

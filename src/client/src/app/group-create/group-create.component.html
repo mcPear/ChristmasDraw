@@ -1,12 +1,12 @@
 <h2 mat-dialog-title><span translate>TYPE_GROUP_NAME</span></h2>
-<form class="example-form">
+<form class="example-form"  #f="ngForm">
   <mat-form-field class="example-full-width">
     <input matInput placeholder="{{ 'GROUP_NAME' | translate}}" required
            [(ngModel)]="groupName" name="groupName" (keyup)="onKey($event)">
   </mat-form-field>
 </form>
 <mat-dialog-actions>
-  <button mat-raised-button [mat-dialog-close]="groupName" [disabled]="groupExists"><span translate>SAVE</span></button>
+  <button mat-raised-button [mat-dialog-close]="groupName" [disabled]="groupExists || !f.form.valid"><span translate>SAVE</span></button>
   <button mat-raised-button [mat-dialog-close]=null><span translate>CANCEL</span></button>
 </mat-dialog-actions>
 <p *ngIf="groupExists"><span translate>NAME_IN_USE</span></p>

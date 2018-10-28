@@ -1,13 +1,13 @@
 <mat-card class="app-card" *ngIf="group; else waitForGroup">
   <mat-card-subtitle class="app-card-or-modal-header">{{ 'DRAW_SETTINGS' | translate:groupNameTranslationParam }}
   </mat-card-subtitle>
-  <form>
+  <form #f="ngForm">
     <section class="example-section">
       <mat-form-field class="example-full-width">
         <input matInput [matDatepicker]="picker" placeholder="{{'DUE_DATE' | translate}}"
                (dateChange)="setCurrentData($event)"
                [value]="group.drawDate | date:'yyyy-MM-dd'"
-               name="drawDate">
+               name="drawDate"  required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -16,14 +16,14 @@
     <section class="example-section">
       <mat-form-field>
         <input matInput type="number" [(ngModel)]="group.giftValue" name="giftValue"
-               placeholder="{{'VALUE_OF_GIFT' | translate}}" [value]="group.giftValue" min="0">
+               placeholder="{{'VALUE_OF_GIFT' | translate}}" [value]="group.giftValue" min="0" required>
       </mat-form-field>
     </section>
 
     <section class="example-section">
       <mat-form-field class="example-full-width">
         <input matInput [(ngModel)]="group.currency" name="currency"
-               placeholder="{{'CURRENCY' | translate}}" [value]="group.currency">
+               placeholder="{{'CURRENCY' | translate}}" [value]="group.currency" required>
       </mat-form-field>
     </section>
 
@@ -36,7 +36,7 @@
     <section class="example-section">
       <mat-form-field class="example-full-width">
         <input matInput type="number" [(ngModel)]="group.childGiftValue" name="childGiftValue"
-               placeholder="{{'VALUE_OF_GIFT_FOR_CHILD' | translate}}" [value]="group.childGiftValue" min="0">
+               placeholder="{{'VALUE_OF_GIFT_FOR_CHILD' | translate}}" [value]="group.childGiftValue" min="0" required>
       </mat-form-field>
     </section>
 
@@ -54,8 +54,9 @@
     <p *ngIf="group.drawn" translate>ALREADY_DRAWN</p>
     <p *ngIf="!group.drawn" translate>NOT_YET_DRAWN</p>
 
-    <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned"><span translate>DRAW</span></button>
-    <button mat-raised-button type="submit" (click)="saveData()"><span translate>SAVE</span></button>
+    <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned" [disabled]="!f.form.valid"><span translate>DRAW</span></button>
+    <button mat-raised-button type="submit" (click)="saveData()" [disabled]="!f.form.valid"><span translate>SAVE</span></button>
   </form>
+
 </mat-card>
 <ng-template #waitForGroup>loading group information...</ng-template>
