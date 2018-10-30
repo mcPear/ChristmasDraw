@@ -199,8 +199,10 @@ public class MembershipService {
         List<Membership> memberships = membershipDao.findByGroupId(groupId);
         for (Membership mem : memberships) {
             Pair<Boolean, Boolean> includes = includesMap.get(mem.getUser().getPreferredUsername());
-            mem.setIncludeInFutureDraw(includes.getKey());
-            mem.setIncludedInLastDraw(includes.getValue());
+            if(includes != null) {
+                mem.setIncludeInFutureDraw(includes.getKey());
+                mem.setIncludedInLastDraw(includes.getValue());
+            }
         }
         membershipDao.save(memberships);
     }

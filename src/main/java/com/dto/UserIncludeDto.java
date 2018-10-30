@@ -1,5 +1,8 @@
 package com.dto;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class UserIncludeDto extends UserDto {
     private boolean includeInFutureDraw;
     private Boolean includedInLastDraw;
