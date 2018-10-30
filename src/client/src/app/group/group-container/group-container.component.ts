@@ -25,7 +25,7 @@ export class GroupContainerComponent implements OnInit {
   }
 
   updateDrawButtonState(includes: UserIncludeDto[]) {
-    this.mutableDrawComponent.resolveDrawButtonState(includes);
+    this.mutableDrawComponent.handleIncludesChange(includes);
   }
 
   refreshMembers() {
@@ -33,6 +33,7 @@ export class GroupContainerComponent implements OnInit {
   }
 
   refresh() {
+    this.refreshMembers();
     this.userDrawComponent.ngOnInit();
     this.ngOnInit();
   }

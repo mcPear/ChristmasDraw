@@ -41,7 +41,8 @@ public class MembershipController {
 
     @RequestMapping(path = "/draw/{groupName}", method = RequestMethod.POST)
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    private void performDraw(@PathVariable String groupName) {
+    private void performDraw(@PathVariable String groupName, @RequestBody List<UserIncludeDto> userIncludeDtos) {
+        membershipService.updateIncludeMembers(userIncludeDtos, groupName);
         membershipService.performDraw(groupName);
     }
 

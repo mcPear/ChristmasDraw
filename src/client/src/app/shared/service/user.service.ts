@@ -73,8 +73,8 @@ export class UserService {
       this.MEMBERSHIP_URL + 'accept/' + groupName + '/' + username + '/' + value, {}).toPromise();
   }
 
-  performDraw(groupName: string): Promise<object> {
-    return this.http.post(this.MEMBERSHIP_URL + 'draw/' + groupName, {}).toPromise();
+  performDraw(groupName: string, members: UserIncludeDto[]): Promise<object> {
+    return this.http.post(this.MEMBERSHIP_URL + 'draw/' + groupName, members).toPromise();
   }
 
   getGroupMembers(groupName: string): Promise<UserIncludeDto[]> {

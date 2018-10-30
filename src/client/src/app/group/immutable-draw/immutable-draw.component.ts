@@ -23,12 +23,6 @@ export class ImmutableDrawComponent implements OnInit {
         this.groupNameTranslationParam = {value: this.group.name}
     }
 
-    async performDraw() {
-        await this.service.performDraw(this.selectedGroup.name);
-        this.drawPerformed.emit();
-        this.ngOnInit();
-    }
-
     getIncludeChildrenOutput() {
       if (this.group.countChildren) return 'yes';
       else return 'no';

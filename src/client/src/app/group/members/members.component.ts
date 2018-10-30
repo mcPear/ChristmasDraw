@@ -4,7 +4,6 @@ import {UserIncludeDto} from "../../shared/dto/user_include.dto";
 import {MatCheckboxChange, MatDialog} from "@angular/material";
 import {UserEditComponent} from "../../user-edit/user-edit.component";
 import {UserDto} from "../../shared/dto/user.dto";
-import {UserDrawComponent} from "../user-draw/user-draw.component";
 import {DrawUserModalDto} from "../../shared/dto/draw_user_modal.dto";
 import {UserDrawModalComponent} from "../user-draw-modal/user-draw-modal.component";
 
@@ -23,15 +22,18 @@ export class MembersComponent implements OnInit {
 
   async ngOnInit() {
     this.members = await this.service.getGroupMembers(this.groupName);
+    this.includeChanged.emit(this.members);
   }
 
   async updateIncludeMembers() {
     this.service.updateIncludeMembers(this.members, this.groupName);
   }
 
-  emitIncludeChanged(member: UserIncludeDto, change: MatCheckboxChange){
+  emitIncludeChanged(member: UserIncludeDto, change: MatCheckboxChange) {
     member.includeInFutureDraw = change.checked;
     this.includeChanged.emit(this.members);
+    console.log('emit in members below: ');
+    console.log(this.members);
   }
 
   openAddMemberModal(): void {

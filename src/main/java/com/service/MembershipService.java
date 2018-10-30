@@ -81,8 +81,17 @@ public class MembershipService {
                 .collect(Collectors.toSet());
     }
 
+    @Transactional
     public void performDraw(String groupName) {
+        System.out.println("DRAW   @@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         Group group = groupDao.findByName(groupName);
+        group.getMemberships().stream()
+                .filter(m -> !m.isIncludeInFutureDraw())
+                .forEach(m -> {
+                    m.setDrawnUser(null);
+                    m.setIncludedInLastDraw(false);
+                    membershipDao.save(m);
+                });
         List<Membership> memberships = group.getMemberships().stream()
                 .filter(Membership::isIncludeInFutureDraw)
                 .collect(Collectors.toList());
@@ -108,7 +117,6 @@ public class MembershipService {
         group.setDrawn(true);
         groupDao.save(group);
         try {
-            sendMails(memberships);
             sendMails(memberships);
         } catch (Exception e) {
             e.printStackTrace();
@@ -189,6 +197,7 @@ public class MembershipService {
         }
     }
 
+    @Transactional
     public void updateIncludeMembers(List<UserIncludeDto> userIncludeDtos, String groupName) { //TODO by group id
         Map<String, Pair<Boolean, Boolean>> includesMap = new HashMap<>();
         userIncludeDtos.forEach(dto -> includesMap.put(
@@ -199,12 +208,13 @@ public class MembershipService {
         List<Membership> memberships = membershipDao.findByGroupId(groupId);
         for (Membership mem : memberships) {
             Pair<Boolean, Boolean> includes = includesMap.get(mem.getUser().getPreferredUsername());
-            if(includes != null) {
+            if (includes != null) {
                 mem.setIncludeInFutureDraw(includes.getKey());
                 mem.setIncludedInLastDraw(includes.getValue());
             }
         }
         membershipDao.save(memberships);
+        System.out.println("INCLUDES UPDATED   @@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     }
 
     @Transactional
