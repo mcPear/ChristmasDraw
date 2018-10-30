@@ -86,8 +86,8 @@ public class MembershipService {
         List<Membership> memberships = group.getMemberships().stream()
                 .filter(Membership::isIncludeInFutureDraw)
                 .collect(Collectors.toList());
-        if (memberships.size() < 2) throw new IllegalArgumentException(
-                "The number of users included in draw should be greater than 2.");
+        if (memberships.size() < 3) throw new IllegalArgumentException(
+                "The number of users included in draw should be greater than 3.");
         Random random = new Random(System.currentTimeMillis());
         Result algorithmResult = new DrawForwardCheck(memberships.size(), Options.getDefaultInstance()).run();
         List<List<Integer>> foundSolutions = algorithmResult.foundSolutions;
