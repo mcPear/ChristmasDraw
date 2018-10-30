@@ -2,6 +2,8 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {SelectedGroup} from "../../shared/model/selected-group-data";
 import {MembersComponent} from "../members/members.component";
 import {UserDrawComponent} from "../user-draw/user-draw.component";
+import {MutableDrawComponent} from "../mutable-draw/mutable-draw.component";
+import {UserIncludeDto} from "../../shared/dto/user_include.dto";
 
 @Component({
   selector: 'app-group-container',
@@ -14,11 +16,16 @@ export class GroupContainerComponent implements OnInit {
   @Input() selectedGroup: SelectedGroup;
   @ViewChild(MembersComponent) membersComponent: MembersComponent;
   @ViewChild(UserDrawComponent) userDrawComponent: UserDrawComponent;
+  @ViewChild(MutableDrawComponent) mutableDrawComponent: MutableDrawComponent;
 
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  updateDrawButtonState(includes: UserIncludeDto[]) {
+    this.mutableDrawComponent.resolveDrawButtonState(includes);
   }
 
   refreshMembers() {

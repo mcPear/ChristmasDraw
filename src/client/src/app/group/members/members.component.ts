@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserService} from "../../shared/service/user.service";
 import {UserIncludeDto} from "../../shared/dto/user_include.dto";
-import {MatDialog} from "@angular/material";
+import {MatCheckboxChange, MatDialog} from "@angular/material";
 import {UserEditComponent} from "../../user-edit/user-edit.component";
 import {UserDto} from "../../shared/dto/user.dto";
 import {UserDrawComponent} from "../user-draw/user-draw.component";
@@ -15,6 +15,7 @@ import {UserDrawModalComponent} from "../user-draw-modal/user-draw-modal.compone
 })
 export class MembersComponent implements OnInit {
   @Input() groupName: string;
+  @Output() includeChanged = new EventEmitter<UserIncludeDto[]>();
   members: UserIncludeDto[];
 
   constructor(private service: UserService, public dialog: MatDialog) {
@@ -26,6 +27,11 @@ export class MembersComponent implements OnInit {
 
   async updateIncludeMembers() {
     this.service.updateIncludeMembers(this.members, this.groupName);
+  }
+
+  emitIncludeChanged(member: UserIncludeDto, change: MatCheckboxChange){
+    member.includeInFutureDraw = change.checked;
+    this.includeChanged.emit(this.members);
   }
 
   openAddMemberModal(): void {

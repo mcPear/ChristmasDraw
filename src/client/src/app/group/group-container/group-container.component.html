@@ -13,7 +13,7 @@
       <app-user-draw [groupName]='selectedGroup.name'></app-user-draw>
     </div>
     <div class="col-sm" *ngIf="selectedGroup.isOwned">
-      <app-members [groupName]='selectedGroup.name'></app-members>
+      <app-members [groupName]='selectedGroup.name' (includeChanged)="updateDrawButtonState($event)"></app-members>
     </div>
     <div class="col-sm" *ngIf="selectedGroup.isOwned">
       <app-requests [groupName]='selectedGroup.name' (requestAccepted)="refreshMembers()"></app-requests>

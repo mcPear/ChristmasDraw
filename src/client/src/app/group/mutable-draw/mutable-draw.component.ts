@@ -3,6 +3,7 @@ import {GroupSimpleDto} from "../../shared/dto/group_simple";
 import {MatDatepickerInputEvent} from "@angular/material";
 import {UserService} from "../../shared/service/user.service";
 import {SelectedGroup} from "../../shared/model/selected-group-data";
+import {UserIncludeDto} from "../../shared/dto/user_include.dto";
 
 @Component({
   selector: 'app-mutable-draw',
@@ -14,6 +15,7 @@ export class MutableDrawComponent implements OnInit {
   @Output() drawPerformed = new EventEmitter<string>();
   group: GroupSimpleDto;
   groupNameTranslationParam: Object;
+  drawAvailable: boolean = false;
 
   constructor(private service: UserService) {
   }
@@ -38,6 +40,11 @@ export class MutableDrawComponent implements OnInit {
 
   setCurrentData(event: MatDatepickerInputEvent<Date>) {
     this.group.drawDate = event.value.getTime();
+  }
+
+  resolveDrawButtonState(includes: UserIncludeDto[]) {
+    let futureDrawIncludesCount = includes.filter(i => i.includeInFutureDraw).length;
+    this.drawAvailable = futureDrawIncludesCount >= 3;
   }
 
 }

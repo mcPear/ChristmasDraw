@@ -54,7 +54,8 @@
     <p *ngIf="group.drawn" translate>ALREADY_DRAWN</p>
     <p *ngIf="!group.drawn" translate>NOT_YET_DRAWN</p>
 
-    <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned" [disabled]="!f.form.valid"><span translate>DRAW</span></button>
+    <button mat-raised-button (click)="performDraw()" *ngIf="selectedGroup.isOwned" [disabled]="!f.form.valid || !drawAvailable">
+      <span translate>DRAW</span></button>
     <button mat-raised-button type="submit" (click)="saveData()" [disabled]="!f.form.valid"><span translate>SAVE</span></button>
   </form>
 
