@@ -28,8 +28,6 @@ public class User {
     @NotNull
     private String firstName;
 
-    @NotEmpty
-    @NotNull
     private String lastName;
 
     private String email;

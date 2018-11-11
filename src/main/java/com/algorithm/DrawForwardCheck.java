@@ -1,4 +1,5 @@
 package com.algorithm;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,6 +28,11 @@ public class DrawForwardCheck extends ForwardCheck {
         //update others
         for (int i = 0; i < updatedDomains.size(); i++) {
             updatedDomains.get(i).remove(theLastValue);
+        }
+
+        //prevent swaps
+        if (index % 2 == 0 && theLastValue == (theLastValueIndex + 2)) {
+            updatedDomains.get(theLastValueIndex + 1).remove(new Integer(theLastValueIndex + 1));
         }
 
         return updatedDomains;
