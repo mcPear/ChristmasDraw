@@ -1,6 +1,6 @@
 package com.service;
 
-import com.algorithm.DrawForwardCheck;
+import com.algorithm.DrawForwardChecking;
 import com.algorithm.Options;
 import com.algorithm.Result;
 import com.dao.GroupDao;
@@ -99,7 +99,7 @@ public class MembershipService {
         if (memberships.size() < 3) throw new IllegalArgumentException(
                 "The number of users included in draw should be greater than 3.");
         Random random = new Random(System.currentTimeMillis());
-        Result algorithmResult = new DrawForwardCheck(memberships.size(), Options.getDefaultInstance()).run();
+        Result algorithmResult = new DrawForwardChecking(memberships.size(), Options.getDefaults()).run();
         List<List<Integer>> foundSolutions = algorithmResult.foundSolutions;
         List<Integer> permutation = foundSolutions.get(random.nextInt(foundSolutions.size()));
         GlobalLogger.info("" + permutation);

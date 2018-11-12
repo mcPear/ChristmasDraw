@@ -31,7 +31,7 @@ public class Options {
         this.useEdgesToMedianValueHeuristic = useEdgesToMedianValueHeuristic;
     }
 
-    public static Options getDefaultInstance() {
+    public static Options getDefaults() {
         return new Options(false, false, false,
                 false, true, false, false,
                 false, false, false,

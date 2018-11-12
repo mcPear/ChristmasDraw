@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 
 //count all domains
-public class DrawForwardCheck extends ForwardCheck {
+public class DrawForwardChecking extends ForwardCheck {
 
-    public DrawForwardCheck(int n, Options options) {
+    public DrawForwardChecking(int n, Options options) {
         super(n, options);
     }
 
