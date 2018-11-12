@@ -124,9 +124,10 @@ public class MembershipService {
     }
 
     private void sendMails(List<Membership> memberships) {
-        memberships.stream()
-                .filter(m -> m.getAccepted() != null & m.getAccepted() && m.isIncludeInFutureDraw() && !m.getUser().getVirtual())
-                .forEach(mailService::send);
+        mailService.send(
+                memberships.stream()
+                        .filter(m -> m.getAccepted() != null & m.getAccepted() && m.isIncludeInFutureDraw() && !m.getUser().getVirtual())
+                        .collect(Collectors.toList()));
     }
 
     private BigDecimal calculateChildGiftValue(List<Membership> memberships, Group group) {
