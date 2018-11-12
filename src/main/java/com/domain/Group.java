@@ -23,7 +23,7 @@ public class Group {
     public Group(String name) {
         this(null, name, new Date(System.currentTimeMillis()), false, false,
                 new BigDecimal(0), new BigDecimal(0), null, "-", "",
-                null);
+                false, null);
         this.name = name;
     }
 
@@ -52,6 +52,8 @@ public class Group {
     private String collectorContact;
 
     private String currency;
+
+    private boolean mailsSent;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     Set<Membership> memberships;

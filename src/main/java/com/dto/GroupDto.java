@@ -21,5 +21,6 @@ public class GroupDto {
     private BigDecimal calculatedChildGiftValue;
     private String collectorContact;
     private String currency;
+    private boolean areMailsSent;
 
 }

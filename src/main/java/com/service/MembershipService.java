@@ -13,6 +13,7 @@ import com.dto.MemberGroupDto;
 import com.dto.UserDto;
 import com.dto.UserIncludeDto;
 import com.mapper.UserMapper;
+import com.service.mail.MailException;
 import com.service.mail.MailService;
 import com.util.GlobalLogger;
 import com.util.PrincipalUtil;
@@ -115,12 +116,8 @@ public class MembershipService {
             group.setCalculatedChildGiftValue(v);
         }
         group.setDrawn(true);
+        group.setMailsSent(false);
         groupDao.save(group);
-        try {
-            sendMails(memberships);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void sendMails(List<Membership> memberships) {
@@ -232,6 +229,20 @@ public class MembershipService {
             User user = userDao.save(UserMapper.toUser(userDto, maxId));
             membershipDao.save(new Membership(null, false, true, true,
                     false, storedGroup, user, null, null));
+        }
+    }
+
+    public void sendMails(String groupName) {
+        Group group = groupDao.findByName(groupName);
+        List<Membership> memberships = group.getMemberships().stream()
+                .filter(m -> m.getIncludedInLastDraw() != null && m.getIncludedInLastDraw())
+                .collect(Collectors.toList());
+        try {
+            sendMails(memberships);
+            group.setMailsSent(true);
+            groupDao.save(group);
+        } catch (Exception e) {
+            throw new MailException(e.getMessage(), e.getCause());
         }
     }
 

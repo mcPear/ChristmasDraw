@@ -33,5 +33,4 @@ public class MailService {
         return message;
     }
 
-
 }

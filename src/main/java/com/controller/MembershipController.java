@@ -90,4 +90,10 @@ public class MembershipController {
         membershipService.addByHand(groupName, userDto);
     }
 
+    @RequestMapping(path = "/sendMails/{groupName}", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    private void sendmails(@PathVariable String groupName) {
+        membershipService.sendMails(groupName);
+    }
+
 }

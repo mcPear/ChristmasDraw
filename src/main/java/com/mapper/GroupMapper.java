@@ -14,7 +14,8 @@ public final class GroupMapper {
                 group.getChildGiftValue(),
                 group.getCalculatedChildGiftValue(),
                 group.getCollectorContact(),
-                group.getCurrency()
+                group.getCurrency(),
+                group.isMailsSent()
         );
     }
 
