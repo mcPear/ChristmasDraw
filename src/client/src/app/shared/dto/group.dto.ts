@@ -5,5 +5,6 @@ export interface GroupDto {
   giftValue: number,
   childGiftValue: number,
   collectorContact: string,
-  currency: string
+  currency: string,
+  areMailsSent: boolean
 }

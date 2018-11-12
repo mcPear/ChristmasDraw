@@ -126,4 +126,8 @@ export class UserService {
     return this.http.post(this.GIFT_PART_URL + "/" + groupName, dtos).toPromise();
   }
 
+  sendMails(groupName: string) {
+    return this.http.post(this.MEMBERSHIP_URL + 'sendMails/' + groupName, {}).toPromise();
+  }
+
 }

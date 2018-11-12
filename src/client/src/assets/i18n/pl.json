@@ -65,5 +65,6 @@
   "ADD": "Dodaj",
   "SUM": "Razem",
   "CURRENCY": "Waluta",
-  "LEAVE": "Opuść"
+  "LEAVE": "Opuść",
+  "SEND_MAILS": "Wyślij maile"
 }

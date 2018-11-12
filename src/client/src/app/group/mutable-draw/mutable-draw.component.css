@@ -26,10 +26,18 @@
     display: flex;
     align-content: center;
     align-items: center;
-    height: 100px;
+    height: 90px;
 }
 
 .count-children-checkbox {
     margin-bottom: 25px !important;
+}
+
+.count-children-checkbox {
+    margin-bottom: 25px !important;
+}
+
+.bottom-button {
+    margin-top: 10px;
 }
 

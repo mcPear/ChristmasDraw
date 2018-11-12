@@ -23,4 +23,5 @@ public class GroupSimpleDto {
     private BigDecimal calculatedChildGiftValue;
     private String collectorContact;
     private String currency;
+    private boolean areMailsSent;
 }

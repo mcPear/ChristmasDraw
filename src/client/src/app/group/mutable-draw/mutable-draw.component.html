@@ -57,6 +57,8 @@
     <button mat-raised-button (click)="performDrawActions()" *ngIf="selectedGroup.isOwned" [disabled]="!f.form.valid || !drawAvailable">
       <span translate>DRAW</span></button>
     <button mat-raised-button type="submit" (click)="saveData()" [disabled]="!f.form.valid"><span translate>SAVE</span></button>
+    <button *ngIf="!sendMailsinProgress" mat-raised-button class="bottom-button" type="submit" (click)="sendMails()" [disabled]="group.drawn && group.areMailsSent"><span translate>SEND_MAILS</span></button>
+    <mat-spinner *ngIf="sendMailsinProgress" ></mat-spinner>
   </form>
 
 </mat-card>

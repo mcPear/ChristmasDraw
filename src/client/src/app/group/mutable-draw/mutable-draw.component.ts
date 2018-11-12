@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GroupSimpleDto} from "../../shared/dto/group_simple";
-import {MatDatepickerInputEvent} from "@angular/material";
+import {MatDatepickerInputEvent, MatSnackBar} from "@angular/material";
 import {UserService} from "../../shared/service/user.service";
 import {SelectedGroup} from "../../shared/model/selected-group-data";
 import {UserIncludeDto} from "../../shared/dto/user_include.dto";
@@ -17,8 +17,9 @@ export class MutableDrawComponent implements OnInit {
   groupNameTranslationParam: Object;
   drawAvailable: boolean = false;
   includes: UserIncludeDto[] = null;
+  sendMailsinProgress: boolean;
 
-  constructor(private service: UserService) {
+  constructor(private service: UserService, public snackBar: MatSnackBar) {
   }
 
   async ngOnInit() {
@@ -57,6 +58,19 @@ export class MutableDrawComponent implements OnInit {
 
   async updateIncludeMembers() {
     this.service.updateIncludeMembers(this.includes, this.group.name);
+  }
+
+  async sendMails() {
+    this.sendMailsinProgress = true;
+    await this.service.sendMails(this.group.name).catch(e => {
+      this.snackBar.open(e.toString(), "OK", {
+        duration: 3000
+      });
+      this.sendMailsinProgress = false;
+    }).then(() => {
+      this.group.areMailsSent = true;
+      this.sendMailsinProgress = false;
+    });
   }
 
 }

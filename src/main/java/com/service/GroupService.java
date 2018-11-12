@@ -52,7 +52,8 @@ public class GroupService {
                     item.getChildGiftValue(),
                     item.getCalculatedChildGiftValue(),
                     item.getCollectorContact(),
-                    item.getCurrency());
+                    item.getCurrency(),
+                    item.isMailsSent());
         else return null;
     }
 
@@ -71,7 +72,8 @@ public class GroupService {
                         item.getChildGiftValue(),
                         item.getCalculatedChildGiftValue(),
                         item.getCollectorContact(),
-                        item.getCurrency()));
+                        item.getCurrency(),
+                        item.isMailsSent()));
             }
             return dtoList;
         } else {
