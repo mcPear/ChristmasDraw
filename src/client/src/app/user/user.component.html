@@ -1,15 +1,15 @@
 <mat-card class="app-card" *ngIf="user != null; else waitForUser">
   <mat-card-subtitle class="app-card-or-modal-header"><span translate>ABOUT_ME</span></mat-card-subtitle>
   <mat-card-content>
-    <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
-    <pre class="angular-with-newlines">{{user.about}}</pre>
+    <mat-card-title id="fullName">{{user.firstName}} {{user.lastName}}</mat-card-title>
+    <pre class="angular-with-newlines" id="about">{{user.about}}</pre>
     <p *ngIf="user.children === undefined" translate>MISSING_CHILDREN_INFO</p>
     <p *ngIf="user.children === 0" translate>NO_CHILDREN</p>
     <p *ngIf="user.children === 1" translate>ONE_CHILD</p>
-    <p *ngIf="user.children > 1" translate>{{ user.children+' ' }}<span translate>CHILDREN</span></p>
+    <p *ngIf="user.children > 1" translate id="manyChildren">{{ user.children+' ' }}<span translate>CHILDREN</span></p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="openEditDialog()"><span translate>EDIT</span></button>
+    <button mat-raised-button id="openEditDialog" (click)="openEditDialog()"><span translate>EDIT</span></button>
   </mat-card-actions>
 </mat-card>
 <ng-template #waitForUser>
