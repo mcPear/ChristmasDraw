@@ -6,7 +6,7 @@
   <mat-toolbar-row>
     <span translate>APP_TITLE</span>
     <span class="example-spacer"></span>
-    <span>{{userDetails.username}}{{getSelectedGroupOutput()}}</span>
+    <span id="logged-username">{{userDetails.username}}{{getSelectedGroupOutput()}}</span>
     <span class="example-spacer"></span>
     <button mat-button (click)="deselectGroup()" > <span translate>DASHBOARD</span></button>
     <button mat-button (click)="doLogout()" ><span translate>LOGOUT</span></button>
