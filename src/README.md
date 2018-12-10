@@ -5,13 +5,12 @@ url http://localhost:4200<br />
 <br />
 2. Running SpringBoot<br />
 use Intellij project<br />
-for port :8090 copy default_applicatioin.properties to applicatioin.properties<br />
+copy default_applicatioin.properties to applicatioin.properties<br />
+set mail credenials if you want to use mail notifications feature<br />
+url http://localhost:8090<br />
 <br />
 3. running keycloak<br />
-use own standalone version<br />
-import file src/keycloak/realm-export.json to keycloak<br />
-port :8080<br />
+Download Keycloak 3.4.3 from https://www.keycloak.org/archive/downloads-3.4.3.html and run<br />
+import file src/keycloak/realm-export.json to Keycloak<br />
+url http://localhost:8000<br />
 <br />
-
-Tips<br />
-Don't forget about credentials when setting up keycloack config in future apps
